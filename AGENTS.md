@@ -1,7 +1,19 @@
-# Working in music-analyzer
+# Working in music-watcher
 
 This repo is Krish's Music Brain: `trackcard` (src/) measures audio locally, and `taste/` holds what he and Calvin like,
 including the playlist knowledge graph (`taste/graph/`, start with `GENERATION.md`).
+
+`NOW.md` says where it stands. It runs on the worker server (`trackcard` and the Music Inspo watcher), and the fleet's record of that move is ai-harness `state/vps/MIGRATION-2026-11-14.md`.
+
+<!-- north-star:start -->
+## North Star: read it first, every session
+
+[`docs/NORTH_STAR.md`](docs/NORTH_STAR.md). It is not set yet: only Krish sets it. Say which part of it a task moves before starting, and close by noting what moved. The state line, the first line under "Where it is right now" in `NOW.md`, says U4 until he sets a number ([the harness contract](https://github.com/krishanraja/ai-harness/blob/main/contract/north-star-metric.md)).
+<!-- north-star:end -->
+
+## Close out
+
+Before a session that changed the repository ends, write `now-notes/YYYY-MM-DD-<slug>.md` with `Status:`, `Next:` (the single next action) and the line `North Star check (YYYY-MM-DD): holds.` with nothing in front of it. It folds into `NOW.md` on the default branch.
 
 ## Getting audio and media: use content-watcher
 
