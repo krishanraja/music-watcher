@@ -23,3 +23,6 @@ tests/fixtures/*
 # trackcard outputs
 *.trackcard.md
 *.trackcard.json
+# ...except Music Inspo's cards: they ARE the structured data (taste/inspo/README.md)
+!taste/inspo/cards/*.trackcard.md
+!taste/inspo/cards/*.trackcard.json

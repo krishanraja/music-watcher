@@ -265,7 +265,9 @@ def record(results: list[dict]) -> None:
 
 
 def publish(results: list[dict]) -> bool:
-    git("add", "taste/inspo")
+    # -f: the repository ignores *.trackcard.* (taste/graph keeps its cards outside); Music Inspo's cards are the
+    # structured data itself, so they are committed (also excepted in .gitignore, for taste/inspo/cards only).
+    git("add", "-A", "-f", "taste/inspo")
     if git("diff", "--cached", "--quiet").returncode == 0:
         return True
     measured = sum(r["status"] == "measured" for r in results)
