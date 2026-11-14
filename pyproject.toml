@@ -23,7 +23,7 @@ dependencies = [
 stems = ["torch>=2.0", "demucs>=4.0.1"]
 loudness = ["pyloudnorm>=0.1.1"]
 sections = ["allin1"]
-dev = ["pytest>=7.0"]
+dev = ["pytest>=7.0", "matplotlib>=3.7"]
 
 [project.scripts]
 trackcard = "trackcard.cli:main"
