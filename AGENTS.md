@@ -50,6 +50,7 @@ installed there with the `stems` (Demucs, CPU) and `loudness` extras, so use it 
   there. Say so; don't try.
 - **Audio on the worker lives in `~/media`**, outside every repository (never commit audio). Stems on CPU take
   about 3 to 4.5 minutes for a 4 to 5 minute track; the Demucs weights are already downloaded.
+- **New drops in Drive › Inspiration › Music Inspo are measured automatically** on the worker every 15 minutes (`taste/inspo/watch.py`, how it works in `taste/inspo/README.md`); the cards arrive as one rolling PR, `inspo/new-drops`. Don't measure a Music Inspo drop by hand unless that PR says it was left for home.
 - **The worker is a datacenter machine, so YouTube refuses it too.** The "Getting audio" rules above apply to it as
   they do to a cloud session: SoundCloud first, the rest to a home computer, and say which tracks were left for home.
 - Never hand-copy a key onto the worker (its secrets live in a root-only store), and never copy `~/.codex/auth.json`.
