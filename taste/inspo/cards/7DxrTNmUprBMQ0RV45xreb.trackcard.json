@@ -1,0 +1,726 @@
+{
+  "file": "7DxrTNmUprBMQ0RV45xreb.wav",
+  "analyzed_at": "2026-11-14 21:36",
+  "trackcard_version": "0.4.0",
+  "duration": 246.04,
+  "sample_rate": 44100,
+  "channels": 2,
+  "bpm": 126.0,
+  "bpm_source": "measured",
+  "measured_bpm": null,
+  "likely_project_bpm": 126,
+  "raw_bpm": 123.0,
+  "bpm_confidence": "high",
+  "bpm_note": "one steady tempo fits the whole track (grid score 2.1x the typical neighbouring tempo), as in a DAW bounce",
+  "octave_corrected": false,
+  "downbeat_rule": "beat 1 chosen from kick/bass (<250 Hz) onset strength (bounce does not start on a beat)",
+  "time_signature": "4/4 (assumed)",
+  "key": "G minor",
+  "key_source": "measured",
+  "measured_key": "G minor (6A)",
+  "key_alternative": "D# major",
+  "key_alternative_camelot": "5B",
+  "key_alternative_reason": "they share 6 of 7 notes and a second key profile (Temperley) ranks D# major close behind",
+  "camelot": "6A",
+  "compatible_keys": [
+    "6A",
+    "7A",
+    "5A",
+    "6B"
+  ],
+  "key_confidence": "medium",
+  "key_runner_up": "G major",
+  "key_margin": 0.133,
+  "section_method": "laplacian",
+  "phrase_snaps": 2,
+  "drop_splits": 0,
+  "drops": [
+    {
+      "time": 17.39,
+      "bar": 10,
+      "main": false,
+      "lead": "kick",
+      "text": "staged: kick and low drums first, then bassline at bar 10; vocal-range layer (vocals or a lead) at bar 24",
+      "cut": null,
+      "build": {
+        "time": 11.67,
+        "bar": 7,
+        "what": "kick and low drums drop out"
+      },
+      "joins": [
+        {
+          "time": 17.39,
+          "bar": 10,
+          "layer": "bass"
+        },
+        {
+          "time": 44.06,
+          "bar": 24,
+          "layer": "vocals"
+        }
+      ]
+    },
+    {
+      "time": 108.82,
+      "bar": 58,
+      "main": true,
+      "lead": "kick",
+      "text": "staged: kick and low drums first, then synths/chords layer at bar 72",
+      "cut": {
+        "time": 78.34,
+        "bar": 42,
+        "bars": 16
+      },
+      "build": null,
+      "joins": [
+        {
+          "time": 135.48,
+          "bar": 72,
+          "layer": "other"
+        }
+      ]
+    }
+  ],
+  "moments": [
+    {
+      "time": 11.67,
+      "bar": 7,
+      "layer": "kick",
+      "change": "drops out",
+      "delta_db": -46.6,
+      "drop": "",
+      "text": "kick and low drums drop out"
+    },
+    {
+      "time": 17.39,
+      "bar": 10,
+      "layer": "kick",
+      "change": "fuller",
+      "delta_db": 23.3,
+      "drop": "drop",
+      "text": "DROP: kick and low drums come in fuller (+23 dB)"
+    },
+    {
+      "time": 17.39,
+      "bar": 10,
+      "layer": "bass",
+      "change": "enters",
+      "delta_db": 57.0,
+      "drop": "joins",
+      "text": "bassline enters, joining the drop at bar 10"
+    },
+    {
+      "time": 44.06,
+      "bar": 24,
+      "layer": "vocals",
+      "change": "enters",
+      "delta_db": 49.0,
+      "drop": "joins",
+      "text": "vocal-range layer (vocals or a lead) enters, joining the drop at bar 10"
+    },
+    {
+      "time": 47.86,
+      "bar": 26,
+      "layer": "vocals",
+      "change": "drops out",
+      "delta_db": -29.6,
+      "drop": "",
+      "text": "vocal-range layer (vocals or a lead) drops out"
+    },
+    {
+      "time": 78.34,
+      "bar": 42,
+      "layer": "kick",
+      "change": "drops out",
+      "delta_db": -43.2,
+      "drop": "",
+      "text": "kick and low drums drop out"
+    },
+    {
+      "time": 78.34,
+      "bar": 42,
+      "layer": "tops",
+      "change": "pulls back",
+      "delta_db": -8.1,
+      "drop": "",
+      "text": "hats and cymbals (drum tops) pull back (-8 dB)"
+    },
+    {
+      "time": 93.58,
+      "bar": 50,
+      "layer": "kick",
+      "change": "enters",
+      "delta_db": 13.3,
+      "drop": "",
+      "text": "kick and low drums enter"
+    },
+    {
+      "time": 93.58,
+      "bar": 50,
+      "layer": "other",
+      "change": "fuller",
+      "delta_db": 14.9,
+      "drop": "",
+      "text": "synths/chords layer comes in fuller (+15 dB)"
+    },
+    {
+      "time": 105.01,
+      "bar": 56,
+      "layer": "tops",
+      "change": "pulls back",
+      "delta_db": -16.3,
+      "drop": "",
+      "text": "hats and cymbals (drum tops) pull back (-16 dB)"
+    },
+    {
+      "time": 106.91,
+      "bar": 57,
+      "layer": "vocals",
+      "change": "enters",
+      "delta_db": 48.4,
+      "drop": "",
+      "text": "vocal-range layer (vocals or a lead) enters"
+    },
+    {
+      "time": 108.82,
+      "bar": 58,
+      "layer": "kick",
+      "change": "fuller",
+      "delta_db": 31.6,
+      "drop": "drop",
+      "text": "DROP: kick and low drums come in fuller (+32 dB)"
+    },
+    {
+      "time": 108.82,
+      "bar": 58,
+      "layer": "bass",
+      "change": "fuller",
+      "delta_db": 6.0,
+      "drop": "",
+      "text": "bassline comes in fuller (+6 dB)"
+    },
+    {
+      "time": 108.82,
+      "bar": 58,
+      "layer": "tops",
+      "change": "fuller",
+      "delta_db": 19.6,
+      "drop": "",
+      "text": "hats and cymbals (drum tops) come in fuller (+20 dB)"
+    },
+    {
+      "time": 108.82,
+      "bar": 58,
+      "layer": "other",
+      "change": "pulls back",
+      "delta_db": -12.3,
+      "drop": "",
+      "text": "synths/chords layer pulls back (-12 dB)"
+    },
+    {
+      "time": 135.48,
+      "bar": 72,
+      "layer": "kick",
+      "change": "pulls back",
+      "delta_db": -22.6,
+      "drop": "",
+      "text": "kick and low drums pull back (-23 dB)"
+    },
+    {
+      "time": 135.48,
+      "bar": 72,
+      "layer": "other",
+      "change": "fuller",
+      "delta_db": 6.8,
+      "drop": "joins",
+      "text": "synths/chords layer comes in fuller (+7 dB), joining the drop at bar 58"
+    },
+    {
+      "time": 137.39,
+      "bar": 73,
+      "layer": "vocals",
+      "change": "drops out",
+      "delta_db": -50.0,
+      "drop": "",
+      "text": "vocal-range layer (vocals or a lead) drops out"
+    },
+    {
+      "time": 154.53,
+      "bar": 82,
+      "layer": "other",
+      "change": "fuller",
+      "delta_db": 12.5,
+      "drop": "",
+      "text": "synths/chords layer comes in fuller (+12 dB)"
+    },
+    {
+      "time": 167.86,
+      "bar": 89,
+      "layer": "vocals",
+      "change": "enters",
+      "delta_db": 43.4,
+      "drop": "",
+      "text": "vocal-range layer (vocals or a lead) enters"
+    },
+    {
+      "time": 169.77,
+      "bar": 90,
+      "layer": "other",
+      "change": "pulls back",
+      "delta_db": -9.3,
+      "drop": "",
+      "text": "synths/chords layer pulls back (-9 dB)"
+    },
+    {
+      "time": 171.67,
+      "bar": 91,
+      "layer": "vocals",
+      "change": "drops out",
+      "delta_db": -33.2,
+      "drop": "",
+      "text": "vocal-range layer (vocals or a lead) drops out"
+    },
+    {
+      "time": 186.91,
+      "bar": 99,
+      "layer": "vocals",
+      "change": "enters",
+      "delta_db": 10.3,
+      "drop": "",
+      "text": "vocal-range layer (vocals or a lead) enters"
+    },
+    {
+      "time": 194.53,
+      "bar": 103,
+      "layer": "vocals",
+      "change": "drops out",
+      "delta_db": -6.6,
+      "drop": "",
+      "text": "vocal-range layer (vocals or a lead) drops out"
+    },
+    {
+      "time": 196.43,
+      "bar": 104,
+      "layer": "other",
+      "change": "fuller",
+      "delta_db": 7.1,
+      "drop": "",
+      "text": "synths/chords layer comes in fuller (+7 dB)"
+    },
+    {
+      "time": 232.62,
+      "bar": 123,
+      "layer": "bass",
+      "change": "drops out",
+      "delta_db": -56.2,
+      "drop": "",
+      "text": "bassline drops out"
+    },
+    {
+      "time": 244.05,
+      "bar": 129,
+      "layer": "other",
+      "change": "drops out",
+      "delta_db": -16.0,
+      "drop": "",
+      "text": "synths/chords layer drops out"
+    }
+  ],
+  "sections": [
+    {
+      "id": "S1",
+      "label": "section_1",
+      "start": 0.0,
+      "end": 15.48,
+      "start_bar": 0,
+      "end_bar": 8,
+      "level_dbfs": -10.9,
+      "rel_level_db": -2.1,
+      "energy": "peak",
+      "stems": {
+        "drums": {
+          "state": "active",
+          "density": 0.94,
+          "level_dbfs": -10.7
+        },
+        "bass": {
+          "state": "absent",
+          "density": 0.0,
+          "level_dbfs": -120.0
+        },
+        "vocals": {
+          "state": "absent",
+          "density": 0.0,
+          "level_dbfs": -120.0
+        },
+        "other": {
+          "state": "active",
+          "density": 0.97,
+          "level_dbfs": -35.9
+        }
+      },
+      "bands_rel_db": {
+        "sub": 0.0,
+        "low": -3.3,
+        "mid": -10.3,
+        "high-mid": -15.8,
+        "air": -22.9
+      },
+      "band_flags": [
+        "sub-heavy: sub sits 3 dB over the low band"
+      ],
+      "bars": "0-8"
+    },
+    {
+      "id": "S2",
+      "label": "section_2",
+      "start": 15.48,
+      "end": 76.44,
+      "start_bar": 9,
+      "end_bar": 40,
+      "level_dbfs": -8.8,
+      "rel_level_db": 0.0,
+      "energy": "peak",
+      "stems": {
+        "drums": {
+          "state": "active",
+          "density": 0.99,
+          "level_dbfs": -10.3
+        },
+        "bass": {
+          "state": "active",
+          "density": 0.99,
+          "level_dbfs": -14.8
+        },
+        "vocals": {
+          "state": "absent",
+          "density": 0.04,
+          "level_dbfs": -19.4
+        },
+        "other": {
+          "state": "active",
+          "density": 1.0,
+          "level_dbfs": -31.5
+        }
+      },
+      "bands_rel_db": {
+        "sub": 0.0,
+        "low": -1.9,
+        "mid": -9.7,
+        "high-mid": -13.5,
+        "air": -17.5
+      },
+      "band_flags": [],
+      "bars": "9-40"
+    },
+    {
+      "id": "S3",
+      "label": "section_3",
+      "start": 76.44,
+      "end": 91.67,
+      "start_bar": 41,
+      "end_bar": 48,
+      "level_dbfs": -17.1,
+      "rel_level_db": -8.3,
+      "energy": "low",
+      "stems": {
+        "drums": {
+          "state": "active",
+          "density": 0.81,
+          "level_dbfs": -21.2
+        },
+        "bass": {
+          "state": "active",
+          "density": 0.95,
+          "level_dbfs": -18.7
+        },
+        "vocals": {
+          "state": "absent",
+          "density": 0.0,
+          "level_dbfs": -120.0
+        },
+        "other": {
+          "state": "active",
+          "density": 1.0,
+          "level_dbfs": -33.2
+        }
+      },
+      "bands_rel_db": {
+        "sub": -7.0,
+        "low": 0.0,
+        "mid": -6.1,
+        "high-mid": -12.5,
+        "air": -20.7
+      },
+      "band_flags": [],
+      "bars": "41-48"
+    },
+    {
+      "id": "S4",
+      "label": "section_4",
+      "start": 91.67,
+      "end": 106.91,
+      "start_bar": 49,
+      "end_bar": 56,
+      "level_dbfs": -15.0,
+      "rel_level_db": -6.2,
+      "energy": "mid",
+      "stems": {
+        "drums": {
+          "state": "active",
+          "density": 0.84,
+          "level_dbfs": -19.8
+        },
+        "bass": {
+          "state": "active",
+          "density": 0.99,
+          "level_dbfs": -19.8
+        },
+        "vocals": {
+          "state": "absent",
+          "density": 0.0,
+          "level_dbfs": -120.0
+        },
+        "other": {
+          "state": "active",
+          "density": 1.0,
+          "level_dbfs": -19.8
+        }
+      },
+      "bands_rel_db": {
+        "sub": -22.4,
+        "low": 0.0,
+        "mid": -0.9,
+        "high-mid": -6.3,
+        "air": -19.0
+      },
+      "band_flags": [],
+      "bars": "49-56"
+    },
+    {
+      "id": "S5",
+      "label": "section_2",
+      "start": 106.91,
+      "end": 228.82,
+      "start_bar": 57,
+      "end_bar": 120,
+      "level_dbfs": -9.0,
+      "rel_level_db": -0.2,
+      "energy": "peak",
+      "stems": {
+        "drums": {
+          "state": "active",
+          "density": 0.97,
+          "level_dbfs": -10.4
+        },
+        "bass": {
+          "state": "active",
+          "density": 0.93,
+          "level_dbfs": -15.0
+        },
+        "vocals": {
+          "state": "sparse",
+          "density": 0.17,
+          "level_dbfs": -18.5
+        },
+        "other": {
+          "state": "active",
+          "density": 0.99,
+          "level_dbfs": -28.3
+        }
+      },
+      "bands_rel_db": {
+        "sub": 0.0,
+        "low": -1.8,
+        "mid": -8.3,
+        "high-mid": -12.3,
+        "air": -16.5
+      },
+      "band_flags": [],
+      "bars": "57-120"
+    },
+    {
+      "id": "S6",
+      "label": "section_1",
+      "start": 228.82,
+      "end": 246.04,
+      "start_bar": 121,
+      "end_bar": 130,
+      "level_dbfs": -9.6,
+      "rel_level_db": -0.8,
+      "energy": "peak",
+      "stems": {
+        "drums": {
+          "state": "active",
+          "density": 0.99,
+          "level_dbfs": -9.6
+        },
+        "bass": {
+          "state": "sparse",
+          "density": 0.12,
+          "level_dbfs": -15.0
+        },
+        "vocals": {
+          "state": "absent",
+          "density": 0.0,
+          "level_dbfs": -120.0
+        },
+        "other": {
+          "state": "active",
+          "density": 0.76,
+          "level_dbfs": -39.5
+        }
+      },
+      "bands_rel_db": {
+        "sub": 0.0,
+        "low": -3.2,
+        "mid": -10.9,
+        "high-mid": -13.8,
+        "air": -17.5
+      },
+      "band_flags": [
+        "sub-heavy: sub sits 3 dB over the low band"
+      ],
+      "bars": "121-130"
+    }
+  ],
+  "stems_available": true,
+  "stems_device": "cpu (shifts=0)",
+  "loudness": {
+    "peak_dbfs": 0.0,
+    "rms_dbfs": -9.6,
+    "crest_db": 9.6,
+    "integrated_lufs": -8.7,
+    "lufs_method": "ITU-R BS.1770 via pyloudnorm",
+    "clipped_samples": 113
+  },
+  "level_by_8_bars": [
+    {
+      "bars": "1-8",
+      "start": 0.25,
+      "rms_dbfs": -10.9
+    },
+    {
+      "bars": "9-16",
+      "start": 15.48,
+      "rms_dbfs": -8.6
+    },
+    {
+      "bars": "17-24",
+      "start": 30.72,
+      "rms_dbfs": -9.0
+    },
+    {
+      "bars": "25-32",
+      "start": 45.96,
+      "rms_dbfs": -8.7
+    },
+    {
+      "bars": "33-40",
+      "start": 61.2,
+      "rms_dbfs": -9.0
+    },
+    {
+      "bars": "41-48",
+      "start": 76.44,
+      "rms_dbfs": -17.1
+    },
+    {
+      "bars": "49-56",
+      "start": 91.67,
+      "rms_dbfs": -15.0
+    },
+    {
+      "bars": "57-64",
+      "start": 106.91,
+      "rms_dbfs": -9.1
+    },
+    {
+      "bars": "65-72",
+      "start": 122.15,
+      "rms_dbfs": -8.9
+    },
+    {
+      "bars": "73-80",
+      "start": 137.39,
+      "rms_dbfs": -9.2
+    },
+    {
+      "bars": "81-88",
+      "start": 152.63,
+      "rms_dbfs": -8.8
+    },
+    {
+      "bars": "89-96",
+      "start": 167.86,
+      "rms_dbfs": -9.1
+    },
+    {
+      "bars": "97-104",
+      "start": 183.1,
+      "rms_dbfs": -8.7
+    },
+    {
+      "bars": "105-112",
+      "start": 198.34,
+      "rms_dbfs": -9.1
+    },
+    {
+      "bars": "113-120",
+      "start": 213.58,
+      "rms_dbfs": -9.1
+    },
+    {
+      "bars": "121-128",
+      "start": 228.82,
+      "rms_dbfs": -9.5
+    },
+    {
+      "bars": "129-130",
+      "start": 244.05,
+      "rms_dbfs": -10.1
+    }
+  ],
+  "brief": [
+    {
+      "section": "S1",
+      "bars": "0-8",
+      "layer": "bass",
+      "gap": "no bassline in a peak-energy section",
+      "evidence": "bass stem absent; section level -2.1 dB vs the loudest section",
+      "bpm_range": "124-128",
+      "key": "G minor (6A) or D# major (5B); trackcard is unsure between the two, so confirm with the producer; also works: D minor (7A), C minor (5A), A# major (6B)",
+      "tags": [
+        "basslines",
+        "bass loops",
+        "sub bass",
+        "synth bass"
+      ],
+      "instruction": "Search Splice for bass loops at 124-128 BPM, key G minor (or D# major), tags: basslines, bass loops, sub bass. Use it in bars 0-8 to anchor the low end.",
+      "rule": "R2"
+    },
+    {
+      "section": "S4",
+      "bars": "49-56",
+      "layer": "fx",
+      "gap": "nothing builds into the next section",
+      "evidence": "next section is 6.0 dB louder",
+      "bpm_range": "124-128",
+      "key": "any (unpitched; skip the key filter)",
+      "tags": [
+        "risers",
+        "uplifters",
+        "sweeps",
+        "white noise",
+        "fx"
+      ],
+      "instruction": "Search Splice for fx samples at 124-128 BPM, tags: risers, uplifters, sweeps. Use it in bars 49-56 to build into the next section (last 4-8 bars).",
+      "rule": "R7"
+    }
+  ],
+  "notes": [
+    "Beat grid moved by half a beat: the tracker had locked onto the off-beat (the kick/bass band hits half a beat later).",
+    "No GPU found; Demucs ran on CPU.",
+    "113 samples hit 0 dBFS; the bounce may be clipping."
+  ]
+}
