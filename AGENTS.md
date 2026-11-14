@@ -34,3 +34,22 @@ a metadata source (Spotify, Discogs, label page), or inferred by Claude. Inferre
 - Taken back? Set `"withdrawn": true` on the row; never delete it. Run `trackcard brain check` after any edit.
 - Weekly: `trackcard brain propose` (at most 3, frozen once proposed). Krish runs `trackcard brain accept|reject <id>`.
 - After any change to evidence, claims or the graph: `trackcard brain render`.
+
+## The worker: use it by default
+
+Krish has an always-on Linux server, **the worker** (`ssh worker`; x86 Ubuntu, 4 vCPU / 8 GB). `trackcard` is
+installed there with the `stems` (Demucs, CPU) and `loudness` extras, so use it without being asked:
+
+- **Already on it?** If `hostname` prints `worker`, you are a Remote Control or Codex session on it, running as
+  `agent`. Clone into your own `~/work/music-watcher-<task>` folder and work there. `trackcard` and `content-watch`
+  are already on your PATH; their installed copies are in `~/apps/` (pull to update, never edit in place).
+- **On Krish's laptop?** Edit locally, but send heavy steps (stem separation and `trackcard analyze` on full tracks,
+  the test suite) to the worker: `ssh worker offload <<'EOF'` … `EOF` runs as `agent` in `~/work` inside the worker's
+  CPU and memory budget. Clone or pull into `~/work/music-watcher-<task>` first; delete it when done.
+- **On a cloud session** (claude.ai/code, Codex cloud): the worker is unreachable, because outbound SSH is blocked
+  there. Say so; don't try.
+- **Audio on the worker lives in `~/media`**, outside every repository (never commit audio). Stems on CPU take
+  about 3 to 4.5 minutes for a 4 to 5 minute track; the Demucs weights are already downloaded.
+- **The worker is a datacenter machine, so YouTube refuses it too.** The "Getting audio" rules above apply to it as
+  they do to a cloud session: SoundCloud first, the rest to a home computer, and say which tracks were left for home.
+- Never hand-copy a key onto the worker (its secrets live in a root-only store), and never copy `~/.codex/auth.json`.
