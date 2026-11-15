@@ -1,0 +1,107 @@
+{
+ "about": "Style family per artist for Calvin's 'Fall Bangers'. Claude's read from artist knowledge, labels and co-artists (2026-11-15), not measured and not stated by Calvin. Correct freely. Families that also exist in Krish's graph keep his slug, name and definition, so the two brains can be compared family by family; artists who appear in both playlists sit in the same family in both. Two families are new here (disco_indie_dance, afro_latin_club). The match is on the credited artist name, case-insensitive.",
+ "families": {
+  "groove_tech_house": {
+   "name": "Groove-led tech house",
+   "description": "The 2024-26 club turn at 124-130 BPM: rolling, swung basslines, crisp percussion, sparse stabs and chopped vocal hooks; driving and playful, with little harmony or melody.",
+   "shared_with": "Krish's taste/graph/families.json (same family, same definition)",
+   "artists": [
+    "Toman",
+    "Cloonee",
+    "Chris Lorenzo",
+    "Jazzy",
+    "Marco Lys",
+    "Michael Ekow",
+    "Kevcody",
+    "The Martinez Brothers",
+    "Stevie Appleton",
+    "TYGE",
+    "veggi",
+    "Barney Bones",
+    "Wal",
+    "Riordan",
+    "Locky",
+    "ANOTR",
+    "3DDY",
+    "Kolter",
+    "L.P. Rhythm",
+    "KDAY",
+    "Collect 200"
+   ]
+  },
+  "uk_soulful_club": {
+   "name": "UK and soulful vocal house",
+   "description": "Garage swing, diva or soul vocals, organs and chunky basslines; disco and nu-disco edges.",
+   "shared_with": "Krish's taste/graph/families.json (same family, same definition)",
+   "artists": [
+    "Claptone",
+    "MIRAMAR",
+    "Kurtis Wells",
+    "Barry Can't Swim",
+    "Dam Swindle",
+    "DJ Minx",
+    "LP Giobbi",
+    "blythe",
+    "KETTAMA",
+    "Sam Gellaitry",
+    "Arlo",
+    "Allegra Miles"
+   ]
+  },
+  "disco_indie_dance": {
+   "name": "Disco, French touch and indie dance",
+   "description": "Filtered disco loops, funk guitar and talkbox, French-touch pumping, and indie-dance remixes and re-edits at 120-126 BPM: bright, warm, joyful, with a song or a sample at the centre. New in Calvin's brain; Krish's graph files Purple Disco Machine-style tracks under uk_soulful_club's disco edge.",
+   "artists": [
+    "Purple Disco Machine",
+    "Julien Jabre",
+    "The Paradise",
+    "Alan Braxe",
+    "Romuald",
+    "Chromeo",
+    "Roog",
+    "CŒUR ACIDE",
+    "Pat Lok",
+    "F-MACK",
+    "Edd",
+    "King Wizard",
+    "LOVE LANGUAGE",
+    "Lemonade Baby",
+    "Gilligan Moss",
+    "James Juke"
+   ]
+  },
+  "afro_latin_club": {
+   "name": "Afro and Latin club house",
+   "description": "Afro house built for the club rather than the sunrise: log drums and congas, chanted or Latin vocal hooks, a firm four-to-the-floor at 120-124 BPM. New in Calvin's brain; harder and more driving than Krish's organic_afro_house.",
+   "artists": [
+    "Francis Mercier",
+    "CAMELPHAT",
+    "Josh Gigante",
+    "Kuuda",
+    "unfazed",
+    "Emanuel Satie",
+    "Maga",
+    "Sean Doron",
+    "Scenarios",
+    "Tim Engelhardt"
+   ]
+  }
+ },
+ "low_confidence": {
+  "about": "Artists Claude knows little about; family judged from title, label and co-artists only.",
+  "artists": [
+   "L.P. Rhythm",
+   "KDAY",
+   "Collect 200",
+   "Kolter",
+   "Wal",
+   "Arlo",
+   "Allegra Miles",
+   "Sam Gellaitry",
+   "CŒUR ACIDE",
+   "F-MACK",
+   "Edd",
+   "King Wizard"
+  ]
+ }
+}

@@ -94,3 +94,52 @@ def test_accepted_claim_renders_and_flags_weakening(taste):
 def test_repo_evidence_is_valid():
     b = br.load(REPO_TASTE)
     assert br.check(b) == []
+
+
+def test_a_second_brain_counts_only_its_voices_and_names_its_decider(taste, tmp_path):
+    """Calvin's brain: the shared vocabulary and evidence log, only Calvin's words, its own claims and decisions."""
+    cal = taste / "calvin"
+    (cal / "brain").mkdir(parents=True)
+    (cal / "graph").mkdir()
+    shutil.copy(taste / "graph" / "tracks.csv", cal / "graph" / "tracks.csv")
+    policy = json.loads((taste / "brain" / "policy.json").read_text()) | {
+        "voices": ["calvin"], "decides": "Calvin", "vocab": "../../brain/vocab.json", "evidence": "../../brain/evidence.jsonl"}
+    (cal / "brain" / "policy.json").write_text(json.dumps(policy))
+    b = br.load(cal)
+    assert br.check(b) == [] and len(b.evidence) == 3  # every row is validated, whoever said it
+    pats = br.recount(b)
+    assert ("sound_design", "growl_bass") not in pats  # Krish's words do not count here
+    assert pats[("vocal", "vocal_chops")]["words_like"] == 2 and not pats[("vocal", "vocal_chops")]["both_ways"]
+    b.policy["proposals_per_week"] = 20
+    claim = next(c for c in br.propose(b, MONDAY) if c["slug"] == "vocal_chops")
+    approved, patterns = br.render(b)
+    assert "## Waiting for Calvin" in approved and "taste/calvin/brain/claims.jsonl" in approved
+    assert "`trackcard brain accept <id> --taste taste/calvin`" in approved
+    assert "Calvin's words in `taste/brain/evidence.jsonl`" in " ".join(patterns.split())
+    br.decide(b, claim["id"], True)
+    br.save(b)
+    assert (cal / "brain" / "claims.jsonl").exists() and not (taste / "brain" / "claims.jsonl").exists()
+    approved, _ = br.render(b)
+    assert "accepted by Calvin" in approved and claim["text"] in approved
+    # Krish's brain is untouched: still both voices, still Krish deciding
+    k = br.load(taste)
+    assert br.recount(k)[("vocal", "vocal_chops")]["both_ways"] and "## Waiting for" not in br.render(k)[0]
+    br.propose(k, MONDAY)
+    assert "## Waiting for Krish" in br.render(k)[0] and "--taste" not in br.render(k)[0]
+
+
+def test_trend_needs_a_span_of_adding_dates(taste):
+    b = br.load(taste)
+    for i, t in enumerate(b.tracks):
+        t["added_at"] = f"2026-11-14T23:{i:02d}:00Z"  # a playlist built in one evening
+    assert all(p["trend"] is None for p in br.recount(b).values())
+    for i, t in enumerate(b.tracks):
+        t["added_at"] = f"{2014 + i}-01-01T00:00:00Z"
+    assert br.recount(b)[("groove", "tempo_118_125")]["trend"] == "falling"  # 122 BPM early, 100 BPM late
+
+
+def test_calvin_brain_is_valid():
+    b = br.load(REPO_TASTE / "calvin")
+    assert br.check(b) == []
+    assert br.voices(b) == ["calvin"] and br.decider(b) == "Calvin"
+    assert all(c["evidence"] for c in b.claims)

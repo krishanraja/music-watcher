@@ -11,6 +11,11 @@ Three layers, kept apart (the inspirationhouse model):
                Accepted claims render to taste/APPROVED.md, the only file a generator should treat as rules.
 
 A signal never decides anything; only an accepted claim does.
+
+One brain per person. Krish's brain is taste/ (it counts Krish's and Calvin's words, as it always has); Calvin's is
+taste/calvin/. A brain's policy.json can point at a shared vocabulary and evidence log ("vocab", "evidence", paths relative
+to its brain/ folder), name the voices whose words it counts ("voices") and who decides its claims ("decides"). Claims,
+rejections and APPROVED.md always stay in the brain's own folder, so one person's decisions never touch another's rules.
 """
 from __future__ import annotations
 
@@ -54,12 +59,15 @@ def _write_jsonl(p: Path, rows: list[dict]) -> None:
     p.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
 
 
+VOICES = ("krish", "calvin")
+
+
 def load(root: Path) -> Brain:
     root = Path(root)
     b = Brain(root)
-    b.vocab = json.loads((b.dir / "vocab.json").read_text(encoding="utf-8"))["dimensions"]
     b.policy = json.loads((b.dir / "policy.json").read_text(encoding="utf-8"))
-    b.evidence = _read_jsonl(b.dir / "evidence.jsonl")
+    b.vocab = json.loads((b.dir / b.policy.get("vocab", "vocab.json")).read_text(encoding="utf-8"))["dimensions"]
+    b.evidence = _read_jsonl(b.dir / b.policy.get("evidence", "evidence.jsonl"))
     b.claims = _read_jsonl(b.dir / "claims.jsonl")
     tracks_csv = root / "graph" / "tracks.csv"
     if tracks_csv.exists():
@@ -78,7 +86,7 @@ def check(b: Brain) -> list[str]:
         if rid in seen:
             problems.append(f"{rid}: duplicate id")
         seen.add(rid)
-        if row.get("who") not in ("krish", "calvin"):
+        if row.get("who") not in VOICES:
             problems.append(f"{rid}: who must be krish or calvin (measured evidence is derived, never written here)")
         if not row.get("where") or not row.get("when"):
             problems.append(f"{rid}: words need where and when they were said")
@@ -159,6 +167,27 @@ def _eligible(track: dict, dim: str, slug: str) -> bool:
 
 # ---------------------------------------------------------------- layer 2: patterns (recounted, never stored)
 
+def voices(b: Brain) -> list[str]:
+    """Whose words this brain counts (policy "voices"; Krish's brain counts both, as it always has)."""
+    return list(b.policy.get("voices", VOICES))
+
+
+def decider(b: Brain) -> str:
+    """Who accepts or rejects this brain's claims (policy "decides")."""
+    return b.policy.get("decides", "Krish")
+
+
+def _from_taste(p: Path) -> str:
+    """A path as a reader finds it from the repository root (taste/...), or as given when it is not under taste/."""
+    parts = p.resolve().parts
+    return "/".join(parts[len(parts) - 1 - parts[::-1].index("taste"):]) if "taste" in parts else str(p)
+
+
+def evidence_shown(b: Brain) -> str:
+    """The evidence log as a reader should find it: its own file, or the shared one from the repository's taste/ folder."""
+    return _from_taste(b.dir / b.policy["evidence"]) if "evidence" in b.policy else "evidence.jsonl"
+
+
 def recount(b: Brain) -> dict[tuple[str, str], dict]:
     pats: dict[tuple[str, str], dict] = {}
 
@@ -167,9 +196,10 @@ def recount(b: Brain) -> dict[tuple[str, str], dict]:
             "dim": dim, "slug": slug, "words_like": 0, "words_dislike": 0, "words_sources": set(),
             "word_ids": [], "quotes": [], "measured_tracks": [], "eligible": 0})
 
+    counted = voices(b)
     for row in b.evidence:
-        if row.get("withdrawn"):
-            continue  # taken back: stops counting
+        if row.get("withdrawn") or row.get("who") not in counted:
+            continue  # taken back, or someone else's words: stops counting
         for s in row.get("signals", []):
             slug = s["slug"] if s["dim"] != "other" else f"other:{s['slug']}"
             p = pat(s["dim"], slug)
@@ -191,10 +221,16 @@ def recount(b: Brain) -> dict[tuple[str, str], dict]:
     return pats
 
 
+TREND_MIN_SPAN_DAYS = 90  # a playlist built in one evening has an adding order, not a trend
+
+
 def _trend(hits: list[dict], eligible: list[dict]) -> str | None:
     """Share among the newest third of tracks by added_at minus the oldest third, when added dates exist."""
     dated = sorted((t for t in eligible if t.get("added_at")), key=lambda t: t["added_at"])
     if len(dated) < 9:
+        return None
+    span = dt.date.fromisoformat(dated[-1]["added_at"][:10]) - dt.date.fromisoformat(dated[0]["added_at"][:10])
+    if span.days < TREND_MIN_SPAN_DAYS:
         return None
     third = len(dated) // 3
     hit_ids = {t["id"] for t in hits}
@@ -301,8 +337,8 @@ def render(b: Brain) -> tuple[str, str]:
     """(APPROVED.md, PATTERNS.md) as text. Both are generated; edit evidence or claims, never these."""
     pats = recount(b)
     a = ["# Approved taste rules", "",
-         "Generated by `trackcard brain render` from `taste/brain/claims.jsonl`. These are the only lines a generator or a",
-         "Splice search should treat as rules. Each was proposed from evidence and accepted by Krish. Do not edit by hand.",
+         f"Generated by `trackcard brain render` from `{_from_taste(b.dir / 'claims.jsonl')}`. These are the only lines a generator or a",
+         f"Splice search should treat as rules. Each was proposed from evidence and accepted by {decider(b)}. Do not edit by hand.",
          "They rank below truth and safety, and they describe how a track is made, not what it is about.", ""]
     acc = [c for c in b.claims if c["status"] == "accepted"]
     if not acc:
@@ -315,16 +351,20 @@ def render(b: Brain) -> tuple[str, str]:
             a.append(f"  - {q}")
     open_ = [c for c in b.claims if c["status"] == "proposed"]
     if open_:
-        a += ["", "## Waiting for Krish", "",
-              "Accept with `trackcard brain accept <id>`, reject with `trackcard brain reject <id> --why \"...\"`.", ""]
+        shown = _from_taste(b.root)
+        flag = "" if shown == "taste" else f" --taste {shown}"  # another person's brain: the command must name it
+        a += ["", f"## Waiting for {decider(b)}", "",
+              f"Accept with `trackcard brain accept <id>{flag}`, reject with `trackcard brain reject <id>{flag} --why \"...\"`.", ""]
         a += [f"- `{c['id']}` (proposed {c['proposed_on']}): {c['text']}" for c in open_]
     rej = [c for c in b.claims if c["status"] == "rejected"]
     if rej:
         a += ["", "## Rejected (never proposed again)", ""] + [f"- `{c['id']}`: {c.get('why', 'no reason given')}" for c in rej]
 
+    whose = " and ".join(f"{v.title()}'s" for v in voices(b))
     t = ["# Taste patterns (recounted)", "",
-         "Generated by `trackcard brain render`. Patterns are recounted from live evidence on every run: Krish's and Calvin's",
-         "words in `evidence.jsonl` (withdrawn rows excluded) and trackcard measurements of the playlist in `graph/tracks.csv`.",
+         f"Generated by `trackcard brain render`. Patterns are recounted from live evidence on every run: {whose}",
+         f"words in `{evidence_shown(b)}` (withdrawn rows excluded) and trackcard measurements of the "
+         "playlist in `graph/tracks.csv`.",
          "A pattern decides nothing until it becomes an accepted claim.", "",
          "| dimension | signal | words like | words dislike | sources | measured | share | trend | state |",
          "|---|---|---|---|---|---|---|---|---|"]

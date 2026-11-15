@@ -1,0 +1,4318 @@
+{
+ "about": "Calvin's taste graph. All 30 tracks of Calvin's Spotify playlist 'Fall Bangers' (read 2026-11-15 from Spotify's public pages, with the date each was added). Release dates and added dates are from Spotify's public pages; labels from Spotify's album pages (the phonographic copyright line). Tempo, key, frequency balance, dynamics and arrangement are measured by trackcard on the full track for 18 tracks; each track's measured_from says which. Style families are inferred (Claude's read).",
+ "counts": {
+  "style_family": 4,
+  "track": 30,
+  "artist": 59,
+  "label": 30,
+  "era": 5,
+  "added_year": 1,
+  "added_month": 1,
+  "key": 15,
+  "tempo_band": 5,
+  "trait": 11,
+  "edges": 428
+ },
+ "nodes": [
+  {
+   "id": "family:groove_tech_house",
+   "type": "style_family",
+   "name": "Groove-led tech house",
+   "description": "The 2024-26 club turn at 124-130 BPM: rolling, swung basslines, crisp percussion, sparse stabs and chopped vocal hooks; driving and playful, with little harmony or melody.",
+   "provenance": "inferred from artists (Claude's read)"
+  },
+  {
+   "id": "family:uk_soulful_club",
+   "type": "style_family",
+   "name": "UK and soulful vocal house",
+   "description": "Garage swing, diva or soul vocals, organs and chunky basslines; disco and nu-disco edges.",
+   "provenance": "inferred from artists (Claude's read)"
+  },
+  {
+   "id": "family:disco_indie_dance",
+   "type": "style_family",
+   "name": "Disco, French touch and indie dance",
+   "description": "Filtered disco loops, funk guitar and talkbox, French-touch pumping, and indie-dance remixes and re-edits at 120-126 BPM: bright, warm, joyful, with a song or a sample at the centre. New in Calvin's brain; Krish's graph files Purple Disco Machine-style tracks under uk_soulful_club's disco edge.",
+   "provenance": "inferred from artists (Claude's read)"
+  },
+  {
+   "id": "family:afro_latin_club",
+   "type": "style_family",
+   "name": "Afro and Latin club house",
+   "description": "Afro house built for the club rather than the sunrise: log drums and congas, chanted or Latin vocal hooks, a firm four-to-the-floor at 120-124 BPM. New in Calvin's brain; harder and more driving than Krish's organic_afro_house.",
+   "provenance": "inferred from artists (Claude's read)"
+  },
+  {
+   "id": "track:6HTDX4qgjY6usYjtx18eWf",
+   "type": "track",
+   "title": "How Ya Feelin’",
+   "artists": [
+    "L.P. Rhythm"
+   ],
+   "duration_s": 157,
+   "release_date": "2026-09-04",
+   "release_year": 2026,
+   "label": "Lewis Pitcairn under exclusive license to Disorder Records/UMG Recordings, Inc. A Capitol Records/Disorder release.",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:43:14Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/6HTDX4qgjY6usYjtx18eWf",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 132,
+    "bpm_confidence": "high",
+    "key": "A# minor",
+    "camelot": "3A",
+    "mode": "minor",
+    "key_confidence": "medium",
+    "key_alternative": "G# major",
+    "lufs": -8.7,
+    "crest_db": 10.6,
+    "clip_seconds": 156.8,
+    "band_sub": -3.0,
+    "band_low": -0.1,
+    "band_mid": -6.6,
+    "band_high-mid": -8.3,
+    "band_air": -15.2,
+    "full_track": true,
+    "sections": 6,
+    "intro_bars_before_first_peak": 6,
+    "first_peak_s": 11,
+    "peak_share": 0.63,
+    "breakdowns": 2,
+    "energy_arc": "L > P > M > M > P > M",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.973)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://api.soundcloud.com/tracks/soundcloud%3Atracks%3A2394389223",
+    "upload_title": "How Ya Feelin'",
+    "uploader": "L.P. Rhythm",
+    "length_diff_s": 0.1,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.973)"
+   }
+  },
+  {
+   "id": "artist:L.P. Rhythm",
+   "type": "artist",
+   "name": "L.P. Rhythm"
+  },
+  {
+   "id": "label:Lewis Pitcairn under exclusive license to Disorder Records/UMG Recordings, Inc. A Capitol Records/Disorder release.",
+   "type": "label",
+   "name": "Lewis Pitcairn under exclusive license to Disorder Records/UMG Recordings, Inc. A Capitol Records/Disorder release."
+  },
+  {
+   "id": "era:2026",
+   "type": "era",
+   "name": "2026"
+  },
+  {
+   "id": "added_year:2026",
+   "type": "added_year",
+   "name": "2026"
+  },
+  {
+   "id": "added_month:2026-11",
+   "type": "added_month",
+   "name": "2026-11"
+  },
+  {
+   "id": "key:3A",
+   "type": "key",
+   "name": "A# minor",
+   "camelot": "3A"
+  },
+  {
+   "id": "tempo:130+ BPM",
+   "type": "tempo_band",
+   "name": "130+ BPM"
+  },
+  {
+   "id": "trait:minor key",
+   "type": "trait",
+   "name": "minor key",
+   "provenance": "measured"
+  },
+  {
+   "id": "trait:low-mid warmth led",
+   "type": "trait",
+   "name": "low-mid warmth led",
+   "provenance": "measured"
+  },
+  {
+   "id": "trait:radio length (under 4 min)",
+   "type": "trait",
+   "name": "radio length (under 4 min)",
+   "provenance": "measured"
+  },
+  {
+   "id": "track:3XO43dyBY9DWKIAeFEidRC",
+   "type": "track",
+   "title": "Get Up And Dance",
+   "artists": [
+    "Cloonee"
+   ],
+   "duration_s": 155,
+   "release_date": "2026-09-09",
+   "release_year": 2026,
+   "label": "Good Music For Bad People, powered by co:brand",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:43:22Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/3XO43dyBY9DWKIAeFEidRC",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 130,
+    "bpm_confidence": "high",
+    "key": "D# major",
+    "camelot": "5B",
+    "mode": "major",
+    "key_confidence": "medium",
+    "key_alternative": "G minor",
+    "lufs": -8.5,
+    "crest_db": 10.2,
+    "clip_seconds": 155.1,
+    "band_sub": -1.8,
+    "band_low": -0.6,
+    "band_mid": -3.5,
+    "band_high-mid": -9.5,
+    "band_air": -15.2,
+    "full_track": true,
+    "sections": 6,
+    "intro_bars_before_first_peak": 24,
+    "first_peak_s": 44,
+    "peak_share": 0.62,
+    "breakdowns": 1,
+    "energy_arc": "L > M > P > P > M > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.976)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/cloonee/getupanddance",
+    "upload_title": "Cloonee - Get Up And Dance",
+    "uploader": "Cloonee",
+    "length_diff_s": 0.1,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.976)"
+   }
+  },
+  {
+   "id": "artist:Cloonee",
+   "type": "artist",
+   "name": "Cloonee"
+  },
+  {
+   "id": "label:Good Music For Bad People, powered by co:brand",
+   "type": "label",
+   "name": "Good Music For Bad People, powered by co:brand"
+  },
+  {
+   "id": "key:5B",
+   "type": "key",
+   "name": "D# major",
+   "camelot": "5B"
+  },
+  {
+   "id": "trait:major key",
+   "type": "trait",
+   "name": "major key",
+   "provenance": "measured"
+  },
+  {
+   "id": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "type": "track",
+   "title": "Beautiful Times",
+   "artists": [
+    "Claptone",
+    "MIRAMAR",
+    "Kurtis Wells"
+   ],
+   "duration_s": 173,
+   "release_date": "2026-09-18",
+   "release_year": 2026,
+   "label": "FUNKSHWAY",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:43:29Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/50pR4Bbl07sXiKHtaTJA9h",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 128,
+    "bpm_confidence": "high",
+    "key": "G# minor",
+    "camelot": "1A",
+    "mode": "minor",
+    "key_confidence": "medium",
+    "key_alternative": "E major",
+    "lufs": -8.1,
+    "crest_db": 10.9,
+    "clip_seconds": 173.6,
+    "band_sub": -9.8,
+    "band_low": -1.6,
+    "band_mid": -4.8,
+    "band_high-mid": -8.5,
+    "band_air": -12.9,
+    "full_track": true,
+    "sections": 7,
+    "intro_bars_before_first_peak": 0,
+    "first_peak_s": 0,
+    "peak_share": 0.68,
+    "breakdowns": 2,
+    "energy_arc": "P > L > M > P > L > M > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.979)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/claptone/claptone-kurtis-wells-miramar",
+    "upload_title": "Claptone - Beautiful Times (ft. Kurtis Wells & Miramar) [FUNKSHWAY]",
+    "uploader": "Claptone",
+    "length_diff_s": 0.5,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.979)"
+   }
+  },
+  {
+   "id": "artist:Claptone",
+   "type": "artist",
+   "name": "Claptone"
+  },
+  {
+   "id": "artist:MIRAMAR",
+   "type": "artist",
+   "name": "MIRAMAR"
+  },
+  {
+   "id": "artist:Kurtis Wells",
+   "type": "artist",
+   "name": "Kurtis Wells"
+  },
+  {
+   "id": "label:FUNKSHWAY",
+   "type": "label",
+   "name": "FUNKSHWAY"
+  },
+  {
+   "id": "key:1A",
+   "type": "key",
+   "name": "G# minor",
+   "camelot": "1A"
+  },
+  {
+   "id": "tempo:126-129 BPM",
+   "type": "tempo_band",
+   "name": "126-129 BPM"
+  },
+  {
+   "id": "trait:airy top end",
+   "type": "trait",
+   "name": "airy top end",
+   "provenance": "measured"
+  },
+  {
+   "id": "track:0tGhQm627q0UTFXCwkgrJg",
+   "type": "track",
+   "title": "As You Are",
+   "artists": [
+    "KDAY"
+   ],
+   "duration_s": 211,
+   "release_date": "2026-09-16",
+   "release_year": 2026,
+   "label": "Thrive Music / DAYKLUB",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:43:37Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/0tGhQm627q0UTFXCwkgrJg",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:KDAY",
+   "type": "artist",
+   "name": "KDAY"
+  },
+  {
+   "id": "label:Thrive Music / DAYKLUB",
+   "type": "label",
+   "name": "Thrive Music / DAYKLUB"
+  },
+  {
+   "id": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "type": "track",
+   "title": "Fancy Footwork",
+   "artists": [
+    "Chris Lorenzo",
+    "Chromeo"
+   ],
+   "duration_s": 192,
+   "release_date": "2026-09-30",
+   "release_year": 2026,
+   "label": "Turbo Blanco, powered by co:brand",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:43:43Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/0BK6ACxpzK8nkWa3YKuunX",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 130,
+    "bpm_confidence": "high",
+    "key": "F minor",
+    "camelot": "4A",
+    "mode": "minor",
+    "key_confidence": "medium",
+    "key_alternative": "F major",
+    "lufs": -5.9,
+    "crest_db": 8.1,
+    "clip_seconds": 192.3,
+    "band_sub": -3.9,
+    "band_low": -0.1,
+    "band_mid": -5.9,
+    "band_high-mid": -7.9,
+    "band_air": -11.7,
+    "full_track": true,
+    "sections": 9,
+    "intro_bars_before_first_peak": 8,
+    "first_peak_s": 15,
+    "peak_share": 0.77,
+    "breakdowns": 1,
+    "energy_arc": "M > P > P > P > P > P > M > P > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.91)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/chris-lorenzo-1/fancy-footwork-snippet",
+    "upload_title": "Fancy Footwork",
+    "uploader": "Chris Lorenzo",
+    "length_diff_s": 0.3,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.91)"
+   }
+  },
+  {
+   "id": "artist:Chris Lorenzo",
+   "type": "artist",
+   "name": "Chris Lorenzo"
+  },
+  {
+   "id": "artist:Chromeo",
+   "type": "artist",
+   "name": "Chromeo"
+  },
+  {
+   "id": "label:Turbo Blanco, powered by co:brand",
+   "type": "label",
+   "name": "Turbo Blanco, powered by co:brand"
+  },
+  {
+   "id": "key:4A",
+   "type": "key",
+   "name": "F minor",
+   "camelot": "4A"
+  },
+  {
+   "id": "trait:dense master (crest under 8.5 dB)",
+   "type": "trait",
+   "name": "dense master (crest under 8.5 dB)",
+   "provenance": "measured"
+  },
+  {
+   "id": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "type": "track",
+   "title": "YOUR TOUCH",
+   "artists": [
+    "CŒUR ACIDE",
+    "Pat Lok",
+    "F-MACK"
+   ],
+   "duration_s": 210,
+   "release_date": "2026-10-01",
+   "release_year": 2026,
+   "label": "toucan sounds",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:44:01Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/7jEtbI7M0Cxu4Ccn0IDlol",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 103,
+    "bpm_confidence": "high",
+    "key": "A minor",
+    "camelot": "8A",
+    "mode": "minor",
+    "key_confidence": "high",
+    "key_alternative": null,
+    "lufs": -7.3,
+    "crest_db": 10.2,
+    "clip_seconds": 209.8,
+    "band_sub": -9.1,
+    "band_low": -0.9,
+    "band_mid": -3.8,
+    "band_high-mid": -6.7,
+    "band_air": -10.5,
+    "full_track": true,
+    "sections": 4,
+    "intro_bars_before_first_peak": 8,
+    "first_peak_s": 19,
+    "peak_share": 0.91,
+    "breakdowns": 0,
+    "energy_arc": "L > P > P > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.957)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/toucansounds/your-touch",
+    "upload_title": "YOUR TOUCH",
+    "uploader": "toucan sounds",
+    "length_diff_s": 0.2,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.957)"
+   }
+  },
+  {
+   "id": "artist:CŒUR ACIDE",
+   "type": "artist",
+   "name": "CŒUR ACIDE"
+  },
+  {
+   "id": "artist:Pat Lok",
+   "type": "artist",
+   "name": "Pat Lok"
+  },
+  {
+   "id": "artist:F-MACK",
+   "type": "artist",
+   "name": "F-MACK"
+  },
+  {
+   "id": "label:toucan sounds",
+   "type": "label",
+   "name": "toucan sounds"
+  },
+  {
+   "id": "key:8A",
+   "type": "key",
+   "name": "A minor",
+   "camelot": "8A"
+  },
+  {
+   "id": "tempo:100-109 BPM",
+   "type": "tempo_band",
+   "name": "100-109 BPM"
+  },
+  {
+   "id": "track:7pqAuzsyoIDwUwdmw7KJeQ",
+   "type": "track",
+   "title": "Super Hot",
+   "artists": [
+    "Marco Lys",
+    "Michael Ekow",
+    "Kevcody"
+   ],
+   "duration_s": 183,
+   "release_date": "2026-07-31",
+   "release_year": 2026,
+   "label": "Black Book Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:44:41Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/7pqAuzsyoIDwUwdmw7KJeQ",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:Marco Lys",
+   "type": "artist",
+   "name": "Marco Lys"
+  },
+  {
+   "id": "artist:Michael Ekow",
+   "type": "artist",
+   "name": "Michael Ekow"
+  },
+  {
+   "id": "artist:Kevcody",
+   "type": "artist",
+   "name": "Kevcody"
+  },
+  {
+   "id": "label:Black Book Records",
+   "type": "label",
+   "name": "Black Book Records"
+  },
+  {
+   "id": "track:0FxEt9WPc729I8X2hvk4vp",
+   "type": "track",
+   "title": "Impressions",
+   "artists": [
+    "The Martinez Brothers",
+    "Stevie Appleton"
+   ],
+   "duration_s": 176,
+   "release_date": "2026-07-24",
+   "release_year": 2026,
+   "label": "The Martinez Brothers / EMPIRE",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:44:53Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/0FxEt9WPc729I8X2hvk4vp",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:The Martinez Brothers",
+   "type": "artist",
+   "name": "The Martinez Brothers"
+  },
+  {
+   "id": "artist:Stevie Appleton",
+   "type": "artist",
+   "name": "Stevie Appleton"
+  },
+  {
+   "id": "label:The Martinez Brothers / EMPIRE",
+   "type": "label",
+   "name": "The Martinez Brothers / EMPIRE"
+  },
+  {
+   "id": "track:2dt5AmiiAA7dOhE1xws9qY",
+   "type": "track",
+   "title": "Invisible",
+   "artists": [
+    "Jazzy",
+    "Chris Lorenzo"
+   ],
+   "duration_s": 197,
+   "release_date": "2026-06-19",
+   "release_year": 2026,
+   "label": "Universal Music Operations Limited",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:45:15Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/2dt5AmiiAA7dOhE1xws9qY",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:Jazzy",
+   "type": "artist",
+   "name": "Jazzy"
+  },
+  {
+   "id": "label:Universal Music Operations Limited",
+   "type": "label",
+   "name": "Universal Music Operations Limited"
+  },
+  {
+   "id": "track:3ZwYeYswniOgLqfN5kXis8",
+   "type": "track",
+   "title": "Like It",
+   "artists": [
+    "ANOTR",
+    "3DDY"
+   ],
+   "duration_s": 267,
+   "release_date": "2026-06-12",
+   "release_year": 2026,
+   "label": "No Art",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:45:26Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/3ZwYeYswniOgLqfN5kXis8",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 130,
+    "bpm_confidence": "high",
+    "key": "B minor",
+    "camelot": "10A",
+    "mode": "minor",
+    "key_confidence": "medium",
+    "key_alternative": "G major",
+    "lufs": -7.0,
+    "crest_db": 10.0,
+    "clip_seconds": 267.0,
+    "band_sub": -6.5,
+    "band_low": -1.9,
+    "band_mid": -0.5,
+    "band_high-mid": -8.2,
+    "band_air": -15.8,
+    "full_track": true,
+    "sections": 8,
+    "intro_bars_before_first_peak": 16,
+    "first_peak_s": 30,
+    "peak_share": 0.72,
+    "breakdowns": 2,
+    "energy_arc": "L > M > P > M > P > M > P > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.967)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/anotr/2-anotr-3ddy-like-it-no-art-2",
+    "upload_title": "2. ANOTR & 3DDY - Like It [No Art]",
+    "uploader": "ANOTR",
+    "length_diff_s": 0.0,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.967)"
+   }
+  },
+  {
+   "id": "artist:ANOTR",
+   "type": "artist",
+   "name": "ANOTR"
+  },
+  {
+   "id": "artist:3DDY",
+   "type": "artist",
+   "name": "3DDY"
+  },
+  {
+   "id": "label:No Art",
+   "type": "label",
+   "name": "No Art"
+  },
+  {
+   "id": "key:10A",
+   "type": "key",
+   "name": "B minor",
+   "camelot": "10A"
+  },
+  {
+   "id": "trait:mid-forward",
+   "type": "trait",
+   "name": "mid-forward",
+   "provenance": "measured"
+  },
+  {
+   "id": "trait:mid length (4-6 min)",
+   "type": "trait",
+   "name": "mid length (4-6 min)",
+   "provenance": "measured"
+  },
+  {
+   "id": "track:5yfr8dsjozvYDQtm84DfLE",
+   "type": "track",
+   "title": "Everything Will Be Alright",
+   "artists": [
+    "Collect 200"
+   ],
+   "duration_s": 151,
+   "release_date": "2026-04-30",
+   "release_year": 2026,
+   "label": "Collect 200, powered by co:brand",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:46:13Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/5yfr8dsjozvYDQtm84DfLE",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:Collect 200",
+   "type": "artist",
+   "name": "Collect 200"
+  },
+  {
+   "id": "label:Collect 200, powered by co:brand",
+   "type": "label",
+   "name": "Collect 200, powered by co:brand"
+  },
+  {
+   "id": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "type": "track",
+   "title": "I’ll Stand By You",
+   "artists": [
+    "LP Giobbi",
+    "blythe"
+   ],
+   "duration_s": 214,
+   "release_date": "2026-03-06",
+   "release_year": 2026,
+   "label": "Insomniac Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:46:38Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/3yVqNA9S8luw1wAUPbLwNH",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 129,
+    "bpm_confidence": "high",
+    "key": "A minor",
+    "camelot": "8A",
+    "mode": "minor",
+    "key_confidence": "medium",
+    "key_alternative": "F major",
+    "lufs": -9.4,
+    "crest_db": 11.4,
+    "clip_seconds": 214.0,
+    "band_sub": -7.5,
+    "band_low": -4.7,
+    "band_mid": -3.6,
+    "band_high-mid": -10.0,
+    "band_air": -19.4,
+    "full_track": true,
+    "sections": 8,
+    "intro_bars_before_first_peak": 8,
+    "first_peak_s": 15,
+    "peak_share": 0.56,
+    "breakdowns": 3,
+    "energy_arc": "L > P > M > P > M > M > P > M",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.97)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/insomniacrecords/lp-giobbi-featuring-blythe-ill-stand-by-you-1",
+    "upload_title": "LP Giobbi - I'll Stand By You (feat. Blythe)",
+    "uploader": "Insomniac Records",
+    "length_diff_s": 0.0,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.97)"
+   }
+  },
+  {
+   "id": "artist:LP Giobbi",
+   "type": "artist",
+   "name": "LP Giobbi"
+  },
+  {
+   "id": "artist:blythe",
+   "type": "artist",
+   "name": "blythe"
+  },
+  {
+   "id": "label:Insomniac Records",
+   "type": "label",
+   "name": "Insomniac Records"
+  },
+  {
+   "id": "trait:dynamic master (crest 11 dB+)",
+   "type": "trait",
+   "name": "dynamic master (crest 11 dB+)",
+   "provenance": "measured"
+  },
+  {
+   "id": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "type": "track",
+   "title": "Work 2 Da Beat",
+   "artists": [
+    "TYGE"
+   ],
+   "duration_s": 169,
+   "release_date": "2026-01-30",
+   "release_year": 2026,
+   "label": "Lost Culture Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:46:45Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/3gfFxjJ5dgMNXYyL5bIH3f",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 132,
+    "bpm_confidence": "high",
+    "key": "E major",
+    "camelot": "12B",
+    "mode": "major",
+    "key_confidence": "medium",
+    "key_alternative": "G# minor",
+    "lufs": -8.2,
+    "crest_db": 9.5,
+    "clip_seconds": 169.2,
+    "band_sub": -4.1,
+    "band_low": 0.0,
+    "band_mid": -10.2,
+    "band_high-mid": -12.6,
+    "band_air": -17.4,
+    "full_track": true,
+    "sections": 7,
+    "intro_bars_before_first_peak": 8,
+    "first_peak_s": 15,
+    "peak_share": 0.78,
+    "breakdowns": 2,
+    "energy_arc": "L > P > L > P > M > P > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.97)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/tadhg-eustace-610290237/work-2-da-beat-preview",
+    "upload_title": "Work 2 Da Beat",
+    "uploader": "TYGE",
+    "length_diff_s": 0.2,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.97)"
+   }
+  },
+  {
+   "id": "artist:TYGE",
+   "type": "artist",
+   "name": "TYGE"
+  },
+  {
+   "id": "label:Lost Culture Records",
+   "type": "label",
+   "name": "Lost Culture Records"
+  },
+  {
+   "id": "key:12B",
+   "type": "key",
+   "name": "E major",
+   "camelot": "12B"
+  },
+  {
+   "id": "track:3usbTu6wFzldrsolOdOwxT",
+   "type": "track",
+   "title": "SHAKE SUM",
+   "artists": [
+    "veggi",
+    "Barney Bones"
+   ],
+   "duration_s": 179,
+   "release_date": "2026-05-22",
+   "release_year": 2026,
+   "label": "eat ur veggis under exclusive license to Independent Co.",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:18:15Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/3usbTu6wFzldrsolOdOwxT",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:veggi",
+   "type": "artist",
+   "name": "veggi"
+  },
+  {
+   "id": "artist:Barney Bones",
+   "type": "artist",
+   "name": "Barney Bones"
+  },
+  {
+   "id": "label:eat ur veggis under exclusive license to Independent Co.",
+   "type": "label",
+   "name": "eat ur veggis under exclusive license to Independent Co."
+  },
+  {
+   "id": "track:2PxlgpxOYFoNnipKN3214d",
+   "type": "track",
+   "title": "Picanya 2400",
+   "artists": [
+    "KETTAMA"
+   ],
+   "duration_s": 320,
+   "release_date": "2021-08-25",
+   "release_year": 2021,
+   "label": "Steel City Dance Discs, powered by co:brand",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:18:40Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/2PxlgpxOYFoNnipKN3214d",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 135,
+    "bpm_confidence": "high",
+    "key": "F# minor",
+    "camelot": "11A",
+    "mode": "minor",
+    "key_confidence": "medium",
+    "key_alternative": "E major",
+    "lufs": -10.0,
+    "crest_db": 11.8,
+    "clip_seconds": 320.2,
+    "band_sub": -0.6,
+    "band_low": -2.0,
+    "band_mid": -7.8,
+    "band_high-mid": -9.2,
+    "band_air": -12.9,
+    "full_track": true,
+    "sections": 7,
+    "intro_bars_before_first_peak": 8,
+    "first_peak_s": 15,
+    "peak_share": 0.8,
+    "breakdowns": 2,
+    "energy_arc": "L > P > M > P > P > P > L",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.898)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/kettamabro/kettama-picanya-2401",
+    "upload_title": "KETTAMA - Picanya 2400",
+    "uploader": "KETTAMA (G-TOWN FOREVER)",
+    "length_diff_s": 0.2,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.898)"
+   }
+  },
+  {
+   "id": "artist:KETTAMA",
+   "type": "artist",
+   "name": "KETTAMA"
+  },
+  {
+   "id": "label:Steel City Dance Discs, powered by co:brand",
+   "type": "label",
+   "name": "Steel City Dance Discs, powered by co:brand"
+  },
+  {
+   "id": "era:2021",
+   "type": "era",
+   "name": "2021"
+  },
+  {
+   "id": "key:11A",
+   "type": "key",
+   "name": "F# minor",
+   "camelot": "11A"
+  },
+  {
+   "id": "trait:sub-led low end",
+   "type": "trait",
+   "name": "sub-led low end",
+   "provenance": "measured"
+  },
+  {
+   "id": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "type": "track",
+   "title": "Nothing But You",
+   "artists": [
+    "Arlo",
+    "Allegra Miles"
+   ],
+   "duration_s": 191,
+   "release_date": "2026-05-01",
+   "release_year": 2026,
+   "label": "Arlo & Allegra Miles",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:20:12Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/0M5XBd9bd8P5xKdJYCtGxM",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 135,
+    "bpm_confidence": "high",
+    "key": "C minor",
+    "camelot": "5A",
+    "mode": "minor",
+    "key_confidence": "medium",
+    "key_alternative": "C major",
+    "lufs": -6.4,
+    "crest_db": 8.8,
+    "clip_seconds": 191.3,
+    "band_sub": -7.5,
+    "band_low": -1.4,
+    "band_mid": -3.1,
+    "band_high-mid": -12.5,
+    "band_air": -17.2,
+    "full_track": true,
+    "sections": 8,
+    "intro_bars_before_first_peak": 24,
+    "first_peak_s": 43,
+    "peak_share": 0.7,
+    "breakdowns": 1,
+    "energy_arc": "M > M > P > P > P > M > P > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.979)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/arlobeets/nothing-but-you",
+    "upload_title": "Nothing But You",
+    "uploader": "Arlo",
+    "length_diff_s": 0.3,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.979)"
+   }
+  },
+  {
+   "id": "artist:Arlo",
+   "type": "artist",
+   "name": "Arlo"
+  },
+  {
+   "id": "artist:Allegra Miles",
+   "type": "artist",
+   "name": "Allegra Miles"
+  },
+  {
+   "id": "label:Arlo & Allegra Miles",
+   "type": "label",
+   "name": "Arlo & Allegra Miles"
+  },
+  {
+   "id": "key:5A",
+   "type": "key",
+   "name": "C minor",
+   "camelot": "5A"
+  },
+  {
+   "id": "track:0HzRiWAopxgrlMkYnUD055",
+   "type": "track",
+   "title": "What Ya Got",
+   "artists": [
+    "Wal"
+   ],
+   "duration_s": 231,
+   "release_date": "2026-02-20",
+   "release_year": 2026,
+   "label": "Bass Jamz",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:22:12Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/0HzRiWAopxgrlMkYnUD055",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:Wal",
+   "type": "artist",
+   "name": "Wal"
+  },
+  {
+   "id": "label:Bass Jamz",
+   "type": "label",
+   "name": "Bass Jamz"
+  },
+  {
+   "id": "track:7A5lQnbimaAolqrVqVGSbl",
+   "type": "track",
+   "title": "Trapped - Radio-Edit",
+   "artists": [
+    "Kolter"
+   ],
+   "duration_s": 222,
+   "release_date": "2026-04-10",
+   "release_year": 2026,
+   "label": "Koltrax",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:23:22Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/7A5lQnbimaAolqrVqVGSbl",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 130,
+    "bpm_confidence": "high",
+    "key": "D# major",
+    "camelot": "5B",
+    "mode": "major",
+    "key_confidence": "high",
+    "key_alternative": null,
+    "lufs": -9.3,
+    "crest_db": 11.4,
+    "clip_seconds": 221.6,
+    "band_sub": -13.6,
+    "band_low": -1.3,
+    "band_mid": -7.0,
+    "band_high-mid": -10.5,
+    "band_air": -17.6,
+    "full_track": true,
+    "sections": 8,
+    "intro_bars_before_first_peak": 8,
+    "first_peak_s": 15,
+    "peak_share": 0.67,
+    "breakdowns": 3,
+    "energy_arc": "M > P > L > M > P > M > P > L",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.919)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/novajrec/premiere-kolter-trapped-radio",
+    "upload_title": "PREMIERE: Kolter - Trapped (Radio Edit)",
+    "uploader": "Novaj 新し",
+    "length_diff_s": 0.4,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.919)"
+   }
+  },
+  {
+   "id": "artist:Kolter",
+   "type": "artist",
+   "name": "Kolter"
+  },
+  {
+   "id": "label:Koltrax",
+   "type": "label",
+   "name": "Koltrax"
+  },
+  {
+   "id": "track:5iOlKINhADUkKnc5vdsURg",
+   "type": "track",
+   "title": "Ooh",
+   "artists": [
+    "Roog"
+   ],
+   "duration_s": 172,
+   "release_date": "2022-12-09",
+   "release_year": 2022,
+   "label": "HouseU",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:24:25Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/5iOlKINhADUkKnc5vdsURg",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 124,
+    "bpm_confidence": "high",
+    "key": "E minor",
+    "camelot": "9A",
+    "mode": "minor",
+    "key_confidence": "medium",
+    "key_alternative": "A minor",
+    "lufs": -9.2,
+    "crest_db": 11.3,
+    "clip_seconds": 172.4,
+    "band_sub": -1.9,
+    "band_low": -2.8,
+    "band_mid": -3.1,
+    "band_high-mid": -10.0,
+    "band_air": -15.7,
+    "full_track": true,
+    "sections": 6,
+    "intro_bars_before_first_peak": 16,
+    "first_peak_s": 33,
+    "peak_share": 0.52,
+    "breakdowns": 1,
+    "energy_arc": "M > P > M > P > P > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.979)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/houseurec/roog-ooh-1",
+    "upload_title": "Roog - OOH",
+    "uploader": "HouseU",
+    "length_diff_s": 0.4,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.979)"
+   }
+  },
+  {
+   "id": "artist:Roog",
+   "type": "artist",
+   "name": "Roog"
+  },
+  {
+   "id": "label:HouseU",
+   "type": "label",
+   "name": "HouseU"
+  },
+  {
+   "id": "era:2022",
+   "type": "era",
+   "name": "2022"
+  },
+  {
+   "id": "key:9A",
+   "type": "key",
+   "name": "E minor",
+   "camelot": "9A"
+  },
+  {
+   "id": "tempo:122-125 BPM",
+   "type": "tempo_band",
+   "name": "122-125 BPM"
+  },
+  {
+   "id": "track:2FKWdV8dsIeFCjLErZ0Cld",
+   "type": "track",
+   "title": "START UP A RUMOUR",
+   "artists": [
+    "Sam Gellaitry"
+   ],
+   "duration_s": 200,
+   "release_date": "2025-11-07",
+   "release_year": 2025,
+   "label": "Major Recordings, ℗ 2025 Warner Records Inc. under exclusive license from Viewfinder Recordings Limited",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:25:06Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/2FKWdV8dsIeFCjLErZ0Cld",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:Sam Gellaitry",
+   "type": "artist",
+   "name": "Sam Gellaitry"
+  },
+  {
+   "id": "label:Major Recordings, ℗ 2025 Warner Records Inc. under exclusive license from Viewfinder Recordings Limited",
+   "type": "label",
+   "name": "Major Recordings, ℗ 2025 Warner Records Inc. under exclusive license from Viewfinder Recordings Limited"
+  },
+  {
+   "id": "era:2025",
+   "type": "era",
+   "name": "2025"
+  },
+  {
+   "id": "track:0QgLzi1dK9dtTBtEJLIX0p",
+   "type": "track",
+   "title": "PARTYS OVER - James Juke Remix",
+   "artists": [
+    "LOVE LANGUAGE",
+    "Lemonade Baby",
+    "Gilligan Moss",
+    "James Juke"
+   ],
+   "duration_s": 393,
+   "release_date": "2026-04-03",
+   "release_year": 2026,
+   "label": "LOVE LANGUAGE under exclusive license to Pack Records, Inc. & Create Music Group",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:28:23Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/0QgLzi1dK9dtTBtEJLIX0p",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:LOVE LANGUAGE",
+   "type": "artist",
+   "name": "LOVE LANGUAGE"
+  },
+  {
+   "id": "artist:Lemonade Baby",
+   "type": "artist",
+   "name": "Lemonade Baby"
+  },
+  {
+   "id": "artist:Gilligan Moss",
+   "type": "artist",
+   "name": "Gilligan Moss"
+  },
+  {
+   "id": "artist:James Juke",
+   "type": "artist",
+   "name": "James Juke"
+  },
+  {
+   "id": "label:LOVE LANGUAGE under exclusive license to Pack Records, Inc. & Create Music Group",
+   "type": "label",
+   "name": "LOVE LANGUAGE under exclusive license to Pack Records, Inc. & Create Music Group"
+  },
+  {
+   "id": "track:67qRozKjwMvXUMNaVvWQmU",
+   "type": "track",
+   "title": "Swimming Places - Purple Disco Machine Re-Work",
+   "artists": [
+    "Julien Jabre",
+    "Purple Disco Machine"
+   ],
+   "duration_s": 382,
+   "release_date": "2026-02-20",
+   "release_year": 2026,
+   "label": "Defected Records Limited",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:28:37Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/67qRozKjwMvXUMNaVvWQmU",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:Julien Jabre",
+   "type": "artist",
+   "name": "Julien Jabre"
+  },
+  {
+   "id": "artist:Purple Disco Machine",
+   "type": "artist",
+   "name": "Purple Disco Machine"
+  },
+  {
+   "id": "label:Defected Records Limited",
+   "type": "label",
+   "name": "Defected Records Limited"
+  },
+  {
+   "id": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "type": "track",
+   "title": "Back to the Old School",
+   "artists": [
+    "Dam Swindle",
+    "DJ Minx"
+   ],
+   "duration_s": 371,
+   "release_date": "2026-05-08",
+   "release_year": 2026,
+   "label": "Heist Recordings",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:30:59Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/2GcRQo1iIfDGvg4FBgsrU6",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 125,
+    "bpm_confidence": "high",
+    "key": "F# major",
+    "camelot": "2B",
+    "mode": "major",
+    "key_confidence": "medium",
+    "key_alternative": "B minor",
+    "lufs": -10.0,
+    "crest_db": 11.2,
+    "clip_seconds": 371.4,
+    "band_sub": -3.7,
+    "band_low": -0.1,
+    "band_mid": -7.7,
+    "band_high-mid": -12.7,
+    "band_air": -16.7,
+    "full_track": true,
+    "sections": 9,
+    "intro_bars_before_first_peak": -1,
+    "first_peak_s": 0,
+    "peak_share": 0.88,
+    "breakdowns": 2,
+    "energy_arc": "P > M > P > P > P > P > M > P > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.988)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/heistrecordings/dam-swindle-feat-dj-minx-back-to-the-old-school-1",
+    "upload_title": "Dam Swindle feat. DJ Minx - Back to the old school",
+    "uploader": "Heist Recordings",
+    "length_diff_s": 0.4,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.988)"
+   }
+  },
+  {
+   "id": "artist:Dam Swindle",
+   "type": "artist",
+   "name": "Dam Swindle"
+  },
+  {
+   "id": "artist:DJ Minx",
+   "type": "artist",
+   "name": "DJ Minx"
+  },
+  {
+   "id": "label:Heist Recordings",
+   "type": "label",
+   "name": "Heist Recordings"
+  },
+  {
+   "id": "key:2B",
+   "type": "key",
+   "name": "F# major",
+   "camelot": "2B"
+  },
+  {
+   "id": "trait:club length (6 min+)",
+   "type": "trait",
+   "name": "club length (6 min+)",
+   "provenance": "measured"
+  },
+  {
+   "id": "track:77kExLr3RKN77SYcVEZZ14",
+   "type": "track",
+   "title": "A Gira (with Emanuel Satie, Maga, Sean Doron, Tim Engelhardt & Scenarios) - Remix",
+   "artists": [
+    "unfazed",
+    "Emanuel Satie",
+    "Maga",
+    "Sean Doron",
+    "Scenarios",
+    "Tim Engelhardt"
+   ],
+   "duration_s": 175,
+   "release_date": "2026-05-15",
+   "release_year": 2026,
+   "label": "Spinnin' Deep, ℗ 2026 Spinnin' Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:31:13Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/77kExLr3RKN77SYcVEZZ14",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:unfazed",
+   "type": "artist",
+   "name": "unfazed"
+  },
+  {
+   "id": "artist:Emanuel Satie",
+   "type": "artist",
+   "name": "Emanuel Satie"
+  },
+  {
+   "id": "artist:Maga",
+   "type": "artist",
+   "name": "Maga"
+  },
+  {
+   "id": "artist:Sean Doron",
+   "type": "artist",
+   "name": "Sean Doron"
+  },
+  {
+   "id": "artist:Scenarios",
+   "type": "artist",
+   "name": "Scenarios"
+  },
+  {
+   "id": "artist:Tim Engelhardt",
+   "type": "artist",
+   "name": "Tim Engelhardt"
+  },
+  {
+   "id": "label:Spinnin' Deep, ℗ 2026 Spinnin' Records",
+   "type": "label",
+   "name": "Spinnin' Deep, ℗ 2026 Spinnin' Records"
+  },
+  {
+   "id": "track:7DxrTNmUprBMQ0RV45xreb",
+   "type": "track",
+   "title": "Verano En NY",
+   "artists": [
+    "Toman"
+   ],
+   "duration_s": 246,
+   "release_date": "2025-06-27",
+   "release_year": 2025,
+   "label": "Solid Grooves Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:32:18Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/7DxrTNmUprBMQ0RV45xreb",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 126,
+    "bpm_confidence": "high",
+    "key": "G minor",
+    "camelot": "6A",
+    "mode": "minor",
+    "key_confidence": "medium",
+    "key_alternative": "D# major",
+    "lufs": -8.7,
+    "crest_db": 9.6,
+    "clip_seconds": 246.0,
+    "band_sub": -1.8,
+    "band_low": -1.8,
+    "band_mid": -8.4,
+    "band_high-mid": -12.6,
+    "band_air": -17.6,
+    "full_track": true,
+    "sections": 6,
+    "intro_bars_before_first_peak": -1,
+    "first_peak_s": 0,
+    "peak_share": 0.88,
+    "breakdowns": 1,
+    "energy_arc": "P > P > L > M > P > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.978)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/solidgrooves-records/sgr101-toman-verano-en-ny",
+    "upload_title": "SGR101 - Toman - Verano En NY",
+    "uploader": "Solid Grooves Records",
+    "length_diff_s": 0.0,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.978)"
+   }
+  },
+  {
+   "id": "artist:Toman",
+   "type": "artist",
+   "name": "Toman"
+  },
+  {
+   "id": "label:Solid Grooves Records",
+   "type": "label",
+   "name": "Solid Grooves Records"
+  },
+  {
+   "id": "key:6A",
+   "type": "key",
+   "name": "G minor",
+   "camelot": "6A"
+  },
+  {
+   "id": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "type": "track",
+   "title": "In Love With You - Remastered 2023",
+   "artists": [
+    "The Paradise",
+    "Alan Braxe",
+    "Romuald"
+   ],
+   "duration_s": 255,
+   "release_date": "2023-03-31",
+   "release_year": 2023,
+   "label": "Vulture under exclusive license to Smugglers Way",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:33:58Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/4ZWyIlQo4Za4kophcOoI4i",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 121,
+    "bpm_confidence": "high",
+    "key": "C# major",
+    "camelot": "3B",
+    "mode": "major",
+    "key_confidence": "high",
+    "key_alternative": null,
+    "lufs": -8.9,
+    "crest_db": 12.4,
+    "clip_seconds": 254.3,
+    "band_sub": -6.6,
+    "band_low": -2.4,
+    "band_mid": -1.0,
+    "band_high-mid": -6.9,
+    "band_air": -18.3,
+    "full_track": true,
+    "sections": 5,
+    "intro_bars_before_first_peak": 16,
+    "first_peak_s": 32,
+    "peak_share": 0.64,
+    "breakdowns": 2,
+    "energy_arc": "L > P > L > P > L",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.978)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/spatziba/02-in-love-with-you",
+    "upload_title": "The Paradise - In Love With You",
+    "uploader": "Spatziba",
+    "length_diff_s": 0.7,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.978)"
+   }
+  },
+  {
+   "id": "artist:The Paradise",
+   "type": "artist",
+   "name": "The Paradise"
+  },
+  {
+   "id": "artist:Alan Braxe",
+   "type": "artist",
+   "name": "Alan Braxe"
+  },
+  {
+   "id": "artist:Romuald",
+   "type": "artist",
+   "name": "Romuald"
+  },
+  {
+   "id": "label:Vulture under exclusive license to Smugglers Way",
+   "type": "label",
+   "name": "Vulture under exclusive license to Smugglers Way"
+  },
+  {
+   "id": "era:2023",
+   "type": "era",
+   "name": "2023"
+  },
+  {
+   "id": "key:3B",
+   "type": "key",
+   "name": "C# major",
+   "camelot": "3B"
+  },
+  {
+   "id": "tempo:118-121 BPM",
+   "type": "tempo_band",
+   "name": "118-121 BPM"
+  },
+  {
+   "id": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "type": "track",
+   "title": "So Good (feat. Kuuda) - Francis Mercier Remix",
+   "artists": [
+    "Francis Mercier",
+    "CAMELPHAT",
+    "Josh Gigante",
+    "Kuuda"
+   ],
+   "duration_s": 172,
+   "release_date": "2026-09-25",
+   "release_year": 2026,
+   "label": "When Stars Align",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:34:26Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/0EhbgzF5x4krWOTRXMsXO5",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 126,
+    "bpm_confidence": "high",
+    "key": "F# minor",
+    "camelot": "11A",
+    "mode": "minor",
+    "key_confidence": "medium",
+    "key_alternative": null,
+    "lufs": -8.5,
+    "crest_db": 10.3,
+    "clip_seconds": 171.7,
+    "band_sub": -2.1,
+    "band_low": -0.5,
+    "band_mid": -2.9,
+    "band_high-mid": -11.5,
+    "band_air": -16.0,
+    "full_track": true,
+    "sections": 5,
+    "intro_bars_before_first_peak": 8,
+    "first_peak_s": 17,
+    "peak_share": 0.55,
+    "breakdowns": 1,
+    "energy_arc": "M > P > M > M > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.961)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/whenstarsalignofficial/so-good-francis-mercier-remix",
+    "upload_title": "CamelPhat, Josh Gigante feat. Kuuda - So Good (Francis Mercier Remix)",
+    "uploader": "When Stars Align",
+    "length_diff_s": 0.3,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.961)"
+   }
+  },
+  {
+   "id": "artist:Francis Mercier",
+   "type": "artist",
+   "name": "Francis Mercier"
+  },
+  {
+   "id": "artist:CAMELPHAT",
+   "type": "artist",
+   "name": "CAMELPHAT"
+  },
+  {
+   "id": "artist:Josh Gigante",
+   "type": "artist",
+   "name": "Josh Gigante"
+  },
+  {
+   "id": "artist:Kuuda",
+   "type": "artist",
+   "name": "Kuuda"
+  },
+  {
+   "id": "label:When Stars Align",
+   "type": "label",
+   "name": "When Stars Align"
+  },
+  {
+   "id": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "type": "track",
+   "title": "I Got A Story From... - Edd's Eddit",
+   "artists": [
+    "Edd",
+    "King Wizard"
+   ],
+   "duration_s": 192,
+   "release_date": "2026-09-25",
+   "release_year": 2026,
+   "label": "Helix Records, a division of Payday Records, Inc.",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:35:03Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/28JJCpmvuGEmtKKrOEnCpo",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 132,
+    "bpm_confidence": "high",
+    "key": "G# major",
+    "camelot": "4B",
+    "mode": "major",
+    "key_confidence": "medium",
+    "key_alternative": "C# major",
+    "lufs": -7.7,
+    "crest_db": 10.3,
+    "clip_seconds": 191.9,
+    "band_sub": -7.8,
+    "band_low": -3.0,
+    "band_mid": -2.2,
+    "band_high-mid": -8.5,
+    "band_air": -13.3,
+    "full_track": true,
+    "sections": 7,
+    "intro_bars_before_first_peak": 8,
+    "first_peak_s": 15,
+    "peak_share": 0.53,
+    "breakdowns": 2,
+    "energy_arc": "M > P > M > P > M > M > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.987)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/eddwav/edd-i-got-a-story-from-edds-eddit-1",
+    "upload_title": "Edd - I Got A Story From (edd's eddit)",
+    "uploader": "edd",
+    "length_diff_s": 0.1,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.987)"
+   }
+  },
+  {
+   "id": "artist:Edd",
+   "type": "artist",
+   "name": "Edd"
+  },
+  {
+   "id": "artist:King Wizard",
+   "type": "artist",
+   "name": "King Wizard"
+  },
+  {
+   "id": "label:Helix Records, a division of Payday Records, Inc.",
+   "type": "label",
+   "name": "Helix Records, a division of Payday Records, Inc."
+  },
+  {
+   "id": "key:4B",
+   "type": "key",
+   "name": "G# major",
+   "camelot": "4B"
+  },
+  {
+   "id": "track:6O23Yf2GSRMunBn3j1eQCJ",
+   "type": "track",
+   "title": "Dance Dance Dance!",
+   "artists": [
+    "Barry Can't Swim"
+   ],
+   "duration_s": 218,
+   "release_date": "2026-07-24",
+   "release_year": 2026,
+   "label": "Earths Only Paradise under exclusive license to Atlantic Records UK., ℗ 2026 BCS",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:35:21Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/6O23Yf2GSRMunBn3j1eQCJ",
+   "playlist": "Fall Bangers"
+  },
+  {
+   "id": "artist:Barry Can't Swim",
+   "type": "artist",
+   "name": "Barry Can't Swim"
+  },
+  {
+   "id": "label:Earths Only Paradise under exclusive license to Atlantic Records UK., ℗ 2026 BCS",
+   "type": "label",
+   "name": "Earths Only Paradise under exclusive license to Atlantic Records UK., ℗ 2026 BCS"
+  },
+  {
+   "id": "track:09kvrg8hjr8G71mhIVARfu",
+   "type": "track",
+   "title": "Friction",
+   "artists": [
+    "Riordan",
+    "Locky"
+   ],
+   "duration_s": 194,
+   "release_date": "2026-08-28",
+   "release_year": 2026,
+   "label": "Darkroom Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:36:33Z",
+   "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+   "spotify": "https://open.spotify.com/track/09kvrg8hjr8G71mhIVARfu",
+   "playlist": "Fall Bangers",
+   "measured": {
+    "bpm": 132,
+    "bpm_confidence": "high",
+    "key": "A major",
+    "camelot": "11B",
+    "mode": "major",
+    "key_confidence": "medium",
+    "key_alternative": "D minor",
+    "lufs": -9.4,
+    "crest_db": 10.9,
+    "clip_seconds": 193.8,
+    "band_sub": -4.0,
+    "band_low": 0.0,
+    "band_mid": -6.1,
+    "band_high-mid": -10.3,
+    "band_air": -16.5,
+    "full_track": true,
+    "sections": 6,
+    "intro_bars_before_first_peak": -1,
+    "first_peak_s": 0,
+    "peak_share": 0.62,
+    "breakdowns": 2,
+    "energy_arc": "P > M > P > L > M > P",
+    "stems": false
+   },
+   "measured_from": "full track from SoundCloud (length within 6 s of Spotify's) via trackcard, no stems; Spotify's preview found in it (match 0.989)",
+   "audio_source": {
+    "site": "soundcloud",
+    "url": "https://soundcloud.com/riordanuk/friction",
+    "upload_title": "Riordan x Locky - Friction",
+    "uploader": "Riordan",
+    "length_diff_s": 0.2,
+    "via": "yt-dlp scsearch, length-matched",
+    "note": "Spotify's preview found in it (match 0.989)"
+   }
+  },
+  {
+   "id": "artist:Riordan",
+   "type": "artist",
+   "name": "Riordan"
+  },
+  {
+   "id": "artist:Locky",
+   "type": "artist",
+   "name": "Locky"
+  },
+  {
+   "id": "label:Darkroom Records",
+   "type": "label",
+   "name": "Darkroom Records"
+  },
+  {
+   "id": "key:11B",
+   "type": "key",
+   "name": "A major",
+   "camelot": "11B"
+  }
+ ],
+ "edges": [
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "by",
+   "target": "artist:L.P. Rhythm"
+  },
+  {
+   "source": "artist:L.P. Rhythm",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "released_on",
+   "target": "label:Lewis Pitcairn under exclusive license to Disorder Records/UMG Recordings, Inc. A Capitol Records/Disorder release."
+  },
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "added_month:2026-11",
+   "rel": "in_year",
+   "target": "added_year:2026"
+  },
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:43:14Z"
+  },
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:43:14Z"
+  },
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "in_key",
+   "target": "key:3A",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "at_tempo",
+   "target": "tempo:130+ BPM",
+   "bpm": 132,
+   "confidence": "high"
+  },
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:6HTDX4qgjY6usYjtx18eWf",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "by",
+   "target": "artist:Cloonee"
+  },
+  {
+   "source": "artist:Cloonee",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "released_on",
+   "target": "label:Good Music For Bad People, powered by co:brand"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:43:22Z"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:43:22Z"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "in_key",
+   "target": "key:5B",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "at_tempo",
+   "target": "tempo:130+ BPM",
+   "bpm": 130,
+   "confidence": "high"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "has_trait",
+   "target": "trait:major key"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "by",
+   "target": "artist:Claptone"
+  },
+  {
+   "source": "artist:Claptone",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "by",
+   "target": "artist:MIRAMAR"
+  },
+  {
+   "source": "artist:MIRAMAR",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "by",
+   "target": "artist:Kurtis Wells"
+  },
+  {
+   "source": "artist:Kurtis Wells",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "in_family",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "released_on",
+   "target": "label:FUNKSHWAY"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:43:29Z"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:43:29Z"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "in_key",
+   "target": "key:1A",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "at_tempo",
+   "target": "tempo:126-129 BPM",
+   "bpm": 128,
+   "confidence": "high"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "has_trait",
+   "target": "trait:airy top end"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:0tGhQm627q0UTFXCwkgrJg",
+   "rel": "by",
+   "target": "artist:KDAY"
+  },
+  {
+   "source": "artist:KDAY",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0tGhQm627q0UTFXCwkgrJg",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0tGhQm627q0UTFXCwkgrJg",
+   "rel": "released_on",
+   "target": "label:Thrive Music / DAYKLUB"
+  },
+  {
+   "source": "track:0tGhQm627q0UTFXCwkgrJg",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:0tGhQm627q0UTFXCwkgrJg",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:43:37Z"
+  },
+  {
+   "source": "track:0tGhQm627q0UTFXCwkgrJg",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:43:37Z"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "by",
+   "target": "artist:Chris Lorenzo"
+  },
+  {
+   "source": "artist:Chris Lorenzo",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "by",
+   "target": "artist:Chromeo"
+  },
+  {
+   "source": "artist:Chromeo",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "in_family",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "released_on",
+   "target": "label:Turbo Blanco, powered by co:brand"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:43:43Z"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:43:43Z"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "in_key",
+   "target": "key:4A",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "at_tempo",
+   "target": "tempo:130+ BPM",
+   "bpm": 130,
+   "confidence": "high"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "has_trait",
+   "target": "trait:airy top end"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "has_trait",
+   "target": "trait:dense master (crest under 8.5 dB)"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "by",
+   "target": "artist:CŒUR ACIDE"
+  },
+  {
+   "source": "artist:CŒUR ACIDE",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "by",
+   "target": "artist:Pat Lok"
+  },
+  {
+   "source": "artist:Pat Lok",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "by",
+   "target": "artist:F-MACK"
+  },
+  {
+   "source": "artist:F-MACK",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "in_family",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "released_on",
+   "target": "label:toucan sounds"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:44:01Z"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:44:01Z"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "in_key",
+   "target": "key:8A",
+   "confidence": "high"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "at_tempo",
+   "target": "tempo:100-109 BPM",
+   "bpm": 103,
+   "confidence": "high"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "has_trait",
+   "target": "trait:airy top end"
+  },
+  {
+   "source": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:7pqAuzsyoIDwUwdmw7KJeQ",
+   "rel": "by",
+   "target": "artist:Marco Lys"
+  },
+  {
+   "source": "artist:Marco Lys",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7pqAuzsyoIDwUwdmw7KJeQ",
+   "rel": "by",
+   "target": "artist:Michael Ekow"
+  },
+  {
+   "source": "artist:Michael Ekow",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7pqAuzsyoIDwUwdmw7KJeQ",
+   "rel": "by",
+   "target": "artist:Kevcody"
+  },
+  {
+   "source": "artist:Kevcody",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7pqAuzsyoIDwUwdmw7KJeQ",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7pqAuzsyoIDwUwdmw7KJeQ",
+   "rel": "released_on",
+   "target": "label:Black Book Records"
+  },
+  {
+   "source": "track:7pqAuzsyoIDwUwdmw7KJeQ",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:7pqAuzsyoIDwUwdmw7KJeQ",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:44:41Z"
+  },
+  {
+   "source": "track:7pqAuzsyoIDwUwdmw7KJeQ",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:44:41Z"
+  },
+  {
+   "source": "track:0FxEt9WPc729I8X2hvk4vp",
+   "rel": "by",
+   "target": "artist:The Martinez Brothers"
+  },
+  {
+   "source": "artist:The Martinez Brothers",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0FxEt9WPc729I8X2hvk4vp",
+   "rel": "by",
+   "target": "artist:Stevie Appleton"
+  },
+  {
+   "source": "artist:Stevie Appleton",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0FxEt9WPc729I8X2hvk4vp",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0FxEt9WPc729I8X2hvk4vp",
+   "rel": "released_on",
+   "target": "label:The Martinez Brothers / EMPIRE"
+  },
+  {
+   "source": "track:0FxEt9WPc729I8X2hvk4vp",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:0FxEt9WPc729I8X2hvk4vp",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:44:53Z"
+  },
+  {
+   "source": "track:0FxEt9WPc729I8X2hvk4vp",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:44:53Z"
+  },
+  {
+   "source": "track:2dt5AmiiAA7dOhE1xws9qY",
+   "rel": "by",
+   "target": "artist:Jazzy"
+  },
+  {
+   "source": "artist:Jazzy",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:2dt5AmiiAA7dOhE1xws9qY",
+   "rel": "by",
+   "target": "artist:Chris Lorenzo"
+  },
+  {
+   "source": "artist:Chris Lorenzo",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:2dt5AmiiAA7dOhE1xws9qY",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:2dt5AmiiAA7dOhE1xws9qY",
+   "rel": "released_on",
+   "target": "label:Universal Music Operations Limited"
+  },
+  {
+   "source": "track:2dt5AmiiAA7dOhE1xws9qY",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:2dt5AmiiAA7dOhE1xws9qY",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:45:15Z"
+  },
+  {
+   "source": "track:2dt5AmiiAA7dOhE1xws9qY",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:45:15Z"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "by",
+   "target": "artist:ANOTR"
+  },
+  {
+   "source": "artist:ANOTR",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "by",
+   "target": "artist:3DDY"
+  },
+  {
+   "source": "artist:3DDY",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "released_on",
+   "target": "label:No Art"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:45:26Z"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:45:26Z"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "in_key",
+   "target": "key:10A",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "at_tempo",
+   "target": "tempo:130+ BPM",
+   "bpm": 130,
+   "confidence": "high"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "has_trait",
+   "target": "trait:mid-forward"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "has_trait",
+   "target": "trait:mid length (4-6 min)"
+  },
+  {
+   "source": "track:5yfr8dsjozvYDQtm84DfLE",
+   "rel": "by",
+   "target": "artist:Collect 200"
+  },
+  {
+   "source": "artist:Collect 200",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:5yfr8dsjozvYDQtm84DfLE",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:5yfr8dsjozvYDQtm84DfLE",
+   "rel": "released_on",
+   "target": "label:Collect 200, powered by co:brand"
+  },
+  {
+   "source": "track:5yfr8dsjozvYDQtm84DfLE",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:5yfr8dsjozvYDQtm84DfLE",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:46:13Z"
+  },
+  {
+   "source": "track:5yfr8dsjozvYDQtm84DfLE",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:46:13Z"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "by",
+   "target": "artist:LP Giobbi"
+  },
+  {
+   "source": "artist:LP Giobbi",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "by",
+   "target": "artist:blythe"
+  },
+  {
+   "source": "artist:blythe",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "in_family",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "released_on",
+   "target": "label:Insomniac Records"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:46:38Z"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:46:38Z"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "in_key",
+   "target": "key:8A",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "at_tempo",
+   "target": "tempo:126-129 BPM",
+   "bpm": 129,
+   "confidence": "high"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "has_trait",
+   "target": "trait:mid-forward"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "has_trait",
+   "target": "trait:dynamic master (crest 11 dB+)"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "by",
+   "target": "artist:TYGE"
+  },
+  {
+   "source": "artist:TYGE",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "released_on",
+   "target": "label:Lost Culture Records"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-14T23:46:45Z"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-14T23:46:45Z"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "in_key",
+   "target": "key:12B",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "at_tempo",
+   "target": "tempo:130+ BPM",
+   "bpm": 132,
+   "confidence": "high"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "has_trait",
+   "target": "trait:major key"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:3usbTu6wFzldrsolOdOwxT",
+   "rel": "by",
+   "target": "artist:veggi"
+  },
+  {
+   "source": "artist:veggi",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3usbTu6wFzldrsolOdOwxT",
+   "rel": "by",
+   "target": "artist:Barney Bones"
+  },
+  {
+   "source": "artist:Barney Bones",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3usbTu6wFzldrsolOdOwxT",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:3usbTu6wFzldrsolOdOwxT",
+   "rel": "released_on",
+   "target": "label:eat ur veggis under exclusive license to Independent Co."
+  },
+  {
+   "source": "track:3usbTu6wFzldrsolOdOwxT",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:3usbTu6wFzldrsolOdOwxT",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:18:15Z"
+  },
+  {
+   "source": "track:3usbTu6wFzldrsolOdOwxT",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:18:15Z"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "by",
+   "target": "artist:KETTAMA"
+  },
+  {
+   "source": "artist:KETTAMA",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "in_family",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "released_on",
+   "target": "label:Steel City Dance Discs, powered by co:brand"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "from_era",
+   "target": "era:2021"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:18:40Z"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:18:40Z"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "in_key",
+   "target": "key:11A",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "at_tempo",
+   "target": "tempo:130+ BPM",
+   "bpm": 135,
+   "confidence": "high"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "has_trait",
+   "target": "trait:sub-led low end"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "has_trait",
+   "target": "trait:airy top end"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "has_trait",
+   "target": "trait:dynamic master (crest 11 dB+)"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "has_trait",
+   "target": "trait:mid length (4-6 min)"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "by",
+   "target": "artist:Arlo"
+  },
+  {
+   "source": "artist:Arlo",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "by",
+   "target": "artist:Allegra Miles"
+  },
+  {
+   "source": "artist:Allegra Miles",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "in_family",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "released_on",
+   "target": "label:Arlo & Allegra Miles"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:20:12Z"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:20:12Z"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "in_key",
+   "target": "key:5A",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "at_tempo",
+   "target": "tempo:130+ BPM",
+   "bpm": 135,
+   "confidence": "high"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:0HzRiWAopxgrlMkYnUD055",
+   "rel": "by",
+   "target": "artist:Wal"
+  },
+  {
+   "source": "artist:Wal",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0HzRiWAopxgrlMkYnUD055",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0HzRiWAopxgrlMkYnUD055",
+   "rel": "released_on",
+   "target": "label:Bass Jamz"
+  },
+  {
+   "source": "track:0HzRiWAopxgrlMkYnUD055",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:0HzRiWAopxgrlMkYnUD055",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:22:12Z"
+  },
+  {
+   "source": "track:0HzRiWAopxgrlMkYnUD055",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:22:12Z"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "by",
+   "target": "artist:Kolter"
+  },
+  {
+   "source": "artist:Kolter",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "released_on",
+   "target": "label:Koltrax"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:23:22Z"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:23:22Z"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "in_key",
+   "target": "key:5B",
+   "confidence": "high"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "at_tempo",
+   "target": "tempo:130+ BPM",
+   "bpm": 130,
+   "confidence": "high"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "has_trait",
+   "target": "trait:major key"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "has_trait",
+   "target": "trait:dynamic master (crest 11 dB+)"
+  },
+  {
+   "source": "track:7A5lQnbimaAolqrVqVGSbl",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "by",
+   "target": "artist:Roog"
+  },
+  {
+   "source": "artist:Roog",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "in_family",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "released_on",
+   "target": "label:HouseU"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "from_era",
+   "target": "era:2022"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:24:25Z"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:24:25Z"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "in_key",
+   "target": "key:9A",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "at_tempo",
+   "target": "tempo:122-125 BPM",
+   "bpm": 124,
+   "confidence": "high"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "has_trait",
+   "target": "trait:sub-led low end"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "has_trait",
+   "target": "trait:dynamic master (crest 11 dB+)"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:2FKWdV8dsIeFCjLErZ0Cld",
+   "rel": "by",
+   "target": "artist:Sam Gellaitry"
+  },
+  {
+   "source": "artist:Sam Gellaitry",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:2FKWdV8dsIeFCjLErZ0Cld",
+   "rel": "in_family",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:2FKWdV8dsIeFCjLErZ0Cld",
+   "rel": "released_on",
+   "target": "label:Major Recordings, ℗ 2025 Warner Records Inc. under exclusive license from Viewfinder Recordings Limited"
+  },
+  {
+   "source": "track:2FKWdV8dsIeFCjLErZ0Cld",
+   "rel": "from_era",
+   "target": "era:2025"
+  },
+  {
+   "source": "track:2FKWdV8dsIeFCjLErZ0Cld",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:25:06Z"
+  },
+  {
+   "source": "track:2FKWdV8dsIeFCjLErZ0Cld",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:25:06Z"
+  },
+  {
+   "source": "track:0QgLzi1dK9dtTBtEJLIX0p",
+   "rel": "by",
+   "target": "artist:LOVE LANGUAGE"
+  },
+  {
+   "source": "artist:LOVE LANGUAGE",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0QgLzi1dK9dtTBtEJLIX0p",
+   "rel": "by",
+   "target": "artist:Lemonade Baby"
+  },
+  {
+   "source": "artist:Lemonade Baby",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0QgLzi1dK9dtTBtEJLIX0p",
+   "rel": "by",
+   "target": "artist:Gilligan Moss"
+  },
+  {
+   "source": "artist:Gilligan Moss",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0QgLzi1dK9dtTBtEJLIX0p",
+   "rel": "by",
+   "target": "artist:James Juke"
+  },
+  {
+   "source": "artist:James Juke",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0QgLzi1dK9dtTBtEJLIX0p",
+   "rel": "in_family",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0QgLzi1dK9dtTBtEJLIX0p",
+   "rel": "released_on",
+   "target": "label:LOVE LANGUAGE under exclusive license to Pack Records, Inc. & Create Music Group"
+  },
+  {
+   "source": "track:0QgLzi1dK9dtTBtEJLIX0p",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:0QgLzi1dK9dtTBtEJLIX0p",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:28:23Z"
+  },
+  {
+   "source": "track:0QgLzi1dK9dtTBtEJLIX0p",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:28:23Z"
+  },
+  {
+   "source": "track:67qRozKjwMvXUMNaVvWQmU",
+   "rel": "by",
+   "target": "artist:Julien Jabre"
+  },
+  {
+   "source": "artist:Julien Jabre",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:67qRozKjwMvXUMNaVvWQmU",
+   "rel": "by",
+   "target": "artist:Purple Disco Machine"
+  },
+  {
+   "source": "artist:Purple Disco Machine",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:67qRozKjwMvXUMNaVvWQmU",
+   "rel": "in_family",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:67qRozKjwMvXUMNaVvWQmU",
+   "rel": "released_on",
+   "target": "label:Defected Records Limited"
+  },
+  {
+   "source": "track:67qRozKjwMvXUMNaVvWQmU",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:67qRozKjwMvXUMNaVvWQmU",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:28:37Z"
+  },
+  {
+   "source": "track:67qRozKjwMvXUMNaVvWQmU",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:28:37Z"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "by",
+   "target": "artist:Dam Swindle"
+  },
+  {
+   "source": "artist:Dam Swindle",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "by",
+   "target": "artist:DJ Minx"
+  },
+  {
+   "source": "artist:DJ Minx",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "in_family",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "released_on",
+   "target": "label:Heist Recordings"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:30:59Z"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:30:59Z"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "in_key",
+   "target": "key:2B",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "at_tempo",
+   "target": "tempo:122-125 BPM",
+   "bpm": 125,
+   "confidence": "high"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "has_trait",
+   "target": "trait:major key"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "has_trait",
+   "target": "trait:dynamic master (crest 11 dB+)"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "has_trait",
+   "target": "trait:club length (6 min+)"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "by",
+   "target": "artist:unfazed"
+  },
+  {
+   "source": "artist:unfazed",
+   "rel": "works_in",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "by",
+   "target": "artist:Emanuel Satie"
+  },
+  {
+   "source": "artist:Emanuel Satie",
+   "rel": "works_in",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "by",
+   "target": "artist:Maga"
+  },
+  {
+   "source": "artist:Maga",
+   "rel": "works_in",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "by",
+   "target": "artist:Sean Doron"
+  },
+  {
+   "source": "artist:Sean Doron",
+   "rel": "works_in",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "by",
+   "target": "artist:Scenarios"
+  },
+  {
+   "source": "artist:Scenarios",
+   "rel": "works_in",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "by",
+   "target": "artist:Tim Engelhardt"
+  },
+  {
+   "source": "artist:Tim Engelhardt",
+   "rel": "works_in",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "in_family",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "released_on",
+   "target": "label:Spinnin' Deep, ℗ 2026 Spinnin' Records"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:31:13Z"
+  },
+  {
+   "source": "track:77kExLr3RKN77SYcVEZZ14",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:31:13Z"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "by",
+   "target": "artist:Toman"
+  },
+  {
+   "source": "artist:Toman",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "released_on",
+   "target": "label:Solid Grooves Records"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "from_era",
+   "target": "era:2025"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:32:18Z"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:32:18Z"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "in_key",
+   "target": "key:6A",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "at_tempo",
+   "target": "tempo:126-129 BPM",
+   "bpm": 126,
+   "confidence": "high"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "has_trait",
+   "target": "trait:sub-led low end"
+  },
+  {
+   "source": "track:7DxrTNmUprBMQ0RV45xreb",
+   "rel": "has_trait",
+   "target": "trait:mid length (4-6 min)"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "by",
+   "target": "artist:The Paradise"
+  },
+  {
+   "source": "artist:The Paradise",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "by",
+   "target": "artist:Alan Braxe"
+  },
+  {
+   "source": "artist:Alan Braxe",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "by",
+   "target": "artist:Romuald"
+  },
+  {
+   "source": "artist:Romuald",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "in_family",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "released_on",
+   "target": "label:Vulture under exclusive license to Smugglers Way"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "from_era",
+   "target": "era:2023"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:33:58Z"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:33:58Z"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "in_key",
+   "target": "key:3B",
+   "confidence": "high"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "at_tempo",
+   "target": "tempo:118-121 BPM",
+   "bpm": 121,
+   "confidence": "high"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "has_trait",
+   "target": "trait:major key"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "has_trait",
+   "target": "trait:mid-forward"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "has_trait",
+   "target": "trait:dynamic master (crest 11 dB+)"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "has_trait",
+   "target": "trait:mid length (4-6 min)"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "by",
+   "target": "artist:Francis Mercier"
+  },
+  {
+   "source": "artist:Francis Mercier",
+   "rel": "works_in",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "by",
+   "target": "artist:CAMELPHAT"
+  },
+  {
+   "source": "artist:CAMELPHAT",
+   "rel": "works_in",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "by",
+   "target": "artist:Josh Gigante"
+  },
+  {
+   "source": "artist:Josh Gigante",
+   "rel": "works_in",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "by",
+   "target": "artist:Kuuda"
+  },
+  {
+   "source": "artist:Kuuda",
+   "rel": "works_in",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "in_family",
+   "target": "family:afro_latin_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "released_on",
+   "target": "label:When Stars Align"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:34:26Z"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:34:26Z"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "in_key",
+   "target": "key:11A",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "at_tempo",
+   "target": "tempo:126-129 BPM",
+   "bpm": 126,
+   "confidence": "high"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "has_trait",
+   "target": "trait:minor key"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "by",
+   "target": "artist:Edd"
+  },
+  {
+   "source": "artist:Edd",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "by",
+   "target": "artist:King Wizard"
+  },
+  {
+   "source": "artist:King Wizard",
+   "rel": "works_in",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "in_family",
+   "target": "family:disco_indie_dance",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "released_on",
+   "target": "label:Helix Records, a division of Payday Records, Inc."
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:35:03Z"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:35:03Z"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "in_key",
+   "target": "key:4B",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "at_tempo",
+   "target": "tempo:130+ BPM",
+   "bpm": 132,
+   "confidence": "high"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "has_trait",
+   "target": "trait:major key"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "has_trait",
+   "target": "trait:mid-forward"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "has_trait",
+   "target": "trait:airy top end"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "track:6O23Yf2GSRMunBn3j1eQCJ",
+   "rel": "by",
+   "target": "artist:Barry Can't Swim"
+  },
+  {
+   "source": "artist:Barry Can't Swim",
+   "rel": "works_in",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:6O23Yf2GSRMunBn3j1eQCJ",
+   "rel": "in_family",
+   "target": "family:uk_soulful_club",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:6O23Yf2GSRMunBn3j1eQCJ",
+   "rel": "released_on",
+   "target": "label:Earths Only Paradise under exclusive license to Atlantic Records UK., ℗ 2026 BCS"
+  },
+  {
+   "source": "track:6O23Yf2GSRMunBn3j1eQCJ",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:6O23Yf2GSRMunBn3j1eQCJ",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:35:21Z"
+  },
+  {
+   "source": "track:6O23Yf2GSRMunBn3j1eQCJ",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:35:21Z"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "by",
+   "target": "artist:Riordan"
+  },
+  {
+   "source": "artist:Riordan",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "by",
+   "target": "artist:Locky"
+  },
+  {
+   "source": "artist:Locky",
+   "rel": "works_in",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "in_family",
+   "target": "family:groove_tech_house",
+   "provenance": "inferred"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "released_on",
+   "target": "label:Darkroom Records"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "from_era",
+   "target": "era:2026"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "added_in",
+   "target": "added_month:2026-11",
+   "added_at": "2026-11-15T00:36:33Z"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "added_in",
+   "target": "added_year:2026",
+   "added_at": "2026-11-15T00:36:33Z"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "in_key",
+   "target": "key:11B",
+   "confidence": "medium"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "at_tempo",
+   "target": "tempo:130+ BPM",
+   "bpm": 132,
+   "confidence": "high"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "has_trait",
+   "target": "trait:major key"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "has_trait",
+   "target": "trait:low-mid warmth led"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "has_trait",
+   "target": "trait:radio length (under 4 min)"
+  },
+  {
+   "source": "key:3A",
+   "rel": "mixes_with",
+   "target": "key:4A",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:3A",
+   "rel": "mixes_with",
+   "target": "key:3B",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:4A",
+   "rel": "mixes_with",
+   "target": "key:5A",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:4A",
+   "rel": "mixes_with",
+   "target": "key:4B",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:8A",
+   "rel": "mixes_with",
+   "target": "key:9A",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:10A",
+   "rel": "mixes_with",
+   "target": "key:11A",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:10A",
+   "rel": "mixes_with",
+   "target": "key:9A",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:11A",
+   "rel": "mixes_with",
+   "target": "key:11B",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:5A",
+   "rel": "mixes_with",
+   "target": "key:6A",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:5A",
+   "rel": "mixes_with",
+   "target": "key:5B",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:2B",
+   "rel": "mixes_with",
+   "target": "key:3B",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:3B",
+   "rel": "mixes_with",
+   "target": "key:4B",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:4B",
+   "rel": "mixes_with",
+   "target": "key:5B",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "key:11B",
+   "rel": "mixes_with",
+   "target": "key:12B",
+   "basis": "Camelot neighbour"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "sounds_like",
+   "target": "track:6HTDX4qgjY6usYjtx18eWf",
+   "distance": 3.02,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "sounds_like",
+   "target": "track:6HTDX4qgjY6usYjtx18eWf",
+   "distance": 3.09,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "sounds_like",
+   "target": "track:6HTDX4qgjY6usYjtx18eWf",
+   "distance": 3.3,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "sounds_like",
+   "target": "track:3XO43dyBY9DWKIAeFEidRC",
+   "distance": 3.05,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "sounds_like",
+   "target": "track:3XO43dyBY9DWKIAeFEidRC",
+   "distance": 3.29,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "sounds_like",
+   "target": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "distance": 3.36,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "sounds_like",
+   "target": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "distance": 3.44,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "sounds_like",
+   "target": "track:6HTDX4qgjY6usYjtx18eWf",
+   "distance": 3.89,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "sounds_like",
+   "target": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "distance": 4.07,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:0BK6ACxpzK8nkWa3YKuunX",
+   "rel": "sounds_like",
+   "target": "track:3XO43dyBY9DWKIAeFEidRC",
+   "distance": 4.31,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "rel": "sounds_like",
+   "target": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "distance": 5.05,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "sounds_like",
+   "target": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "distance": 5.08,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "sounds_like",
+   "target": "track:7jEtbI7M0Cxu4Ccn0IDlol",
+   "distance": 5.33,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "sounds_like",
+   "target": "track:3ZwYeYswniOgLqfN5kXis8",
+   "distance": 3.11,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "sounds_like",
+   "target": "track:5iOlKINhADUkKnc5vdsURg",
+   "distance": 3.32,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "sounds_like",
+   "target": "track:5iOlKINhADUkKnc5vdsURg",
+   "distance": 2.96,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:3ZwYeYswniOgLqfN5kXis8",
+   "rel": "sounds_like",
+   "target": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "distance": 4.3,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:3yVqNA9S8luw1wAUPbLwNH",
+   "rel": "sounds_like",
+   "target": "track:7DxrTNmUprBMQ0RV45xreb",
+   "distance": 4.4,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "sounds_like",
+   "target": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "distance": 2.75,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "sounds_like",
+   "target": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "distance": 2.98,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "sounds_like",
+   "target": "track:3gfFxjJ5dgMNXYyL5bIH3f",
+   "distance": 3.89,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "sounds_like",
+   "target": "track:5iOlKINhADUkKnc5vdsURg",
+   "distance": 3.34,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:2PxlgpxOYFoNnipKN3214d",
+   "rel": "sounds_like",
+   "target": "track:6HTDX4qgjY6usYjtx18eWf",
+   "distance": 3.47,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "sounds_like",
+   "target": "track:2PxlgpxOYFoNnipKN3214d",
+   "distance": 3.48,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "sounds_like",
+   "target": "track:7DxrTNmUprBMQ0RV45xreb",
+   "distance": 3.75,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "sounds_like",
+   "target": "track:3ZwYeYswniOgLqfN5kXis8",
+   "distance": 3.9,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:0M5XBd9bd8P5xKdJYCtGxM",
+   "rel": "sounds_like",
+   "target": "track:3XO43dyBY9DWKIAeFEidRC",
+   "distance": 4.06,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "sounds_like",
+   "target": "track:7A5lQnbimaAolqrVqVGSbl",
+   "distance": 4.07,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "sounds_like",
+   "target": "track:7A5lQnbimaAolqrVqVGSbl",
+   "distance": 4.13,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "sounds_like",
+   "target": "track:7A5lQnbimaAolqrVqVGSbl",
+   "distance": 4.17,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "rel": "sounds_like",
+   "target": "track:5iOlKINhADUkKnc5vdsURg",
+   "distance": 2.83,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "sounds_like",
+   "target": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "distance": 2.6,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:2GcRQo1iIfDGvg4FBgsrU6",
+   "rel": "sounds_like",
+   "target": "track:6HTDX4qgjY6usYjtx18eWf",
+   "distance": 3.66,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "sounds_like",
+   "target": "track:7DxrTNmUprBMQ0RV45xreb",
+   "distance": 3.69,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:5iOlKINhADUkKnc5vdsURg",
+   "rel": "sounds_like",
+   "target": "track:7DxrTNmUprBMQ0RV45xreb",
+   "distance": 3.69,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "sounds_like",
+   "target": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "distance": 3.77,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:3XO43dyBY9DWKIAeFEidRC",
+   "rel": "sounds_like",
+   "target": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "distance": 4.18,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:4ZWyIlQo4Za4kophcOoI4i",
+   "rel": "sounds_like",
+   "target": "track:50pR4Bbl07sXiKHtaTJA9h",
+   "distance": 4.37,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:09kvrg8hjr8G71mhIVARfu",
+   "rel": "sounds_like",
+   "target": "track:0EhbgzF5x4krWOTRXMsXO5",
+   "distance": 2.88,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  },
+  {
+   "source": "track:28JJCpmvuGEmtKKrOEnCpo",
+   "rel": "sounds_like",
+   "target": "track:3ZwYeYswniOgLqfN5kXis8",
+   "distance": 3.72,
+   "basis": "nearest on measured tempo, key, mode, bands, dynamics"
+  }
+ ]
+}

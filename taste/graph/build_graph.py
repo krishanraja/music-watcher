@@ -1,18 +1,20 @@
 """Build the taste knowledge graph from the Spotify playlist read plus trackcard measurements of the full tracks.
 
-Inputs:
-  playlist.json        (this folder) one record per track from the Spotify Web API: id, title, artists, duration_s,
-                       release_date, label (+ label_source), added_at. Made by reading the playlist with Krish's login.
+Inputs (the graph folder: this one for Krish, taste/calvin/graph for Calvin, chosen with --graph):
+  playlist.json        one record per track: id, title, artists, duration_s, release_date, label (+ label_source),
+                       added_at. Krish's was read from the Spotify Web API with his login. Optional top-level keys name
+                       whose playlist it is ("owner", "owner_possessive", "name") and where it was read ("read_from",
+                       "added_source").
   <cards>/<id>.trackcard.json        trackcard output for the FULL track (no stems, Laplacian sections), kept outside the
                                      repo next to the audio. The audio was length-matched to Spotify's within 6 s.
   <cards>/<id>.stems.trackcard.json  optional: the same track measured with Demucs stems; adds drops and stem densities.
   <cards>/fetch_log.jsonl            optional: where each full track came from (SoundCloud or YouTube upload).
   --previews <dir>     optional, labelled fallback only: <dir>/<id>.trackcard.json measured on a 15-30 s preview clip.
-  families.json        (this folder) style family per artist; an inference, labelled as such in the graph.
+  families.json        style family per artist; an inference, labelled as such in the graph.
 
-Output (this folder): graph.json (nodes + edges), tracks.csv (one row per track, flat features).
+Output (the graph folder): graph.json (nodes + edges), tracks.csv (one row per track, flat features).
 
-Run: python taste/graph/build_graph.py <cards dir> [--previews <dir>]
+Run: python taste/graph/build_graph.py <cards dir> [--previews <dir>] [--graph <graph folder>]
 """
 from __future__ import annotations
 
@@ -56,8 +58,8 @@ def tempo_band(bpm: float | None) -> str:
     return "130+ BPM"
 
 
-def quarter(added_at: str) -> str:
-    return f"{added_at[:4]}-Q{(int(added_at[5:7]) - 1) // 3 + 1}"
+def quarter(added_at: str | None) -> str | None:
+    return f"{added_at[:4]}-Q{(int(added_at[5:7]) - 1) // 3 + 1}" if added_at else None
 
 
 def clean_label(label: str | None) -> str | None:
@@ -158,9 +160,12 @@ class _FamilyLookup(dict):
         return self.by_lower[artist.lower()]
 
 
-def main(cards: Path, previews: Path | None = None) -> dict:
-    pl = read_json(HERE / "playlist.json")
-    families = read_json(HERE / "families.json")
+def main(cards: Path, previews: Path | None = None, here: Path | None = None) -> dict:
+    here = Path(here) if here else HERE
+    pl = read_json(here / "playlist.json")
+    families = read_json(here / "families.json")
+    owner, playlist_name = pl.get("owner", "Krish"), pl.get("name", "Chillout & Ambient")
+    added_source = pl.get("added_source", "Spotify Web API (playlist items)")
     fam_by_name = {a.lower(): fam for fam, d in families["families"].items() for a in d["artists"]}
     fam_of_artist = _FamilyLookup(fam_by_name)
     sources = fetch_sources(cards)
@@ -184,12 +189,12 @@ def main(cards: Path, previews: Path | None = None) -> dict:
         tid, artists = r["id"], r["artists"]
         year = (r.get("release_date") or "")[:4] or None
         label = clean_label(r.get("label"))
-        added = r["added_at"]
+        added = r.get("added_at")
         tnode = node(f"track:{tid}", "track", title=r["title"], artists=artists, duration_s=r["duration_s"],
                      release_date=r.get("release_date"), release_year=int(year) if year else None,
                      label=label, label_source=r.get("label_source"),
-                     added_at=added, added_source="Spotify Web API (playlist items)",
-                     spotify=f"https://open.spotify.com/track/{tid}", playlist="Chillout & Ambient")
+                     added_at=added, added_source=added_source if added else None,
+                     spotify=f"https://open.spotify.com/track/{tid}", playlist=playlist_name)
         for a in artists:
             edge(tnode, "by", node(f"artist:{a}", "artist", name=a))
             if a in fam_of_artist:
@@ -204,14 +209,16 @@ def main(cards: Path, previews: Path | None = None) -> dict:
         if year:
             era = f"{year[:3]}0s" if int(year) < 2010 else year
             edge(tnode, "from_era", node(f"era:{era}", "era", name=era))
-        # When Krish added it (Spotify's added_at): month and year nodes
-        y, m = added[:4], added[:7]
-        ynode = node(f"added_year:{y}", "added_year", name=y)
-        mnode = node(f"added_month:{m}", "added_month", name=m)
-        if not any(e["rel"] == "in_year" and e["source"] == mnode for e in edges):
-            edge(mnode, "in_year", ynode)
-        edge(tnode, "added_in", mnode, added_at=added)
-        edge(tnode, "added_in", ynode, added_at=added)
+        # When the playlist's owner added it (Spotify's added_at): month and year nodes
+        y = added[:4] if added else None
+        if added:
+            m = added[:7]
+            ynode = node(f"added_year:{y}", "added_year", name=y)
+            mnode = node(f"added_month:{m}", "added_month", name=m)
+            if not any(e["rel"] == "in_year" and e["source"] == mnode for e in edges):
+                edge(mnode, "in_year", ynode)
+            edge(tnode, "added_in", mnode, added_at=added)
+            edge(tnode, "added_in", ynode, added_at=added)
 
         row = {"id": tid, "title": r["title"], "artists": "; ".join(artists), "duration_s": r["duration_s"],
                "release_date": r.get("release_date"), "release_year": year, "label": label,
@@ -293,10 +300,11 @@ def main(cards: Path, previews: Path | None = None) -> dict:
 
     n_full = sum(1 for r in rows if r.get("measured_from") == "full")
     n_prev = sum(1 for r in rows if r.get("measured_from") == "preview")
+    read_from = pl.get("read_from", "the Spotify Web API")
     graph = {
-        "about": f"Krish's taste graph. All {len(rows)} tracks of his Spotify playlist 'Chillout & Ambient' (read "
-                 f"{pl['read_at'][:10]} from the Spotify Web API, with the date each was added). Release dates and added "
-                 "dates are from the Spotify Web API; labels from Spotify's album pages (the phonographic copyright line). "
+        "about": f"{owner}'s taste graph. All {len(rows)} tracks of {pl.get('owner_possessive', 'his')} Spotify playlist "
+                 f"'{playlist_name}' (read {pl['read_at'][:10]} from {read_from}, with the date each was added). Release "
+                 f"dates and added dates are from {read_from}; labels from Spotify's album pages (the phonographic copyright line). "
                  f"Tempo, key, frequency balance, dynamics and arrangement are measured by trackcard on the full track for "
                  f"{n_full} tracks" + (f" and on a preview clip for {n_prev}" if n_prev else "") + "; each track's "
                  "measured_from says which. Style families are inferred (Claude's read).",
@@ -304,9 +312,9 @@ def main(cards: Path, previews: Path | None = None) -> dict:
         "nodes": list(nodes.values()),
         "edges": edges,
     }
-    (HERE / "graph.json").write_text(json.dumps(graph, indent=1, ensure_ascii=False), encoding="utf-8")
+    (here / "graph.json").write_text(json.dumps(graph, indent=1, ensure_ascii=False), encoding="utf-8")
     fields = sorted({k for r in rows for k in r}, key=lambda k: (k not in ("id", "title", "artists"), k))
-    with open(HERE / "tracks.csv", "w", newline="", encoding="utf-8") as fh:
+    with open(here / "tracks.csv", "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=fields)
         w.writeheader()
         w.writerows(rows)
@@ -316,9 +324,10 @@ def main(cards: Path, previews: Path | None = None) -> dict:
 
 if __name__ == "__main__":
     args = sys.argv[1:]
-    prev = None
-    if "--previews" in args:
-        i = args.index("--previews")
-        prev = Path(args[i + 1])
-        del args[i:i + 2]
-    main(Path(args[0]), prev)
+    opts = {}
+    for flag in ("--previews", "--graph"):
+        if flag in args:
+            i = args.index(flag)
+            opts[flag] = Path(args[i + 1])
+            del args[i:i + 2]
+    main(Path(args[0]), opts.get("--previews"), opts.get("--graph"))
