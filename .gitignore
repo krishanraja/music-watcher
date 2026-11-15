@@ -26,3 +26,6 @@ tests/fixtures/*
 # ...except Music Inspo's cards: they ARE the structured data (taste/inspo/README.md)
 !taste/inspo/cards/*.trackcard.md
 !taste/inspo/cards/*.trackcard.json
+# ...and the cards of tracks Krish or Calvin pointed at in a session (taste/cards/README.md)
+!taste/cards/*.trackcard.md
+!taste/cards/*.trackcard.json

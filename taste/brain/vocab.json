@@ -23,7 +23,8 @@
       "percussive_bass": "short, plucked, percussive bass",
       "organic_textures": "organic, acoustic-feeling sounds",
       "signature_fx_hit": "a recurring signature hit that marks the phrase",
-      "guitar": "guitar as a feature"
+      "guitar": "guitar as a feature",
+      "brass": "brass or horns as a feature (a motif, stabs, a lead)"
     },
     "arrangement": {
       "quick_to_groove": "full energy within 16 bars",
@@ -32,7 +33,8 @@
       "multiple_breakdowns": "two or more breakdowns",
       "club_length": "6 minutes or longer",
       "solo_tease": "tease an instrument for 8 bars before its solo",
-      "contrast_moments": "moments that give the ear a break from the main instrument"
+      "contrast_moments": "moments that give the ear a break from the main instrument",
+      "build_into_drop": "a build that carries the track into the drop"
     },
     "mix": {
       "warm_low_end": "low or sub band is the loudest",

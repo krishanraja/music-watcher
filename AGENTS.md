@@ -47,6 +47,8 @@ a metadata source (Spotify, Discogs, label page), or inferred by Claude. Inferre
 - Taken back? Set `"withdrawn": true` on the row; never delete it. Run `trackcard brain check` after any edit.
 - Weekly: `trackcard brain propose` (at most 3, frozen once proposed). Krish runs `trackcard brain accept|reject <id>`.
 - After any change to evidence, claims or the graph: `trackcard brain render`.
+- A track Krish or Calvin asks to have measured (not a Music Inspo drop, not a playlist track): its unedited card goes in
+  `taste/cards/`, with a row in `taste/cards/README.md` saying who asked, where the audio came from and how it was checked.
 
 ## Calvin's Music Brain (taste/calvin/)
 

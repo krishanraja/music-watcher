@@ -1,0 +1,3 @@
+Status: The shared vocabulary has brass (sound_design) and build_into_drop (arrangement), and Krish's words on "Bird" and "Hey Sunshine" now count under them; "Hey Sunshine (Antonio Giacca Remix)" is measured with stems in `taste/cards/`, which shows its main build as a 28-bar breakdown carried by the vocal, with no low end for the last 16 bars and kick, bass and hats landing together on bar 141.
+Next: run Krish's weekly `trackcard brain propose` in week 47 (from 16 Nov); organic_textures, percussive_bass, song_vocal, brass and build_into_drop are ready to propose.
+North Star check (2026-11-15): holds.
