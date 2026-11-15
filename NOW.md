@@ -22,6 +22,7 @@ steward: https://github.com/krishanraja/ai-harness/blob/main/docs/steward/RUNBOO
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":null,"current":null,"current_as_of":null,"current_source":null,"urgency":4,"urgency_reason":"North Star not set; Krish sets it"} --> **North Star number: U4, not measured.** The North Star is not set (`docs/NORTH_STAR.md`), so there is no number yet.
 
+- Krish's evidence log holds his words on Time "Bird" (bass that punctuates, the brass motif, brass that sounds natural) and on Sugarstarr & Alexander "Hey Sunshine (Antonio Giacca Remix)" (the build before the drop, the vocals); organic sounds and percussive bass are now said across 2 tracks each, and brass and the build are filed as other/ words until the vocabulary grows. (2026-11-15)
 - Calvin has a separate Music Brain in `taste/calvin/`: the graph of the 30-track "Fall Bangers" playlist (18 measured on the full track, each confirmed against Spotify's preview; 12 DRM-locked on SoundCloud), Calvin's own claims (3 proposed, waiting for Calvin) and `APPROVED.md`; every brain command takes `--taste taste/calvin`, and Krish's brain is unchanged. (2026-11-15)
 - **It runs on the worker server** (Hetzner CPX32), installed for the service user on 14 Nov 2026. Its tests pass (85). A card with Demucs stem activity was written on CPU. `trackcard mcp` serves cards over stdio to a Claude session on the worker. (2026-11-14)
 - **The Music Inspo watcher** (#2) runs every 15 minutes on the worker. Each new drop in Drive's Music Inspo becomes a card in `taste/inspo/` on one rolling pull request. The first drop was measured with stems in 5 min 25 s from a SoundCloud recording within 6 s of Spotify's length (#3, merged). (2026-11-14)
@@ -34,7 +35,7 @@ steward: https://github.com/krishanraja/ai-harness/blob/main/docs/steward/RUNBOO
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-15): Calvin accepts or rejects the three proposed claims (`trackcard brain accept|reject <id> --taste taste/calvin`).
+- Next (2026-11-15): run Krish's weekly `trackcard brain propose` in week 47 (from 16 Nov); organic_textures, percussive_bass and song_vocal are ready to propose.
 - **Next:** decide how the content engine calls `trackcard` for audio treatment (an OS session proposes it; nothing calls it yet).
 - **Waiting on Krish:** his North Star for this repository.
 - North Star check (2026-11-15): holds.
