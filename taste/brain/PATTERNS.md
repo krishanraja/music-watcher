@@ -31,9 +31,12 @@ A pattern decides nothing until it becomes an accepted claim.
 | mix | crisp_drums | 2 | 0 | 1 | n/a | n/a | n/a | ready to propose |
 | mix | airy_top | 0 | 0 | 0 | 20/342 | 6% | steady |  |
 | mix | dense_master | 0 | 0 | 0 | 3/342 | 1% | steady |  |
+| other | other:build | 3 | 0 | 1 | n/a | n/a | n/a |  |
+| other | other:brass | 2 | 0 | 1 | n/a | n/a | n/a |  |
 | sound_design | growl_bass | 6 | 0 | 2 | n/a | n/a | n/a | accepted |
+| sound_design | organic_textures | 6 | 0 | 2 | n/a | n/a | n/a | ready to propose |
+| sound_design | percussive_bass | 4 | 0 | 2 | n/a | n/a | n/a | ready to propose |
 | sound_design | signature_fx_hit | 3 | 0 | 1 | n/a | n/a | n/a | ready to propose |
-| sound_design | organic_textures | 3 | 0 | 1 | n/a | n/a | n/a | ready to propose |
-| sound_design | percussive_bass | 2 | 0 | 1 | n/a | n/a | n/a | ready to propose |
 | sound_design | guitar | 1 | 0 | 1 | n/a | n/a | n/a |  |
 | vocal | vocal_chops | 4 | 0 | 2 | n/a | n/a | n/a | accepted |
+| vocal | song_vocal | 3 | 0 | 1 | n/a | n/a | n/a | ready to propose |
