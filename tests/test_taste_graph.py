@@ -122,3 +122,29 @@ def test_chronology_end_to_end(world, monkeypatch):
     md = (here / "CHRONOLOGY.md").read_text(encoding="utf-8")
     assert "prose" in md and "more prose" in md and "\nold\n" not in md and "| 2014-26 |" in md
     assert (here / "chronology.png").stat().st_size > 1000
+
+
+def test_a_second_playlist_builds_into_its_own_folder(world, tmp_path):
+    """Calvin's graph: its own folder, owner and playlist name from playlist.json, a track with no added date."""
+    bg, _, _, krish_here = world
+    before = (krish_here / "graph.json").read_text(encoding="utf-8")
+    here = tmp_path / "calvin" / "graph"
+    here.mkdir(parents=True)
+    tracks = [{"id": "AAA", "title": "Early", "artists": ["Three"], "duration_s": 300, "release_date": "2026-09-04",
+               "label": "℗ 2026 L", "label_source": "x", "added_at": "2026-11-14T23:43:14Z"},
+              {"id": "EEE", "title": "Undated", "artists": ["Four"], "duration_s": 200, "release_date": "2026", "label": None}]
+    (here / "playlist.json").write_text(json.dumps({"owner": "Calvin", "owner_possessive": "Calvin's", "name": "Fall Bangers",
+                                                    "read_from": "Spotify's public pages", "added_source": "web player",
+                                                    "read_at": "2026-11-15T09:20:00Z", "tracks": tracks}), encoding="utf-8")
+    (here / "families.json").write_text(json.dumps({"families": {"fam_b": {"name": "B", "description": "b",
+                                                                            "artists": ["Three"]}}}), encoding="utf-8")
+    graph = bg.main(tmp_path / "full", None, here)
+    assert graph["about"].startswith("Calvin's taste graph. All 2 tracks of Calvin's Spotify playlist 'Fall Bangers' "
+                                     "(read 2026-11-15 from Spotify's public pages")
+    nodes = {n["id"]: n for n in graph["nodes"]}
+    assert nodes["track:AAA"]["playlist"] == "Fall Bangers" and nodes["track:AAA"]["added_source"] == "web player"
+    assert nodes["track:EEE"]["added_at"] is None and not any(e["source"] == "track:EEE" and e["rel"] == "added_in"
+                                                               for e in graph["edges"])
+    rows = {r["id"]: r for r in csv.DictReader(open(here / "tracks.csv", newline="", encoding="utf-8"))}
+    assert rows["AAA"]["measured"] == "True" and rows["EEE"]["added_quarter"] == ""
+    assert (krish_here / "graph.json").read_text(encoding="utf-8") == before  # Krish's graph is not touched

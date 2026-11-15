@@ -1,0 +1,433 @@
+{
+ "about": "Calvin's Spotify playlist 'Fall Bangers' (https://open.spotify.com/playlist/1inChKFsQRxfnGMBagrEib), shared by Krish on 2026-11-15. Read without a login from Spotify's public pages: the track list and lengths from the playlist's embed page; release date and album from each track's link-preview page; label from the album page's phonographic copyright line (rendered in a headless browser); added_at from the playlist data the public web player loads. Calvin, the playlist's owner, added every track, between 23:43 on 14 Nov and 00:36 on 15 Nov 2026 (UTC), in playlist order.",
+ "owner": "Calvin",
+ "owner_possessive": "Calvin's",
+ "name": "Fall Bangers",
+ "playlist_id": "1inChKFsQRxfnGMBagrEib",
+ "read_from": "Spotify's public pages",
+ "added_source": "Spotify web player (playlist items; every track added by the playlist's owner)",
+ "read_at": "2026-11-15T09:20:00Z",
+ "count": 30,
+ "tracks": [
+  {
+   "id": "6HTDX4qgjY6usYjtx18eWf",
+   "title": "How Ya Feelin’",
+   "artists": [
+    "L.P. Rhythm"
+   ],
+   "duration_s": 157,
+   "album_id": "0XdbLaKmYsKg0AmDLWo2yV",
+   "release_date": "2026-09-04",
+   "label": "℗ 2026 Lewis Pitcairn under exclusive license to Disorder Records/UMG Recordings, Inc. A Capitol Records/Disorder release.",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:43:14Z"
+  },
+  {
+   "id": "3XO43dyBY9DWKIAeFEidRC",
+   "title": "Get Up And Dance",
+   "artists": [
+    "Cloonee"
+   ],
+   "duration_s": 155,
+   "album_id": "3PbkeRh92HBhRCs08U9PQr",
+   "release_date": "2026-09-09",
+   "label": "℗ 2026 Good Music For Bad People, powered by co:brand",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:43:22Z"
+  },
+  {
+   "id": "50pR4Bbl07sXiKHtaTJA9h",
+   "title": "Beautiful Times",
+   "artists": [
+    "Claptone",
+    "MIRAMAR",
+    "Kurtis Wells"
+   ],
+   "duration_s": 173,
+   "album_id": "0mY4P5lgbD5r98U3iFSBxn",
+   "release_date": "2026-09-18",
+   "label": "℗ 2026 FUNKSHWAY",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:43:29Z"
+  },
+  {
+   "id": "0tGhQm627q0UTFXCwkgrJg",
+   "title": "As You Are",
+   "artists": [
+    "KDAY"
+   ],
+   "duration_s": 211,
+   "album_id": "1sHYTZjj6zi02moVuuJkwl",
+   "release_date": "2026-09-16",
+   "label": "℗ 2026 Thrive Music / DAYKLUB",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:43:37Z"
+  },
+  {
+   "id": "0BK6ACxpzK8nkWa3YKuunX",
+   "title": "Fancy Footwork",
+   "artists": [
+    "Chris Lorenzo",
+    "Chromeo"
+   ],
+   "duration_s": 192,
+   "album_id": "1alVbRjUS3mG2Uk2D6iflR",
+   "release_date": "2026-09-30",
+   "label": "℗ 2026 Turbo Blanco, powered by co:brand",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:43:43Z"
+  },
+  {
+   "id": "7jEtbI7M0Cxu4Ccn0IDlol",
+   "title": "YOUR TOUCH",
+   "artists": [
+    "CŒUR ACIDE",
+    "Pat Lok",
+    "F-MACK"
+   ],
+   "duration_s": 210,
+   "album_id": "5h4IPbpuEBlfjXVD8O5Ftr",
+   "release_date": "2026-10-01",
+   "label": "℗ 2026 toucan sounds",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:44:01Z"
+  },
+  {
+   "id": "7pqAuzsyoIDwUwdmw7KJeQ",
+   "title": "Super Hot",
+   "artists": [
+    "Marco Lys",
+    "Michael Ekow",
+    "Kevcody"
+   ],
+   "duration_s": 183,
+   "album_id": "1Goetp3rbBEFvRzvyJLIFe",
+   "release_date": "2026-07-31",
+   "label": "℗ 2026 Black Book Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:44:41Z"
+  },
+  {
+   "id": "0FxEt9WPc729I8X2hvk4vp",
+   "title": "Impressions",
+   "artists": [
+    "The Martinez Brothers",
+    "Stevie Appleton"
+   ],
+   "duration_s": 176,
+   "album_id": "1KuopOe1UEMWK2XmTTvKyw",
+   "release_date": "2026-07-24",
+   "label": "℗ 2026 The Martinez Brothers / EMPIRE",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:44:53Z"
+  },
+  {
+   "id": "2dt5AmiiAA7dOhE1xws9qY",
+   "title": "Invisible",
+   "artists": [
+    "Jazzy",
+    "Chris Lorenzo"
+   ],
+   "duration_s": 197,
+   "album_id": "0y63Qrt20QcFwxq3M7B7SK",
+   "release_date": "2026-06-19",
+   "label": "℗ 2026 Universal Music Operations Limited",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:45:15Z"
+  },
+  {
+   "id": "3ZwYeYswniOgLqfN5kXis8",
+   "title": "Like It",
+   "artists": [
+    "ANOTR",
+    "3DDY"
+   ],
+   "duration_s": 267,
+   "album_id": "4q72fmveNOwffTj4hJ07Zo",
+   "release_date": "2026-06-12",
+   "label": "℗ 2026 No Art",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:45:26Z"
+  },
+  {
+   "id": "5yfr8dsjozvYDQtm84DfLE",
+   "title": "Everything Will Be Alright",
+   "artists": [
+    "Collect 200"
+   ],
+   "duration_s": 151,
+   "album_id": "3VW3rR8BFAITqgT45WX3Cv",
+   "release_date": "2026-04-30",
+   "label": "℗ 2026 Collect 200, powered by co:brand",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:46:13Z"
+  },
+  {
+   "id": "3yVqNA9S8luw1wAUPbLwNH",
+   "title": "I’ll Stand By You",
+   "artists": [
+    "LP Giobbi",
+    "blythe"
+   ],
+   "duration_s": 214,
+   "album_id": "1o9BaPODLlG6YeTWj6hqtQ",
+   "release_date": "2026-03-06",
+   "label": "℗ 2026 Insomniac Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:46:38Z"
+  },
+  {
+   "id": "3gfFxjJ5dgMNXYyL5bIH3f",
+   "title": "Work 2 Da Beat",
+   "artists": [
+    "TYGE"
+   ],
+   "duration_s": 169,
+   "album_id": "1N0LrWUUPaG6xyVF7x2GQq",
+   "release_date": "2026-01-30",
+   "label": "℗ 2026 Lost Culture Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-14T23:46:45Z"
+  },
+  {
+   "id": "3usbTu6wFzldrsolOdOwxT",
+   "title": "SHAKE SUM",
+   "artists": [
+    "veggi",
+    "Barney Bones"
+   ],
+   "duration_s": 179,
+   "album_id": "1xoIA6RcEfdNn6TrBxnZUH",
+   "release_date": "2026-05-22",
+   "label": "℗ 2026 eat ur veggis under exclusive license to Independent Co.",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:18:15Z"
+  },
+  {
+   "id": "2PxlgpxOYFoNnipKN3214d",
+   "title": "Picanya 2400",
+   "artists": [
+    "KETTAMA"
+   ],
+   "duration_s": 320,
+   "album_id": "300loc1hk6b8gKjFsHwvHm",
+   "release_date": "2021-08-25",
+   "label": "℗ 2021 Steel City Dance Discs, powered by co:brand",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:18:40Z"
+  },
+  {
+   "id": "0M5XBd9bd8P5xKdJYCtGxM",
+   "title": "Nothing But You",
+   "artists": [
+    "Arlo",
+    "Allegra Miles"
+   ],
+   "duration_s": 191,
+   "album_id": "0ajQBAvAUdAoPJeVB69fD7",
+   "release_date": "2026-05-01",
+   "label": "℗ 2026 Arlo & Allegra Miles",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:20:12Z"
+  },
+  {
+   "id": "0HzRiWAopxgrlMkYnUD055",
+   "title": "What Ya Got",
+   "artists": [
+    "Wal"
+   ],
+   "duration_s": 231,
+   "album_id": "5jLlh1dm37OduWtv69Ouam",
+   "release_date": "2026-02-20",
+   "label": "℗ 2026 Bass Jamz",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:22:12Z"
+  },
+  {
+   "id": "7A5lQnbimaAolqrVqVGSbl",
+   "title": "Trapped - Radio-Edit",
+   "artists": [
+    "Kolter"
+   ],
+   "duration_s": 222,
+   "album_id": "6UPddPLVGe8DJmabcnSNWe",
+   "release_date": "2026-04-10",
+   "label": "℗ 2026 Koltrax",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:23:22Z"
+  },
+  {
+   "id": "5iOlKINhADUkKnc5vdsURg",
+   "title": "Ooh",
+   "artists": [
+    "Roog"
+   ],
+   "duration_s": 172,
+   "album_id": "7gTsKgp1fo9QUUbQGb4bCN",
+   "release_date": "2022-12-09",
+   "label": "℗ 2022 HouseU",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:24:25Z"
+  },
+  {
+   "id": "2FKWdV8dsIeFCjLErZ0Cld",
+   "title": "START UP A RUMOUR",
+   "artists": [
+    "Sam Gellaitry"
+   ],
+   "duration_s": 200,
+   "album_id": "6tyD7HEJopywG8Dljjd1nA",
+   "release_date": "2025-11-07",
+   "label": "℗ Major Recordings, ℗ 2025 Warner Records Inc. under exclusive license from Viewfinder Recordings Limited",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:25:06Z"
+  },
+  {
+   "id": "0QgLzi1dK9dtTBtEJLIX0p",
+   "title": "PARTYS OVER - James Juke Remix",
+   "artists": [
+    "LOVE LANGUAGE",
+    "Lemonade Baby",
+    "Gilligan Moss",
+    "James Juke"
+   ],
+   "duration_s": 393,
+   "album_id": "3yA90E2j6JmycPHjRmUuGc",
+   "release_date": "2026-04-03",
+   "label": "℗ 2026 LOVE LANGUAGE under exclusive license to Pack Records, Inc. & Create Music Group",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:28:23Z"
+  },
+  {
+   "id": "67qRozKjwMvXUMNaVvWQmU",
+   "title": "Swimming Places - Purple Disco Machine Re-Work",
+   "artists": [
+    "Julien Jabre",
+    "Purple Disco Machine"
+   ],
+   "duration_s": 382,
+   "album_id": "1xaT9OnvT7W7T4lf5cPDP7",
+   "release_date": "2026-02-20",
+   "label": "℗ 2026 Defected Records Limited",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:28:37Z"
+  },
+  {
+   "id": "2GcRQo1iIfDGvg4FBgsrU6",
+   "title": "Back to the Old School",
+   "artists": [
+    "Dam Swindle",
+    "DJ Minx"
+   ],
+   "duration_s": 371,
+   "album_id": "4zqG45IJIbuMfAu4p2TILM",
+   "release_date": "2026-05-08",
+   "label": "℗ 2026 Heist Recordings",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:30:59Z"
+  },
+  {
+   "id": "77kExLr3RKN77SYcVEZZ14",
+   "title": "A Gira (with Emanuel Satie, Maga, Sean Doron, Tim Engelhardt & Scenarios) - Remix",
+   "artists": [
+    "unfazed",
+    "Emanuel Satie",
+    "Maga",
+    "Sean Doron",
+    "Scenarios",
+    "Tim Engelhardt"
+   ],
+   "duration_s": 175,
+   "album_id": "33ryXYhRDCEqDH86X8CRx8",
+   "release_date": "2026-05-15",
+   "label": "℗ Spinnin' Deep, ℗ 2026 Spinnin' Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:31:13Z"
+  },
+  {
+   "id": "7DxrTNmUprBMQ0RV45xreb",
+   "title": "Verano En NY",
+   "artists": [
+    "Toman"
+   ],
+   "duration_s": 246,
+   "album_id": "6lwdsDlonNio6vDG42eUZu",
+   "release_date": "2025-06-27",
+   "label": "℗ 2025 Solid Grooves Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:32:18Z"
+  },
+  {
+   "id": "4ZWyIlQo4Za4kophcOoI4i",
+   "title": "In Love With You - Remastered 2023",
+   "artists": [
+    "The Paradise",
+    "Alan Braxe",
+    "Romuald"
+   ],
+   "duration_s": 255,
+   "album_id": "0TeXdrfFO67UgPpj1mMUAM",
+   "release_date": "2023-03-31",
+   "label": "℗ 2023 Vulture under exclusive license to Smugglers Way",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:33:58Z"
+  },
+  {
+   "id": "0EhbgzF5x4krWOTRXMsXO5",
+   "title": "So Good (feat. Kuuda) - Francis Mercier Remix",
+   "artists": [
+    "Francis Mercier",
+    "CAMELPHAT",
+    "Josh Gigante",
+    "Kuuda"
+   ],
+   "duration_s": 172,
+   "album_id": "74sYEsLEieB3FhNwAnsTkN",
+   "release_date": "2026-09-25",
+   "label": "℗ 2026 When Stars Align",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:34:26Z"
+  },
+  {
+   "id": "28JJCpmvuGEmtKKrOEnCpo",
+   "title": "I Got A Story From... - Edd's Eddit",
+   "artists": [
+    "Edd",
+    "King Wizard"
+   ],
+   "duration_s": 192,
+   "album_id": "135lRYt0qFen4ttAh03cPe",
+   "release_date": "2026-09-25",
+   "label": "℗ 2026 Helix Records, a division of Payday Records, Inc.",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:35:03Z"
+  },
+  {
+   "id": "6O23Yf2GSRMunBn3j1eQCJ",
+   "title": "Dance Dance Dance!",
+   "artists": [
+    "Barry Can't Swim"
+   ],
+   "duration_s": 218,
+   "album_id": "6MpeEDPVX7DiLigR6rVS2r",
+   "release_date": "2026-07-24",
+   "label": "℗ Earths Only Paradise under exclusive license to Atlantic Records UK., ℗ 2026 BCS",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:35:21Z"
+  },
+  {
+   "id": "09kvrg8hjr8G71mhIVARfu",
+   "title": "Friction",
+   "artists": [
+    "Riordan",
+    "Locky"
+   ],
+   "duration_s": 194,
+   "album_id": "7gfLe1HQHQrqtWjEDw8MYB",
+   "release_date": "2026-08-28",
+   "label": "℗ 2026 Darkroom Records",
+   "label_source": "Spotify album page, phonographic copyright line",
+   "added_at": "2026-11-15T00:36:33Z"
+  }
+ ]
+}

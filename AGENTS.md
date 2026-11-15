@@ -1,7 +1,8 @@
 # Working in music-watcher
 
 This repo is Krish's Music Brain: `trackcard` (src/) measures audio locally, and `taste/` holds what he and Calvin like,
-including the playlist knowledge graph (`taste/graph/`, start with `GENERATION.md`).
+including the playlist knowledge graph (`taste/graph/`, start with `GENERATION.md`). Calvin's own brain, built from Calvin's
+playlist, is `taste/calvin/` (see "Calvin's Music Brain" below).
 
 `NOW.md` says where it stands. It runs on the worker server (`trackcard` and the Music Inspo watcher), and the fleet's record of that move is ai-harness `state/vps/MIGRATION-2026-11-14.md`.
 
@@ -46,6 +47,22 @@ a metadata source (Spotify, Discogs, label page), or inferred by Claude. Inferre
 - Taken back? Set `"withdrawn": true` on the row; never delete it. Run `trackcard brain check` after any edit.
 - Weekly: `trackcard brain propose` (at most 3, frozen once proposed). Krish runs `trackcard brain accept|reject <id>`.
 - After any change to evidence, claims or the graph: `trackcard brain render`.
+
+## Calvin's Music Brain (taste/calvin/)
+
+Calvin has a brain of Calvin's own, separate from Krish's: `taste/calvin/` (start with its `README.md`). It is built from
+Calvin's Spotify playlist "Fall Bangers" (`taste/calvin/graph/`) and Calvin's own words.
+
+- Calvin's words still go in the one shared log, `taste/brain/evidence.jsonl`, written as above with `"who": "calvin"`.
+  Calvin's brain counts only those rows; Krish's brain counts both voices, as it always has. Never copy a row into a second log.
+- The vocabulary is the shared `taste/brain/vocab.json`. Calvin's claims, rejections and `taste/calvin/APPROVED.md` belong
+  to Calvin's brain alone.
+- Calvin accepts or rejects Calvin's claims. Whoever runs the command records Calvin's decision; never decide in Calvin's
+  place, and never let a decision in one brain stand in for the other.
+- Every brain command takes `--taste taste/calvin`: `trackcard brain check|propose|render --taste taste/calvin`,
+  `trackcard brain accept|reject <id> --taste taste/calvin`. Run Calvin's weekly `propose` alongside Krish's.
+- Rebuild Calvin's graph with `python taste/graph/build_graph.py <cards dir> --graph taste/calvin/graph`, then render
+  Calvin's brain.
 
 ## The worker: use it by default
 

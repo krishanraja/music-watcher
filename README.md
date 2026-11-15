@@ -160,3 +160,7 @@ trackcard brain accept sound_design.growl_bass
 trackcard brain reject vocal.vocal_chops --why "only in moderation"
 trackcard brain render              # rewrite APPROVED.md and PATTERNS.md
 ```
+
+Calvin has a separate brain in `taste/calvin/` ([`taste/calvin/README.md`](taste/calvin/README.md)): the graph of
+Calvin's Spotify playlist "Fall Bangers", Calvin's own claims and Calvin's own `APPROVED.md`. It reads the same vocabulary and
+evidence log but counts only Calvin's words, and Calvin decides its claims. Every brain command takes `--taste taste/calvin`.

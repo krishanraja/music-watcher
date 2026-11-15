@@ -1,0 +1,13 @@
+{
+  "about": "Calvin's Music Brain. Thresholds match Krish's brain (taste/brain/policy.json); tune here, not in code. Words come from the one shared evidence log and only Calvin's count; the vocabulary is the shared one; Calvin accepts or rejects the claims. Paths are relative to this folder.",
+  "voices": ["calvin"],
+  "decides": "Calvin",
+  "vocab": "../../brain/vocab.json",
+  "evidence": "../../brain/evidence.jsonl",
+  "words_min_strength": 2,
+  "words_min_sources": 1,
+  "measured_min_tracks": 10,
+  "measured_min_share": 0.6,
+  "proposals_per_week": 3,
+  "both_ways_min_share": 0.25
+}
