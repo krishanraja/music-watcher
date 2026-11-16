@@ -29,3 +29,12 @@ tests/fixtures/*
 # ...and the cards of tracks Krish or Calvin pointed at in a session (taste/cards/README.md)
 !taste/cards/*.trackcard.md
 !taste/cards/*.trackcard.json
+# ...and the production engine's cards (engine/README.md)
+!engine/productions/cards/*.trackcard.md
+!engine/productions/cards/*.trackcard.json
+!engine/references/cards/*.trackcard.md
+!engine/references/cards/*.trackcard.json
+
+# The engine's worker config and saved Drive listings hold folder ids and emails: never in this public repository
+engine/config.json
+*.listing.json

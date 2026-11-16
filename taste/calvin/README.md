@@ -21,8 +21,10 @@ playlist "Fall Bangers" (https://open.spotify.com/playlist/1inChKFsQRxfnGMBagrEi
   (rules in `AGENTS.md`). Calvin's brain counts only the rows where `"who": "calvin"`. Krish's brain counts both voices, as it
   did before this brain existed. A row is never copied into a second log, and withdrawing a row withdraws it from both brains.
 - **Vocabulary.** The shared `taste/brain/vocab.json`; it grows only by a change Krish merges.
-- **Measurements.** Calvin's own playlist graph, `graph/tracks.csv`. Krish's playlist does not count here, and this one does
-  not count in Krish's brain.
+- **Measurements.** Calvin's own playlist graph, `graph/tracks.csv`, plus the tracks Calvin drops into Drive's Music
+  Production › Inspiration folder (`engine/references/calvin/tracks.csv`, measured by the production engine and read through
+  `measured_extra` in `brain/policy.json`; a track already in the playlist counts once). Krish's playlist and drops do not
+  count here, and Calvin's do not count in Krish's brain.
 - **Decisions.** Calvin accepts or rejects Calvin's claims. Whoever runs the command records Calvin's decision; nobody decides
   in Calvin's place. A rule accepted in one brain is not a rule in the other: Krish accepted "chopped vocals" on Calvin's
   words, and here the same words make a separate claim that waits for Calvin.

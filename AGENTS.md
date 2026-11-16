@@ -4,7 +4,7 @@ This repo is Krish's Music Brain: `trackcard` (src/) measures audio locally, and
 including the playlist knowledge graph (`taste/graph/`, start with `GENERATION.md`). Calvin's own brain, built from Calvin's
 playlist, is `taste/calvin/` (see "Calvin's Music Brain" below).
 
-`NOW.md` says where it stands. It runs on the worker server (`trackcard` and the Music Inspo watcher), and the fleet's record of that move is ai-harness `state/vps/MIGRATION-2026-11-14.md`.
+`NOW.md` says where it stands. It runs on the worker server (`trackcard`, the production engine and, until the engine's timer replaces it, the Music Inspo watcher), and the fleet's record of that move is ai-harness `state/vps/MIGRATION-2026-11-14.md`.
 
 <!-- north-star:start -->
 ## North Star: read it first, every session
@@ -42,7 +42,9 @@ a metadata source (Spotify, Discogs, label page), or inferred by Claude. Inferre
   a pattern, and decides nothing on its own.
 - When Krish or Calvin says something about a track in a session, append it to `taste/brain/evidence.jsonl`: their words whole,
   where and when said, and signals from `taste/brain/vocab.json` whose quotes appear character for character in the words.
-  Never write measured evidence there; it is derived from `taste/graph/tracks.csv`. A word that is not in the vocabulary goes
+  Never write measured evidence there; it is derived from `taste/graph/tracks.csv` and, through `measured_extra` in
+  `brain/policy.json`, from the tracks this person dropped into Drive (`engine/references/krish/tracks.csv`, written by the
+  production engine; a track already in the playlist counts once). A word that is not in the vocabulary goes
   in as `other/<word>`; the vocabulary grows only by a change Krish merges.
 - Taken back? Set `"withdrawn": true` on the row; never delete it. Run `trackcard brain check` after any edit.
 - Weekly: `trackcard brain propose` (at most 3, frozen once proposed). Krish runs `trackcard brain accept|reject <id>`.
@@ -65,6 +67,28 @@ Calvin's Spotify playlist "Fall Bangers" (`taste/calvin/graph/`) and Calvin's ow
   `trackcard brain accept|reject <id> --taste taste/calvin`. Run Calvin's weekly `propose` alongside Krish's.
 - Rebuild Calvin's graph with `python taste/graph/build_graph.py <cards dir> --graph taste/calvin/graph`, then render
   Calvin's brain.
+- Calvin's drops into Drive's Inspiration folder count in Calvin's measured layer (`engine/references/calvin/tracks.csv`),
+  next to the playlist; Krish's drops never count here.
+
+## The production engine (engine/)
+
+Separate from the brains: the brains hold what Krish and Calvin like; the engine collects what they make and drop, and
+helps produce it. Start with [`engine/README.md`](engine/README.md); code in `src/trackcard/engine/`.
+
+- **In:** Drive › Music Production (bounces; `Archive/` too), its `Inspiration/` folder (`.txt` Spotify links) and the sheet
+  "Calvin and Krish - Spotify tracks". **Out:** one brief per project (`engine/productions/<slug>/BRIEF.md` + `brief.json`),
+  `engine/STATUS.md`, references (`engine/references/`), and their words in the shared evidence log, all through one rolling
+  PR (`engine/updates`) that Krish merges.
+- **The repository is public and the Drive files are link-shared.** Never commit, paste into a PR, note or chat log a Drive
+  file id, folder id, email address or private SoundCloud link: an id is a working download link to an unreleased bounce.
+  The engine's privacy gate refuses such a commit; do the same by hand. If one ever reaches GitHub, restrict that file's
+  sharing at once (it cannot be unpublished).
+- New track or new version is read from the bounce's name and upload date. When the engine asks (engine/STATUS.md), answer
+  in `engine/productions/aliases.json`, keyed by the version id it gives; never rename a measured card.
+- An MCP adapter (Splice, Ableton, Suno) reads `brief.json` and re-reads each brain's `APPROVED.md` before acting; it never
+  applies one brain's rules as the other's, and never downloads a Splice sound (it spends a credit) or makes a public link
+  without that session's explicit yes.
+- `taste/references.json` is the frozen 2026-11-06 hand read of the sheet; new references live in `engine/references/`.
 
 ## The worker: use it by default
 
@@ -81,7 +105,11 @@ installed there with the `stems` (Demucs, CPU) and `loudness` extras, so use it 
   there. Say so; don't try.
 - **Audio on the worker lives in `~/media`**, outside every repository (never commit audio). Stems on CPU take
   about 3 to 4.5 minutes for a 4 to 5 minute track; the Demucs weights are already downloaded.
-- **New drops in Drive › Inspiration › Music Inspo are measured automatically** on the worker every 15 minutes (`taste/inspo/watch.py`, how it works in `taste/inspo/README.md`); the cards arrive as one rolling PR, `inspo/new-drops`. Don't measure a Music Inspo drop by hand unless that PR says it was left for home.
+- **Drops and bounces in Drive › Music Production are measured automatically** by the production engine
+  (`engine/README.md`) once its timer runs on the worker; the results arrive as one rolling PR, `engine/updates`. Don't
+  measure a drop or a bounce by hand unless engine/STATUS.md says it was left for home. Krish ruled on 2026-11-16 that the
+  engine replaces the Music Inspo watcher (`taste/inspo/watch.py`): its timer is disabled in the same step that enables
+  the engine's, and its cards in `taste/inspo/` stay.
 - **The worker is a datacenter machine, so YouTube refuses it too.** The "Getting audio" rules above apply to it as
   they do to a cloud session: SoundCloud first, the rest to a home computer, and say which tracks were left for home.
 - Never hand-copy a key onto the worker (its secrets live in a root-only store), and never copy `~/.codex/auth.json`.
