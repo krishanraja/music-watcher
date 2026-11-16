@@ -1,3 +1,6 @@
+> **History.** The original build plan for trackcard (2026-11). What the repository is now: [`README.md`](README.md); where
+> it stands: [`NOW.md`](NOW.md); where it is going: [`docs/ROADMAP.md`](docs/ROADMAP.md).
+
 # trackcard: build plan
 
 ## Context

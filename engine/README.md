@@ -5,6 +5,28 @@ Krish and Calvin make tracks together. The **brains** (`taste/`, `taste/calvin/`
 project that people, Claude, a later UI and the Splice, Ableton and Suno MCPs can work from. It reads the brains' approved
 rules; it never decides one. Code: `src/trackcard/engine/`. Asked for by Krish on 2026-11-16.
 
+## What it is for
+
+- **One place per track.** Every bounce of a project, in order, each with its card, and one brief that says where the track
+  stands and what changed since the last bounce, so neither of you has to remember which file is newest or what moved.
+- **Collaboration without bookkeeping.** Calvin uploads `Closure 11.13 .wav`, Krish uploads `Closure 11.20 drums.wav`:
+  the engine knows they are versions of one track, who bounced which, and asks only when a name is ambiguous.
+- **Inspiration that sticks.** A Spotify link dropped in Inspiration becomes a measured reference that counts in the
+  dropper's brain; a reason written on the sheet becomes evidence under the voice that said it.
+- **A brief tools can act on.** `brief.json` is the handoff to Splice (searches per gap), Ableton (tempo and locators),
+  Suno (style hints) and a later UI, with the approved rules of each brain attached as pointers.
+
+## Capabilities and limits
+
+| It can | It cannot (yet) |
+|---|---|
+| Classify bounces by name and upload date, including dates, notes, `vN`, Drive copy marks, Archive, re-uploads, format twins, files replaced in place | Read a name it cannot parse into a title: those wait as questions in STATUS |
+| Measure each version with stems, diff it against the previous one, and match gaps across versions by rule, layer and bars | Compare stem-based changes when one version was measured without stems (it says "not comparable") |
+| Turn sheet rows and text drops into evidence under the right voice, with auto tags to confirm | Decide whether words are someone's own when they read as reported speech: it asks |
+| Measure references from SoundCloud within 6 s of Spotify's length, reusing any existing card | Fetch from YouTube on the worker: those are left for a home computer |
+| Publish one PR, rebuilt from main each run, with a privacy gate | Run without the worker, or see Drive files its login cannot see |
+| Shape `brief.json` for Splice, Ableton and Suno | Call those tools: that is Phase 3 of [`docs/ROADMAP.md`](../docs/ROADMAP.md) |
+
 ## What goes in, what comes out
 
 | In (Drive, read-only) | Out (this folder, through one PR) |

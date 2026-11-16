@@ -1,4 +1,79 @@
-# trackcard
+# music-watcher
+
+Krish and Calvin make electronic music together. This repository gives Claude what it needs to help them do that well:
+**ears** (trackcard measures a bounce), **taste** (two Music Brains, one each, built only from evidence they approve) and a
+**production engine** (it collects what they make and what inspires them, and keeps one working brief per track). Claude
+can't hear; this is how it listens, remembers what they like, and keeps track of where each production stands.
+
+Where it stands right now is in [`NOW.md`](NOW.md); where it is going is in [`docs/ROADMAP.md`](docs/ROADMAP.md). How to
+work in it (rules for sessions, provenance, privacy) is in [`AGENTS.md`](AGENTS.md). Its North Star is not set yet
+([`docs/NORTH_STAR.md`](docs/NORTH_STAR.md)); only Krish sets it.
+
+## What's here
+
+| Part | What it does | Start with |
+|---|---|---|
+| **trackcard** (`src/trackcard/`) | Reads a WAV bounce locally and writes a card: tempo, key, a bar-numbered section map, stems per section, frequency balance, loudness, drops and layer changes, and a Splice brief of sounds that would fill measured gaps. CLI and MCP server. | [trackcard](#trackcard-claudes-ears) below |
+| **Krish's Music Brain** (`taste/`) | Turns what Krish and Calvin say about tracks, plus measurements of Krish's 346-track playlist, into taste rules Krish approves one at a time. Only `taste/APPROVED.md` holds rules. | [`taste/graph/GENERATION.md`](taste/graph/GENERATION.md), [`taste/APPROVED.md`](taste/APPROVED.md) |
+| **Calvin's Music Brain** (`taste/calvin/`) | The same machinery for Calvin: his 30-track playlist "Fall Bangers", his words only, his decisions only. | [`taste/calvin/README.md`](taste/calvin/README.md) |
+| **The production engine** (`engine/`, `src/trackcard/engine/`) | Reads Drive's Music Production folder: decides whether each bounce is a new track or a new version, measures it, says what changed, and writes one brief per project; turns Inspiration drops and the reasons sheet into references and evidence for the right brain. Publishes through one rolling PR. | [`engine/README.md`](engine/README.md) |
+| **Shared taste notes** (`taste/PREFERENCES.md`) | A written synthesis of what both of them reach for, for an AI to read next to a card. Evidence, not rules. | [`taste/PREFERENCES.md`](taste/PREFERENCES.md) |
+| **Music Inspo** (`taste/inspo/`) | The first drop watcher. Replaced by the engine (Krish's ruling, 2026-11-16); its cards stay. | [`taste/inspo/README.md`](taste/inspo/README.md) |
+
+## How it fits together
+
+```text
+ Drive: Music Production            Drive: Inspiration (+ the reasons sheet)        a session: "I love the bass on this"
+          |                                       |                                                 |
+          v                                       v                                                 v
+   production engine  --measures with-->  trackcard  <--measures--  references         taste/brain/evidence.jsonl
+          |                                                              |                    (their words, one shared log)
+          |                                                              v                                 |
+          |                                              engine/references/<who>/tracks.csv               |
+          |                                                              |                                 |
+          |                                                              v                                 v
+          |                                      Krish's brain (taste/)          Calvin's brain (taste/calvin/)
+          |                                      patterns -> proposals -> Krish accepts   ... -> Calvin accepts
+          |                                                  |                                 |
+          |                                                  v                                 v
+          +------ reads approved rules only ------  taste/APPROVED.md            taste/calvin/APPROVED.md
+          v
+ engine/productions/<project>/BRIEF.md + brief.json   -->  people, Claude, and later Splice / Ableton / Suno and a UI
+```
+
+The brains decide what counts as their taste (only through an accepted claim); the engine never decides one. The engine
+reads the brains; the brains read the engine's measurements of each person's own drops.
+
+## Use cases
+
+| You want to | Do this | You get |
+|---|---|---|
+| Know what a new bounce is doing | Put it in Drive › Music Production, e.g. `Closure 11.20.wav` | On the engine's next run: a card, and `engine/productions/closure/BRIEF.md` updated with what changed since the previous version |
+| Hear Claude talk about a moment | "Bars 33-40 of the latest Closure feel empty" in a session | Claude reads the brief and card for those bars (sections, stems, bands) and answers from the measurement |
+| Find sounds for a gap | Ask Claude to work through the brief's "Gaps to fill" | Splice searches at the right tempo and key, shaped for the Splice MCP; nothing downloaded without your yes |
+| Share a track that inspires you | Drop a `.txt` with its Spotify link in Inspiration (add a sentence if you like) | A measured reference; it counts in *your* brain; your sentence is filed under your name |
+| Say why you like a track | Add a row to the sheet: `Krish (20 Nov 2026): the build before the drop` | The words in the shared evidence log under the right voice, tagged and listed in the engine's PR to confirm |
+| See what your taste is turning into | `trackcard brain propose` weekly, then `accept` or `reject` | At most 3 proposals a week, frozen once proposed; accepted ones become rules in `APPROVED.md` |
+| Check a single bounce by hand | `trackcard analyze bounce.wav --print` (or the MCP tool in Claude Desktop) | The card, locally, in a few minutes |
+| Tell the engine it got a file wrong | Add a line to `engine/productions/aliases.json` (STATUS gives you the line) | The version moves, gets a date, a note, or is ignored; cards never move |
+
+## Capabilities and limits, in short
+
+- **Measures** tempo (to 0.01 BPM on a steady grid), key with a second opinion, bar-addressable sections, drops and their
+  build-ups (with stems), four-stem activity, five-band balance and LUFS. It does not *hear*: section labels are cluster
+  numbers, keys can lean to a neighbour, and the vocal stem picks up vocal-like synths. Details: the trackcard reference
+  below, "Limits".
+- **Tracks productions** from file names and upload dates, asks instead of guessing when a name is ambiguous, and keeps
+  every version's card. It needs the worker to run, and it can only read what the worker's Drive login can see.
+- **Learns taste** only from their own words and their own playlists and drops, and only as fast as they accept claims.
+  Auto-tagged words are my read (Claude's) until confirmed.
+- **Keeps private things private** in a public repository: no audio, no Drive ids or links, no emails, ever; a gate blocks
+  them before every engine commit.
+- **Does not yet** act in Splice, Ableton or Suno, or have a UI: the briefs are shaped for them ([`docs/ROADMAP.md`](docs/ROADMAP.md)).
+
+---
+
+## trackcard: Claude's ears
 
 Claude can't hear. trackcard listens for it.
 
@@ -6,7 +81,7 @@ Claude can't hear. trackcard listens for it.
 
 Everything runs locally. No uploads, no API keys. The only network access is the one-time download of the Demucs model weights (about 80 MB) on first use.
 
-## Install
+### Install
 
 Python 3.11 or newer. A CPU is enough; a CUDA or Apple Silicon GPU makes stem separation faster.
 
@@ -30,7 +105,7 @@ Extras:
 
 allin1 is best-effort. It needs `madmom` (install it from GitHub: `pip install git+https://github.com/CPJKU/madmom`) and NATTEN 0.17.x built for your exact PyTorch version, which is often hard to install, especially on CPU. If `import allin1` fails for any reason, trackcard falls back and names the reason in the card.
 
-## Use
+### Use
 
 ```bash
 trackcard analyze path/to/bounce.wav            # writes path/to/bounce.trackcard.md
@@ -50,7 +125,7 @@ Accepted files: `.wav`, `.wave`, `.aif`, `.aiff`, `.flac`, at least 5 seconds lo
 
 **Bounce tip.** Export from bar 1 of the arrangement. When a file starts with sound on a beat, trackcard treats that beat as bar 1, so its bar numbers match the DAW's.
 
-## What's in the card
+### What's in the card
 
 1. **Basics.** Duration; BPM plus the likely whole-number project tempo, with a confidence note (or your value, if you gave one); 4/4 (assumed); how bar 1 was chosen; key with major/minor and its Camelot code, with a confidence level and the runner-up key; when trackcard is unsure, a second likely key and why; harmonically compatible keys (Camelot neighbours and relative key).
 2. **Section map.** One row per section: label, bar range, time range, length, and energy (the section's RMS level against the loudest section: peak, mid or low). The method line says whether labels came from allin1 or the Laplacian fallback. Below it, **Drops and layer changes**: every drop (with the main one marked) and, bar by bar, every layer that enters, leaves, fills out or pulls back. Drops are often staged (bassline or kick first, hats a few bars later), and the card says so. The section map gets a boundary at each drop.
@@ -75,7 +150,7 @@ The brief comes from fixed rules, applied per section, at most three per section
 
 Layer types are drawn from: drums, percussion, bass, guitar, keys, strings, vocals, chords, leads, pads, brass-and-woodwinds, synth, fx. The current rules use drums, percussion, bass, chords, pads, fx and vocals.
 
-## Use it with Claude Desktop (MCP)
+### Use it with Claude Desktop (MCP)
 
 `trackcard mcp` runs a small MCP server on stdio with one tool, `analyze_track`. Its arguments: `path` (required, absolute path to the WAV), `stems` (default true), `sections` (`auto`, `allin1` or `laplacian`), `bpm` and `key` (optional, the producer's own values, same forms as the CLI), `include_json` (default false) and `save` (default true: also writes the `.trackcard.md` next to the WAV). It returns the card as text.
 
@@ -94,7 +169,7 @@ Add it to `claude_desktop_config.json`, using the full path to the `trackcard` e
 
 Stem separation on a CPU takes minutes. If Claude Desktop gives up waiting, ask it to call `analyze_track` with `"stems": false`, or run `trackcard analyze` in a terminal and paste the card.
 
-## How it works
+### How it works
 
 | what | method | fallback |
 |---|---|---|
@@ -108,7 +183,7 @@ Stem separation on a CPU takes minutes. If Claude Desktop gives up waiting, ask 
 | loudness | pyloudnorm integrated LUFS | RMS dBFS |
 | drops and layer changes | Per bar, the level of bass, vocals, other, and the drums stem split into kick (<150 Hz) and tops (>5 kHz). A layer changing by 6 dB or more against its previous 4 bars, held for 2 bars, is a moment (a one-bar pre-drop cut does not count). A drop is bass or kick jumping to its full level after 4 bars well below it (10 dB on average); layers rising in the next 16 bars join it (a second bass/kick rise within 4 bars is the same drop). Each drop gets a run-up: the cut (where the low end went out and stayed out) and the build (the earliest layer change in the 16 bars before the cut). The main drop is the last drop with a run-up before the final 15% of the track, an arrangement convention: staged drops are often mixed to the same level, so loudness can't tell them apart. | needs stems; with `--no-stems` the block says it is unavailable |
 
-## Limits (read these)
+### Limits (read these)
 
 - trackcard measures; it does not hear. Labels from the fallback segmenter are cluster numbers, not musical functions. Energy levels hint at where the drops are, but that is an inference.
 - 4/4 is assumed. Tempo changes within a track are not modelled; one BPM is reported.
@@ -119,7 +194,7 @@ Stem separation on a CPU takes minutes. If Claude Desktop gives up waiting, ask 
 - Bar numbers depend on the bar-1 rule above. If the bounce starts mid-bar or with a pickup, numbers can be off by a beat or two; the card warns when its two downbeat signals disagree.
 - The Splice brief's tags are candidates to try, not a fixed vocabulary.
 
-## Tests
+### Tests
 
 ```bash
 pip install -e ".[stems,loudness,dev]"
@@ -137,37 +212,7 @@ To check trackcard against your ear, add entries to `taste/ear-checks.json` (com
 
 `pytest -m slow` then asserts the BPM within 0.1, that your key is the main or alternative key, and that a peak-energy section starts within one bar of each drop time. You can also list moments: `"events": {"3:04": "main drop", "3:20": "tops", "2:15": "cut", "3:37": "build"}`. A layer name means that layer must rise within one bar; "cut" and "drop" match within one bar; "build" matches within four, because where a build starts is fuzzy. All misses are reported together.
 
-## Taste profile
-
-`taste/` holds working knowledge of what Krish and Calvin are reaching for, built from the Spotify tracks they share and their comments: [`taste/PREFERENCES.md`](taste/PREFERENCES.md) (the synthesis, written for an AI to read next to a track card) and [`taste/references.json`](taste/references.json) (every track, link and comment). It is not used by the code.
 
 ## Licence and credits
 
 MIT. See `LICENSE`, and `NOTICE` for attributions (Stem MCP's MCP server skeleton and Demucs approach, methods reimplemented from MixMind, Demucs, allin1, librosa, pyloudnorm).
-
-## The Music Brain
-
-`taste/brain/` turns what Krish and Calvin say about tracks, plus trackcard's measurements of Krish's playlist, into
-taste rules he approves one by one. Three layers stay apart: evidence (`evidence.jsonl`, their words, tagged from the
-fixed vocabulary in `vocab.json`), patterns (recounted from live evidence on every run, view in `PATTERNS.md`) and
-claims (`claims.jsonl`; at most 3 proposals a week, frozen once proposed). Accepted claims render to `taste/APPROVED.md`,
-the only file a generator should treat as rules.
-
-```bash
-trackcard brain check               # evidence valid? (quotes must match the words exactly)
-trackcard brain propose             # this week's proposals
-trackcard brain accept sound_design.growl_bass
-trackcard brain reject vocal.vocal_chops --why "only in moderation"
-trackcard brain render              # rewrite APPROVED.md and PATTERNS.md
-```
-
-Calvin has a separate brain in `taste/calvin/` ([`taste/calvin/README.md`](taste/calvin/README.md)): the graph of
-Calvin's Spotify playlist "Fall Bangers", Calvin's own claims and Calvin's own `APPROVED.md`. It reads the same vocabulary and
-evidence log but counts only Calvin's words, and Calvin decides its claims. Every brain command takes `--taste taste/calvin`.
-
-## The production engine
-
-`engine/` is separate from the brains: it reads Drive's Music Production folder (bounces and an Inspiration folder of
-Spotify links, plus the shared reasons sheet), decides whether each bounce is a new track or a new version, measures it
-with trackcard, and keeps one brief per project for people, Claude and the coming Splice, Ableton and Suno MCPs. It runs
-on the worker (`trackcard engine run --publish`). See [`engine/README.md`](engine/README.md).
