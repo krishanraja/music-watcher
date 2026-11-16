@@ -1,0 +1,29 @@
+name: Checks
+# On pull requests that touch the brains, the engine or the code: both brains' evidence must check clean, and the fast
+# test suite must pass. The engine's own PR is checked here too, so nothing it writes reaches main unchecked.
+on:
+  pull_request:
+    paths:
+      - "taste/**"
+      - "engine/**"
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Install (the runner's Python 3, in a venv)
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install -q -e ".[dev,loudness]"
+          echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
+      - name: Brain check (Krish's and Calvin's)
+        run: |
+          trackcard brain check
+          trackcard brain check --taste taste/calvin
+      - name: Fast tests
+        run: pytest -m "not slow" -q

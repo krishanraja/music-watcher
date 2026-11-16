@@ -420,6 +420,7 @@ class Engine:
         plan = classify(listing, old, aliases)
         items = {it.key: it for it in listing.items if it.kind == "audio"}
         res.measured = self.measure_queue(plan.registry, items, aliases, publish)
+        self.measured_now = res.measured
         extra, touched_words, notes = [], [], {}
         if words is not None:
             touched_words, extra, notes = words(self, listing)

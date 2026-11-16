@@ -380,7 +380,8 @@ def status_md(registry: dict, listing_counts: dict, extra: list[str] | None = No
         vid, archived = latest(vs)
         cnt = lambda s: sum(1 for v in vs.values() if v["status"] == s)
         lat = f"{vs[vid]['date']}{' (archived)' if archived else ''}" if vid else "not measured yet"
-        L.append(f"| [{p['title']}](productions/{slug}/BRIEF.md) | {len(vs)} | {lat} | {cnt('measured')} | {cnt('queued')} | {cnt('gave_up')} |")
+        name = f"[{p['title']}](productions/{slug}/BRIEF.md)" if vid else p["title"]
+        L.append(f"| {name} | {len(vs)} | {lat} | {cnt('measured')} | {cnt('queued')} | {cnt('gave_up')} |")
     L += ["", "## Waiting for a person", ""]
     asks = registry.get("questions") or {}
     if not asks and not extra:

@@ -164,3 +164,10 @@ trackcard brain render              # rewrite APPROVED.md and PATTERNS.md
 Calvin has a separate brain in `taste/calvin/` ([`taste/calvin/README.md`](taste/calvin/README.md)): the graph of
 Calvin's Spotify playlist "Fall Bangers", Calvin's own claims and Calvin's own `APPROVED.md`. It reads the same vocabulary and
 evidence log but counts only Calvin's words, and Calvin decides its claims. Every brain command takes `--taste taste/calvin`.
+
+## The production engine
+
+`engine/` is separate from the brains: it reads Drive's Music Production folder (bounces and an Inspiration folder of
+Spotify links, plus the shared reasons sheet), decides whether each bounce is a new track or a new version, measures it
+with trackcard, and keeps one brief per project for people, Claude and the coming Splice, Ableton and Suno MCPs. It runs
+on the worker (`trackcard engine run --publish`). See [`engine/README.md`](engine/README.md).

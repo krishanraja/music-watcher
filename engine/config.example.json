@@ -1,0 +1,16 @@
+{
+  "clone": "~/engine/music-watcher",
+  "inspiration_folders": ["<Drive folder id of Music Production > Inspiration>"],
+  "productions_folder": "<Drive folder id of Music Production>",
+  "people": {
+    "<Krish's Google account email>": "krish",
+    "<Calvin's Google account email>": "calvin"
+  },
+  "remote": "gdrive",
+  "state_dir": "~/.music-watcher/engine",
+  "work_dir": "~/media/engine",
+  "max_per_run": 3,
+  "max_download_mb": 400,
+  "budget_s": 3000,
+  "sheet_title": "Calvin and Krish - Spotify tracks"
+}

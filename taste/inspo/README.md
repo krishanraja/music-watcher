@@ -1,5 +1,9 @@
 # Music Inspo (taste/inspo)
 
+**Replaced by the production engine** (Krish's ruling, 2026-11-16): new drops go into Drive › Music Production ›
+Inspiration and are measured by `trackcard engine run` (`engine/README.md`). The cards here stay; `watch.py` stops when
+its timer is disabled on the worker.
+
 What Krish drops into the Drive folder **Ventures › Inspiration › Music Inspo**, measured by trackcard, one card per
 drop. Kept apart from `taste/graph/` on purpose: the graph is the Spotify playlist "Chillout & Ambient" and nothing
 else. Same measurement, same evidence rules, so a drop can join the graph later if Krish says so.
