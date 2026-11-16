@@ -145,5 +145,81 @@ def brain_reject(claim_id: str, why: str, taste_dir: Path) -> None:
     _decide(taste_dir, claim_id, False, why)
 
 
+@main.group()
+def engine() -> None:
+    """The production engine: Drive in, measured productions and briefs out (engine/README.md)."""
+
+
+_CONFIG = click.option("--config", "config_path", type=click.Path(path_type=Path, dir_okay=False), default=None,
+                       help="Worker config (default: $ENGINE_CONFIG or ~/.music-watcher/engine.json).")
+_LISTING = click.option("--listing", type=click.Path(path_type=Path, dir_okay=False), default=None,
+                        help="Read a saved rclone lsjson listing instead of Drive (dry runs and tests).")
+_CLONE = click.option("--clone", type=click.Path(path_type=Path, file_okay=False), default=None,
+                      help="The repository checkout to read and write (default: the config's, else here).")
+
+
+def _engine_setup(config_path, listing, clone):
+    from .engine import config as ec
+    from .engine.sources import FixtureSource, RcloneSource
+    try:
+        cfg = ec.load(config_path, clone=clone, require_drive=listing is None)
+    except ec.ConfigError as e:
+        click.echo(f"engine: {e}", err=True)
+        sys.exit(2)
+    return cfg, (FixtureSource(cfg, listing) if listing else RcloneSource(cfg))
+
+
+@engine.command("plan")
+@_CONFIG
+@_LISTING
+@_CLONE
+def engine_plan(config_path, listing, clone) -> None:
+    """Classify what is in Drive (new track, new version, question) without measuring or writing anything."""
+    from .engine.run import plan_rows
+    from .engine.sources import SourceError
+    cfg, src = _engine_setup(config_path, listing, clone)
+    try:
+        rows, lst = plan_rows(cfg, src, cfg.clone)
+    except SourceError as e:
+        click.echo(f"engine: listing stopped: {e}", err=True)
+        sys.exit(1)
+    for r in sorted(rows, key=lambda r: (r.get("project") or "~", r["date"], r["name"])):
+        extra = f" ({r['reason']})" if r.get("reason") else ""
+        v = f" v{r['version']}" if r.get("version") else ""
+        click.echo(f"{r['decision']:<12} {r.get('project') or '-':<22} {r['date']} ({r['date_source']}){v} "
+                   f"note={r['note'] or '-'} folder={r['folder']} by={r['who']} key={r['key']}  {r['name']}{extra}")
+    click.echo(f"{len(rows)} production file(s); {lst.ignored} file(s) of other kinds not read; "
+               f"{lst.other_folders} in other subfolders; {sum(1 for i in lst.items if i.kind != 'audio')} inspiration item(s)")
+
+
+@engine.command("run")
+@_CONFIG
+@_LISTING
+@_CLONE
+@click.option("--publish", is_flag=True, help="Reset the clone to main, then commit and push the rolling PR (worker).")
+def engine_run(config_path, listing, clone, publish) -> None:
+    """Measure new bounces and drops, write briefs and STATUS, and (with --publish) update the engine's PR."""
+    from .engine.run import Engine, locked
+    from .engine.words import words_stage
+    cfg, src = _engine_setup(config_path, listing, clone)
+    try:
+        with locked(cfg):
+            res = Engine(cfg, src).run(publish=publish, words=words_stage)
+    except RuntimeError as e:
+        click.echo(f"engine: {e}", err=True)
+        sys.exit(1)
+    click.echo(f"measured {len(res.measured)}; wrote {len(set(res.written))} file(s)")
+    sys.exit(res.code)
+
+
+@engine.command("resume")
+@_CONFIG
+def engine_resume(config_path) -> None:
+    """Clear a pause (after a PR was closed without merging, or someone else committed to the engine's branch)."""
+    from .engine import config as ec
+    from .engine.run import resume
+    click.echo(resume(ec.load(config_path, require_drive=False)))
+
+
 if __name__ == "__main__":
     main()
