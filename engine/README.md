@@ -66,15 +66,18 @@ Nothing calls the MCPs yet. When an adapter does:
 ## Words and references
 
 - **Sheet:** rows split by speaker (`Krish (20 Nov 2026): ... Calvin: ...`, or a `Who` column). A new voice on a track goes
-  into the shared evidence log with `"added_by": "engine"`, its words exactly as typed and where they came from. Rows dated
-  on or before 2026-11-16 were read by hand on 2026-11-06 (`taste/references.json`, now a frozen snapshot) and are never
-  written again.
+  into the shared evidence log with `"added_by": "engine"`, its words exactly as typed and where they came from. The
+  engine's first read is a baseline: everything already on the sheet then (undated, or dated on or before 2026-11-16) is
+  recorded as seen and never written; the 2026-11-06 hand read (`taste/references.json`, now a frozen snapshot) covers the
+  rows through 2026-11-06. After that, every new segment is considered. A segment with no date of its own takes the
+  row's date only when it is the cell's only speaker.
 - **Questions instead of guesses**, asked once in the PR: words with no speaker, words about the speaker in the third
   person, new words on a track that voice already has a row for (or a withdrawn row), and words holding any other link,
   an email or a phone number (never echoed).
 - **Auto tags** come from `triggers.json` (my read, not Krish's): strength 1, `"tagged_by": "engine (triggers)"`, none
   under a negation, every one listed in the PR to confirm or retag. The vocabulary still grows only by Krish's merge.
-- **Text drops:** words belong to whoever uploaded the file, and only when it holds one track link. A `krish` or `calvin`
+- **Text drops:** words belong to whoever uploaded the file, and only when it holds one track link (any other link
+  makes it a question). A `krish` or `calvin`
   word in the file name routes the reference (a drop made for the other person), never the words.
 - **References:** every Spotify track from a drop or the sheet, measured once from SoundCloud within 6 s of Spotify's
   length (else left for a home computer; YouTube refuses the worker). A card already in `taste/cards/`, `taste/inspo/cards/`

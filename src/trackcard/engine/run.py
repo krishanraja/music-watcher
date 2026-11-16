@@ -86,6 +86,10 @@ def _base_fields(it_name: str, btime: str, alias: dict) -> dict:
     return rec
 
 
+def _rev(vid: str) -> int:
+    return int(vid.split("-r")[1]) if "-r" in vid else 1
+
+
 @dataclass
 class Plan:
     registry: dict
@@ -112,7 +116,8 @@ def classify(listing: Listing, old: dict, aliases: dict) -> Plan:
         it = present.get(key)
         for vid, slug, v in entries:
             a = alias_for(vid, slug)
-            name, btime = (it.name, it.btime) if (it and v.get("md5") == it.md5) else (v["source_name"], v["btime"])
+            fresh = it and v.get("md5") == it.md5 and not (privacy.scan(it.name) or privacy.scan_contacts(Path(it.name).stem))
+            name, btime = (it.name, it.btime) if fresh else (v["source_name"], v["btime"])
             rec = {**v, **_base_fields(name, btime, a)}
             rec["present"] = bool(it and v.get("md5") == it.md5)
             if it and rec["present"]:
@@ -134,7 +139,15 @@ def classify(listing: Listing, old: dict, aliases: dict) -> Plan:
         olds = by_key.get(it.key, [])
         if any(v.get("md5") == it.md5 for _, _, v in olds):
             continue
-        vid = it.key if not olds else f"{it.key}-r{len(olds) + 1}"
+        vid = it.key if not olds else f"{it.key}-r{max(_rev(v) for v, _, _ in olds) + 1}"
+        if privacy.scan(it.name) or privacy.scan_contacts(Path(it.name).stem):
+            reg["questions"][vid] = {"source_name": "(name withheld)", "date": it.btime[:10], "candidates": [],
+                                     "reason": "the file name holds contact details or a link: rename it in Drive, "
+                                               "or ignore it in aliases.json"}
+            plan.rows.append({"name": "(name withheld)", "key": vid, "who": it.who, "folder": it.folder,
+                              "date": it.btime[:10], "date_source": "upload", "note": "", "version": None,
+                              "decision": "ask", "project": "", "reason": "name withheld"})
+            continue
         p = names.parse(it.name, it.btime)
         a = alias_for(vid, p.slug)
         rec = {**_base_fields(it.name, it.btime, a), "folder": it.folder, "present": True, "md5": it.md5,
@@ -155,14 +168,15 @@ def classify(listing: Listing, old: dict, aliases: dict) -> Plan:
                                      "candidates": list(d.candidates)}
             plan.rows.append({**row, "decision": "ask", "project": "", "reason": d.reason})
             continue
-        proj = reg["projects"].setdefault(d.project, {"title": a.get("title") or p.title or d.project, "versions": {}})
+        proj = reg["projects"].setdefault(d.project, {"title": a.get("title") or a.get("project") or p.title or d.project,
+                                                       "versions": {}})
         # the same bounce in another format: measure the lossless one, keep the other as an alternate
         twin = next((k for k, v in proj["versions"].items()
                      if (v["date"], v.get("note"), v.get("version")) == (rec["date"], rec["note"], rec["version"])
                      and v.get("status") not in ("copy_of", "alternate") and v.get("format") != rec["format"]), None)
         if twin and (proj["versions"][twin]["lossless"] or not rec["lossless"]):
             rec.update(status="alternate", alternate_of=twin)
-        elif twin and proj["versions"][twin]["status"] == "queued":
+        elif twin and rec["lossless"] and not proj["versions"][twin]["lossless"]:
             proj["versions"][twin].update(status="alternate", alternate_of=vid)
         proj["versions"][vid] = rec
         if it.md5:
@@ -193,6 +207,8 @@ class Engine:
         self.cfg, self.source, self.sh, self.measurer, self.clock = cfg, source, sh, measurer, clock
         self.state = State(cfg.state_file)
         self.root = cfg.clone
+        self.main_md5: dict[str, str] = {}  # version id -> md5, as main's registry has it
+        self.md5_of: dict[str, str] = {}
 
     # ---- helpers
     def git(self, *args: str, check: bool = True) -> subprocess.CompletedProcess:
@@ -212,16 +228,38 @@ class Engine:
         return self.root / PROD / "cards"
 
     # ---- stages
-    def card_for(self, vid: str) -> dict | None:
-        for d in (self.cards_dir, self.cfg.cache / "cards"):
-            f = d / f"{vid}.trackcard.json"
-            if f.exists():
-                return json.loads(f.read_text(encoding="utf-8"))
+    def card_for(self, vid: str, md5: str | None = None) -> dict | None:
+        """The card measured from exactly this audio: a committed card only if main's registry has the same md5 for it,
+        a cached one only if its md5 sidecar matches. A stale cache entry is removed (its audio was replaced)."""
+        if md5 is None:
+            md5 = self.md5_of.get(vid, "")
+        f = self.cards_dir / f"{vid}.trackcard.json"
+        if f.exists() and self.main_md5.get(vid) == md5:
+            return json.loads(f.read_text(encoding="utf-8"))
+        c = self.cfg.cache / "cards" / f"{vid}.trackcard.json"
+        side = c.with_suffix("").with_suffix(".md5")
+        if c.exists():
+            if side.exists() and side.read_text().strip() == md5:
+                return json.loads(c.read_text(encoding="utf-8"))
+            for ext in ("trackcard.json", "trackcard.md", "md5"):
+                (self.cfg.cache / "cards" / f"{vid}.{ext}").unlink(missing_ok=True)
+            self.state.data["tries"].pop(vid, None)
+            self.state.save()
         return None
 
-    def recover_from_branch(self, vid: str) -> None:
-        """A card measured earlier whose PR is still open: take it back from the branch if the cache lost it."""
+    def recover_from_branch(self, vid: str, md5: str) -> None:
+        """A card measured earlier whose PR is still open: take it back from the branch if the cache lost it, only when
+        the branch's registry says it was measured from this same audio."""
         cache = self.cfg.cache / "cards"
+        r = self.sh(["git", "show", f"origin/{self.cfg.branch}:{PROD}/registry.json"], self.root)
+        try:
+            reg = json.loads(r.stdout) if r.returncode == 0 else {}
+        except json.JSONDecodeError:
+            reg = {}
+        if not any(p["versions"].get(vid, {}).get("md5") == md5 for p in (reg.get("projects") or {}).values()):
+            return
+        cache.mkdir(parents=True, exist_ok=True)
+        (cache / f"{vid}.md5").write_text(md5)
         for ext in ("json", "md"):
             r = self.sh(["git", "show", f"origin/{self.cfg.branch}:{PROD}/cards/{vid}.trackcard.{ext}"], self.root)
             if r.returncode == 0 and r.stdout:
@@ -235,8 +273,9 @@ class Engine:
             for vid, v in p["versions"].items():
                 if v["status"] != "queued":
                     continue
+                self.md5_of[vid] = v.get("md5", "")
                 if publish and self.card_for(vid) is None:
-                    self.recover_from_branch(vid)
+                    self.recover_from_branch(vid, v.get("md5", ""))
                 if self.card_for(vid) is not None:
                     v["status"] = "measured"
                 elif self.state.tries(vid) >= MAX_TRIES:
@@ -272,6 +311,7 @@ class Engine:
                 if self.state.tries(vid) >= MAX_TRIES:
                     v.update(status="gave_up", why=privacy.why(why))
                 continue
+            (self.cfg.cache / "cards" / f"{vid}.md5").write_text(v.get("md5", ""))
             v["status"] = "measured"
             done.append(vid)
             self.log(f"{vid}: measured")
@@ -292,6 +332,9 @@ class Engine:
 
         for slug, p in reg["projects"].items():
             for vid, v in p["versions"].items():
+                self.md5_of[vid] = v.get("md5", "")
+                if v["status"] == "measured" and self.card_for(vid) is None:
+                    v["status"] = "queued"  # its card was measured from audio that has since been replaced
                 if v["status"] != "measured":
                     continue
                 for ext in ("json", "md"):
@@ -326,7 +369,7 @@ class Engine:
 
     # ---- publish
     def prepare_clone(self) -> None:
-        self.git("fetch", "-q", "origin")
+        self.git("fetch", "-q", "--prune", "origin")
         self.git("checkout", "-q", "-B", self.cfg.branch, f"origin/{self.cfg.base}")
         self.git("reset", "-q", "--hard", f"origin/{self.cfg.base}")
         self.git("clean", "-q", "-fd", "--", "engine", "taste")
@@ -335,11 +378,11 @@ class Engine:
         return self.sh([*self.cfg.tool("gh"), *args], self.root)
 
     def last_pr(self) -> dict | None:
-        r = self.gh("pr", "list", "--head", self.cfg.branch, "--state", "all", "--json", "number,state,mergedAt",
-                    "--limit", "10")
+        r = self.gh("pr", "list", "--head", self.cfg.branch, "--state", "all", "--json",
+                    "number,state,mergedAt,isCrossRepository", "--limit", "20")
         if r.returncode != 0:
             raise RuntimeError("gh pr list failed")
-        prs = json.loads(r.stdout or "[]")
+        prs = [p for p in json.loads(r.stdout or "[]") if not p.get("isCrossRepository")]  # never a fork's PR
         return max(prs, key=lambda p: p["number"]) if prs else None
 
     def publish(self, touched: list[str], title: str, body: str, message: str) -> int:
@@ -372,23 +415,28 @@ class Engine:
         remote = self.sh(["git", "rev-parse", "-q", "--verify", f"origin/{self.cfg.branch}"], self.root)
         remote_sha = remote.stdout.strip() if remote.returncode == 0 else ""
         if remote_sha and pr and pr["state"] == "OPEN":
-            me = self.git("config", "user.email", check=False).stdout.strip()
+            ident = self.git("var", "GIT_AUTHOR_IDENT", check=False).stdout
+            me = ident[ident.find("<") + 1:ident.find(">")] if "<" in ident else ""
             authors = set(self.git("log", f"origin/{self.cfg.base}..origin/{self.cfg.branch}", "--format=%ae").stdout.split())
-            if authors - {me}:
+            if me and authors - {me}:
                 self.state.data["paused"] = {"why": "foreign_commits", "pr": pr["number"]}
                 self.state.save()
                 self.git("reset", "-q")
                 self.log("paused: someone else committed to the engine's branch; merge or close its PR, then resume")
                 return 0
         self.git("commit", "-q", "-m", message)
-        if remote_sha and self.git("rev-parse", "HEAD^{tree}").stdout == self.git("rev-parse", f"{remote_sha}^{{tree}}").stdout:
+        same = bool(remote_sha) and \
+            self.git("rev-parse", "HEAD^{tree}").stdout == self.git("rev-parse", f"{remote_sha}^{{tree}}").stdout
+        is_open = bool(pr and pr["state"] == "OPEN")
+        if same and is_open:
             self.log("the open PR already holds this")
             return 0
-        lease = f"--force-with-lease={self.cfg.branch}:{remote_sha}"
-        if self.sh(["git", "push", "-q", lease, "origin", f"HEAD:{self.cfg.branch}"], self.root).returncode != 0:
-            self.log("push refused; retried next run")
-            return 1
-        if pr and pr["state"] == "OPEN":
+        if not same:
+            lease = f"--force-with-lease={self.cfg.branch}:{remote_sha}"
+            if self.sh(["git", "push", "-q", lease, "origin", f"HEAD:{self.cfg.branch}"], self.root).returncode != 0:
+                self.log("push refused; retried next run")
+                return 1
+        if is_open:
             r = self.gh("pr", "edit", str(pr["number"]), "--title", title, "--body", body)
         else:
             r = self.gh("pr", "create", "--base", self.cfg.base, "--head", self.cfg.branch, "--title", title, "--body", body)
@@ -416,6 +464,7 @@ class Engine:
             res.code = 1
             return res
         old = _read_json(self.root / PROD / "registry.json", {})
+        self.main_md5 = {vid: v.get("md5", "") for p in (old.get("projects") or {}).values() for vid, v in p["versions"].items()}
         aliases = _read_json(self.root / PROD / "aliases.json", {})
         plan = classify(listing, old, aliases)
         items = {it.key: it for it in listing.items if it.kind == "audio"}

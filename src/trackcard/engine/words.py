@@ -4,8 +4,9 @@ Words. The sheet ("Calvin and Krish - Spotify tracks") and text drops in Drive >
 the one shared evidence log, taste/brain/evidence.jsonl, under the voice that said them (AGENTS.md: their words whole,
 where and when said). Krish's brain counts both voices; Calvin's counts Calvin's. Rules:
 
-- Sheet segments dated on or before BASELINE_THROUGH were read by hand on 2026-11-06 (taste/references.json is that
-  read): they are recorded as seen and never written again.
+- The engine's first read of the sheet is a baseline: everything already there (undated, or dated on or before
+  BASELINE_THROUGH, the engine's start) is recorded as seen and never written. The 2026-11-06 hand read
+  (taste/references.json) covers rows through 2026-11-06. After the first read, every unseen segment is considered.
 - A new segment for a track and voice with no row yet is appended. Anything a person must judge becomes a question,
   asked once in the engine's PR: unattributed text, words about the speaker in the third person, new words on a track
   that voice already has a row for, a withdrawn row's track, and words holding any other link, an email or a phone
@@ -86,7 +87,7 @@ def segments(comment: str, row_date: str | None = None) -> tuple[list[dict], str
         if not words:
             continue
         who = m.group(1).lower()
-        when = _date(m.group(2) or "") or first
+        when = _date(m.group(2) or "") or (first if len({x.group(1).lower() for x in marks}) == 1 else None)
         if who in out:  # one speaker twice in a cell: one row
             out[who]["text"] += " " + words
         else:
@@ -137,6 +138,12 @@ def held(words: str, own_url: str = "") -> str | None:
     if any(not ms.track_id(u) or ms.track_id(u) != ms.track_id(own_url) for u in URL.findall(words)):
         return "other_link"
     if privacy.scan(words):
+        return "contact_details"
+    own = ms.track_id(own_url)
+    hits = privacy.scan_contacts(words, allow_link=lambda s: bool(own) and ms.track_id(s) == own)
+    if "link" in hits:
+        return "other_link"
+    if hits:
         return "contact_details"
     if len(words) > MAX_WORDS_CHARS:
         return "too_long"
@@ -225,14 +232,14 @@ class Words:
     def consider(self, kind: str, tid: str, who: str, when: str | None, text: str, where: str, own_url: str) -> None:
         sha = _sha(f"{tid}|{who}|{text}")
         if (kind, sha) in self.seen:
-            return
+            return True
         hold = held(text, own_url)
         existing = self.has_row(tid, who)
         if hold:
             self.note(kind, sha, "question", track=tid, who=who, why=hold)
             self.questions.append(f"{who.title()}'s words on track {tid} ({where.split(',')[0]}) hold "
                                   f"{hold.replace('_', ' ')}: a person must add them by hand.")
-        elif (THIRD.search(text) and not FIRST.search(text)) or re.search(rf"\b{who}\b", text, re.I):
+        elif (THIRD.search(text) or re.search(rf"\b{who}\b", text, re.I)) and not FIRST.search(text):
             self.note(kind, sha, "question", track=tid, who=who, why="reported_speech")
             self.questions.append(f"{who.title()}'s segment on track {tid} reads as reported speech (third person): "
                                   "add it by hand if they said it.")
@@ -243,6 +250,9 @@ class Words:
                                   f"`{existing['id']}`: a person decides whether they are a new row.")
         elif self.append(tid, who, when, text, where, sha):
             self.note(kind, sha, "appended", track=tid, who=who, id=self.new_rows[-1]["id"])
+        else:
+            return False
+        return True
 
     # ---- sheet
     def sheet(self, item: Item) -> None:
@@ -256,6 +266,7 @@ class Words:
         finally:
             f.unlink(missing_ok=True)
         title = Path(item.name).stem
+        first_read = not any(x["kind"] == "sheet" for x in self.ledger)
         for r in sheet_rows(text):
             tid = ms.track_id(r["url"])
             if not tid:
@@ -265,20 +276,20 @@ class Words:
             dates = [d for d in (_date(m.group(2) or "") for m in SPEAKER.finditer(r["comment"])) if d]
             row_date = dates[0] if dates else None
             where = f"Google Sheet '{title}', row {r['row']} comment cell (cell author not recorded), read by the production engine"
-            if r["who"] in VOICES:
+            segs, lead = segments(r["comment"], row_date)
+            if not segs and r["who"] in VOICES:  # a Who column, and no speaker labels in the cell
                 segs, lead = [{"who": r["who"], "when": row_date, "text": r["comment"].strip()}], ""
-            else:
-                segs, lead = segments(r["comment"], row_date)
             for s in segs:
                 self.add_ref(tid, s["who"], "sheet")
                 sha = _sha(f"{tid}|{s['who']}|{s['text']}")
-                if s["when"] and s["when"] <= BASELINE_THROUGH:
+                eff = s["when"] or row_date  # an undated reply in a new row is new too
+                if first_read and not (eff and eff > BASELINE_THROUGH):
                     self.note("sheet", sha, "baseline", track=tid, who=s["who"])
                     continue
                 self.consider("sheet", tid, s["who"], s["when"], s["text"], where, r["url"])
             if lead:
                 sha = _sha(f"{tid}|none|{lead}")
-                if row_date and row_date <= BASELINE_THROUGH:
+                if first_read and not (row_date and row_date > BASELINE_THROUGH):
                     self.note("sheet", sha, "baseline", track=tid, who="none")
                 elif ("sheet", sha) not in self.seen:
                     self.note("sheet", sha, "question", track=tid, who="none", why="no_speaker")
@@ -322,25 +333,30 @@ class Words:
             return
         for t in tids:
             self.add_ref(t, ref_who, "drop", drop=True)
-        self.note(kind, sha, "read", who=ref_who, tracks=tids)
-        words = URL.sub(" ", text.replace(item.name, " "))
+        settle = lambda: self.note(kind, sha, "read", who=ref_who, tracks=tids)
+        # strip only the file name and links to the drop's own track; any other link stays, and held() asks
+        own = tids[0]
+        words = URL.sub(lambda m: " " if ms.track_id(m.group(0)) == own else m.group(0), text.replace(item.name, " "))
         words = " ".join(words.split())
         if not words or who not in VOICES:
-            return
+            return settle()
         if len(tids) > 1:
             self.questions.append(f"A text drop by {who.title()} holds {len(tids)} track links and words: one link per "
                                   "file, so the words can be filed under the right track.")
-            return
+            return settle()
         when = item.btime[:10]
         where = f"Drive Music Production > Inspiration text file, uploaded by {who.title()}"
         segs, lead = segments(words, when) if SPEAKER.search(words) else ([{"who": who, "when": when, "text": words}], "")
+        done = True
         for s in segs:
             if s["who"] != who:
                 self.questions.append(f"A text drop by {who.title()} quotes {s['who'].title()}: add it by hand if they said it.")
                 continue
-            self.consider("drop", tids[0], who, s["when"], s["text"], where, ms.track_url(tids[0]))
+            done = self.consider("drop", tids[0], who, s["when"] or when, s["text"], where, ms.track_url(tids[0])) and done
         if lead and segs:
             self.questions.append(f"A text drop by {who.title()} has words before its first speaker name.")
+        if done:  # Spotify unreachable: read the drop again next run
+            settle()
 
     # ---- references
     def measure_refs(self, budget: int) -> list[dict]:
@@ -367,6 +383,10 @@ class Words:
                    "evidence": ";".join(sorted(r["id"] for r in self.evidence + self.new_rows
                                                if ms.track_id(r.get("url", "")) == tid))}
             card, where = self.find_card(tid)
+            spot = m.get("duration_s") or o.get("spotify_duration_s")
+            if card and where.startswith(str(REFS / "cards")) and spot and \
+                    abs(card["duration"] - float(spot)) > ms.LENGTH_TOLERANCE_S:
+                card, where = None, ""  # a card from the wrong recording never counts
             g = next((graphs[w][tid] for w in graphs if tid in graphs[w] and graphs[w][tid].get("measured") == "True"), None)
             if card is None and g is None and budget > 0 and tries.get(f"ref:{tid}", 0) < MAX_REF_TRIES and m:
                 budget -= 1
@@ -416,6 +436,8 @@ class Words:
                     wav.unlink(missing_ok=True)
                 if card and abs(card["duration"] - m["duration_s"]) > ms.LENGTH_TOLERANCE_S:
                     card, why = None, "no_soundcloud_match_within_6s"
+                    for ext in ("json", "md"):
+                        (self.cfg.cache / "refcards" / f"{tid}.trackcard.{ext}").unlink(missing_ok=True)
         if card is None:
             st.setdefault("why", {})[f"ref:{tid}"] = privacy.why(why)
             self.e.state.save()
@@ -519,8 +541,8 @@ def words_stage(engine, listing):
         elif it.kind == "text":
             w.drop(it)
     budget = max(0, engine.cfg.max_per_run - len(getattr(engine, "measured_now", [])))
-    rows = w.measure_refs(budget)
     touched, ok = w.append_evidence()
+    rows = w.measure_refs(budget)
     touched += w.write(rows)
     touched += render_brains(engine.root)
     status = list(w.questions)

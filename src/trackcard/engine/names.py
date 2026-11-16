@@ -28,10 +28,10 @@ GENERIC = {"untitled", "audio", "track", "song", "beat", "beats", "idea", "new",
 NEAR_RATIO = 0.8
 
 _ISO = re.compile(r"(?<!\d)(20\d{2})[-_.](\d{1,2})[-_.](\d{1,2})(?!\d)")
-_MD = re.compile(r"(?<![\d.])(\d{1,2})[._-](\d{1,2})(?:[._-](\d{4}|\d{2}))?(?![\d])")
+_MD = re.compile(r"(?<![\d.vV])(\d{1,2})[._-](\d{1,2})(?:[._-](\d{4}|\d{2}))?(?![\d])")
 _BRACKET = re.compile(r"[\(\[]([^\)\]]*)[\)\]]")
-_VERSION = re.compile(r"^v(\d{1,3})$")
-_GLUED = re.compile(r"^(.*[a-z])v(\d{1,3})$")
+_VERSION = re.compile(r"^v(\d{1,3})(?:\.\d{1,3})?$")
+_GLUED = re.compile(r"^(.*[a-z])v(\d{1,3})(?:\.\d{1,3})?$")
 _BPM = re.compile(r"^\d{2,3}bpm$")
 _CAMELOT = re.compile(r"^(1[0-2]|[1-9])[ab]$")
 
@@ -121,8 +121,13 @@ def parse(name: str, btime: str) -> Parsed:
             bracket_text.append(inner)
     stem = _BRACKET.sub(" ", stem)
     day, span = _find_date(stem, anchor)
+    after = ""
     if span:
-        stem = stem[:span[0]] + " " + stem[span[1]:]
+        before = stem[:span[0]]
+        if re.search(r"[A-Za-z0-9]", before):  # "<title> <date> <notes>": the words after the date are notes
+            stem, after = before, stem[span[1]:]
+        else:
+            stem = before + " " + stem[span[1]:]
     elif bracket_text:
         for i, b in enumerate(bracket_text):
             bday, bspan = _find_date(b, anchor)
@@ -152,6 +157,19 @@ def parse(name: str, btime: str) -> Parsed:
             merged.append(t)
     version = None
     tail: list[str] = []
+    post: list[str] = []
+    for t in [t for t in re.split(r"[\s_]+", after) if t]:  # after the date: version, people, BPM, Camelot or note words
+        low = t.lower()
+        g = _GLUED.match(low)
+        if _VERSION.match(low):
+            version = int(_VERSION.match(low).group(1))
+        elif g and len(g.group(1)) >= 2:
+            post.append(t[:len(g.group(1))].lower())
+            version = int(g.group(2))
+        elif low in PEOPLE:
+            by_hint = by_hint or low
+        elif not (_BPM.match(low) or _CAMELOT.match(low) or low == "bpm"):
+            post.append(low)
     while len(merged) > 1:
         t = merged[-1].lower()
         v = _VERSION.match(t)
@@ -178,7 +196,7 @@ def parse(name: str, btime: str) -> Parsed:
     elif all(w in GENERIC or w.isdigit() for w in slug.split("-")):
         ask = "the title is only placeholder words"
     return Parsed(title=title, slug=slug, date=(day or anchor).isoformat(), date_source="name" if day else "upload",
-                  version=version, note=" ".join(tail + notes), copy=copy, by_hint=by_hint, ext=ext,
+                  version=version, note=" ".join(tail + post + notes), copy=copy, by_hint=by_hint, ext=ext,
                   lossless=ext in LOSSLESS, ask=ask)
 
 

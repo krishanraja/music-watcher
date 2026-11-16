@@ -32,11 +32,15 @@ def measured(versions: dict) -> list[tuple[str, dict]]:
 
 def latest(versions: dict) -> tuple[str | None, bool]:
     """(version id, project_is_archived). Newest measured version not in Archive/; else the newest archived one."""
-    ms = [(k, v) for k, v in measured(versions) if v.get("present", True)]
+    # a version is still there when its file is, or when a present re-upload of the same bytes points at it
+    alive = {v.get("copy_of") for v in versions.values() if v.get("status") == "copy_of" and v.get("present", True)}
+    ms = [(k, v) for k, v in measured(versions) if v.get("present", True) or k in alive]
+    present = [v for v in versions.values() if v.get("present", True)]
+    archived = bool(present) and all(v_folder(v) == "archive" for v in present)
     live = [kv for kv in ms if v_folder(kv[1]) != "archive"]
     if live:
         return live[-1][0], False
-    return (ms[-1][0], True) if ms else (None, all(v_folder(v) == "archive" for v in versions.values()))
+    return (ms[-1][0] if ms else None), archived
 
 
 def v_folder(v: dict) -> str:

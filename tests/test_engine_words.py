@@ -85,7 +85,7 @@ def test_segments_split_and_merge():
     segs, lead = segments("Shared first. Krish (24 Oct 2026): The pads. Calvin (on both): Organic. Krish: and the bass.")
     assert lead == "Shared first."
     assert segs == [{"who": "krish", "when": "2026-10-24", "text": "The pads. and the bass."},
-                    {"who": "calvin", "when": "2026-10-24", "text": "Organic."}]
+                    {"who": "calvin", "when": None, "text": "Organic."}]  # no date of its own: not Krish's
 
 
 def test_tag_longest_match_strength_one_and_negation():
@@ -117,8 +117,8 @@ def test_new_two_voice_row_appends_two_rows_and_checks_clean(env):
                "Krish (20 Nov 2026): I love the growly bass and the panning. Calvin: Big tune, lush chords!")])
     ev = evidence(cfg)
     new = ev[n:]
-    assert [(r["id"], r["who"], r["when"]) for r in new] == [("new-song-krish", "krish", "2026-11-20"),
-                                                             ("new-song-calvin", "calvin", "2026-11-20")]
+    assert [(r["id"], r["who"]) for r in new] == [("new-song-krish", "krish"), ("new-song-calvin", "calvin")]
+    assert new[0]["when"] == "2026-11-20" and new[1]["when"]  # Calvin's reply: the date the engine first saw it
     assert new[0]["url"] == f"https://open.spotify.com/track/{T_NEW}" and new[0]["track"] == "Artist A - New Song"
     for r in new:
         assert all(s["quote"] in r["text"] and s["strength"] == 1 for s in r["signals"])

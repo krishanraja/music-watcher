@@ -23,7 +23,7 @@ WHY = {
 RULES = [
     ("email", re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")),
     ("google_link", re.compile(r"(?:drive|docs)\.google\.com|googleusercontent\.com|/file/d/|[?&]id=[A-Za-z0-9_-]{10,}")),
-    ("soundcloud_private", re.compile(r"soundcloud\.com/[^\s\"'<>]*/s-[A-Za-z0-9]+")),
+    ("soundcloud_private", re.compile(r"soundcloud\.com/[^\s\"'<>]*/s-[A-Za-z0-9]+|on\.soundcloud\.com/[^\s\"'<>]+")),
     ("phone", re.compile(r"(?<![\w.])\+\d[\d ()-]{7,}\d")),
 ]
 # Addresses that may appear in a commit (bot identities), never a person's.
@@ -42,6 +42,27 @@ def scan(text: str, secrets: set[str] | frozenset[str] = frozenset()) -> list[st
             found = [f for f in found if f.lower() not in ALLOWED_EMAILS]
         if found:
             hits.append(name)
+    return hits
+
+
+_NATIONAL_PHONE = re.compile(r"(?<![\w.:/-])\(?\d[\d ()-]{8,}\d(?![\w.:/-])")
+_LINKISH = re.compile(r"(?<![\w@/.])(?:[\w-]+\.)+[a-z]{2,}/[^\s\"'<>]*", re.I)
+
+
+def scan_contacts(text: str, allow_link=lambda s: False) -> list[str]:
+    """For people's free text and file names only (never generated files): phone numbers in national format and links
+    written without https://. Too eager for card numbers, so the commit gate does not use it."""
+    hits = []
+    for m in _NATIONAL_PHONE.finditer(text):
+        g = m.group(0)
+        digits = sum(c.isdigit() for c in g)
+        if 10 <= digits <= 15 and re.search(r"[ ()-]", g) and not re.search(r"\d{4}-\d{1,2}(-\d{1,2})?", g):
+            hits.append("phone")
+            break
+    for m in _LINKISH.finditer(text):
+        if not allow_link(m.group(0)):
+            hits.append("link")
+            break
     return hits
 
 
