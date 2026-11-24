@@ -1,5 +1,10 @@
 """Per project: BRIEF.md (for people and Claude) and brief.json (for the UI and the MCP adapters), plus engine/STATUS.md.
 
+Schema 2 (2026-11-24) adds, without changing any schema 1 key: `moves` (the Studio's next tool moves, trackcard.studio),
+`targets` (where the latest bounce sits against each brain's measured playlist), `second_ear` (Suno's analysis set
+against the card, when a session has run it), `twins` (finished catalog tracks measured stem by stem), and `closed_by` on
+each closed gap in `changes.gaps.closed` (the Studio picks made for it on an earlier version).
+
 Everything here is derived from the registry, the cards and the brains' accepted claims. No run timestamps: the same
 inputs give the same bytes. Rules are a pointer view of each brain's APPROVED list, labelled by brain; an adapter re-reads
 APPROVED.md before acting and never applies one brain's rules as the other's.
@@ -11,7 +16,7 @@ import json
 import re
 from pathlib import Path
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 UNPITCHED = {"drums", "percussion", "fx"}
 STEMS = ("drums", "bass", "vocals", "other")
 
@@ -235,7 +240,9 @@ def references_that_fit(rows: list[dict], bpm, camelot: str, limit: int = 8) -> 
 
 # ---------------------------------------------------------------- the brief
 
-def project_brief(slug: str, proj: dict, cards: Path, rules: list[dict], refs: list[dict]) -> tuple[str, dict] | None:
+def project_brief(slug: str, proj: dict, cards: Path, rules: list[dict], refs: list[dict],
+                  studio: dict | None = None) -> tuple[str, dict] | None:
+    """studio: {"clone", "targets", "ledger", "ears", "twins"} as engine.run gathers them; None leaves those keys empty."""
     versions = proj["versions"]
     vid, archived = latest(versions)
     if vid is None:
@@ -245,9 +252,14 @@ def project_brief(slug: str, proj: dict, cards: Path, rules: list[dict], refs: l
     ms = [k for k, _ in measured(versions)]
     prev_vid = ms[ms.index(vid) - 1] if ms.index(vid) > 0 else None
     changes = None
+    st = studio or {}
     if prev_vid:
         prev = json.loads((cards / f"{prev_vid}.trackcard.json").read_text(encoding="utf-8"))
         changes = {"from": prev_vid, "to": vid, **diff(prev, card)}
+        if changes.get("gaps"):
+            from ..studio import ledger
+            changes["gaps"]["closed"] = ledger.credit(changes["gaps"]["closed"], st.get("ledger") or [],
+                                                      set(ms[:ms.index(vid)]))
     v = versions[vid]
     ctx = context(card)
     fit = references_that_fit(refs, ctx["tempo"]["bpm"], card.get("camelot"))
@@ -269,6 +281,18 @@ def project_brief(slug: str, proj: dict, cards: Path, rules: list[dict], refs: l
                       "by": versions[k].get("by"), "folder": v_folder(versions[k]), "status": versions[k]["status"],
                       "source_name": versions[k]["source_name"]} for i, k in enumerate(order)],
     }
+    from ..studio import moves as mv
+    from ..studio import targets as tg
+    from ..studio import twin as tw
+    data["targets"] = []
+    if st.get("clone") is not None:
+        try:
+            data["targets"] = tg.against(card, st["clone"], st.get("targets"))
+        except (KeyError, TypeError, ValueError):
+            data["targets"] = []  # a card without the fields the graph reads: no comparison rather than a wrong one
+    data["second_ear"] = (st.get("ears") or {}).get(vid)
+    data["twins"] = [{**t, "against": tw.against(card, t)} for t in st.get("twins") or []]
+    data["moves"] = mv.plan_moves(data)
     return render_md(data, card), data
 
 
@@ -327,7 +351,9 @@ def render_md(d: dict, card: dict) -> str:
             L.append("- Stems sounding (share of the track): " + ("; ".join(moves) if moves else "no change of 5 points or more") + ".")
             g = ch["gaps"]
             for x in g["closed"]:
-                L.append(f"- Gap closed: {x['gap']} (bars {x['bars']}, {x['layer']}, rule {x['rule']}).")
+                by = "; ".join(f"{b['provider']} pick by {b['who'].title()} ({b['on']})" for b in x.get("closed_by") or [])
+                L.append(f"- Gap closed: {x['gap']} (bars {x['bars']}, {x['layer']}, rule {x['rule']})"
+                         + (f", after a Studio pick: {by}." if by else "."))
             for x in g["opened"]:
                 L.append(f"- New gap: {x['gap']} (bars {x['bars']}, {x['layer']}, rule {x['rule']}).")
             L.append(f"- Gaps still open: {g['still_open']}.")
@@ -368,17 +394,72 @@ def render_md(d: dict, card: dict) -> str:
         L.append("None of the measured references or playlist tracks fit yet.")
     for r in d["references"]:
         L.append(f"- {r['artists']} - {r['title']}: {r['bpm']} BPM, {r['camelot']} ({r['source']})")
+    L += render_studio_md(d)
     L.append("")
     return "\n".join(L)
 
 
+def render_studio_md(d: dict) -> list[str]:
+    L = []
+    if d.get("second_ear"):
+        e = d["second_ear"]
+        L += ["", "## Second ear (Suno)", "",
+              f"Suno's analysis of this bounce ({e['on']}) set against trackcard's card. Listen only where they disagree.", ""]
+        agree = [k for k in ("tempo", "key", "grid", "sections") if (e.get(k) or {}).get("agree")]
+        if agree:
+            L.append("- Agree: " + ", ".join(agree) + ".")
+        for q in e.get("questions") or []:
+            L.append(f"- {q['text']}")
+        if e.get("unread"):
+            L.append("- Not read from Suno's answer: " + ", ".join(e["unread"]) + ".")
+    if d.get("targets"):
+        L += ["", "## Against the target", "",
+              "Where this bounce sits against each brain's measured playlist. Evidence, not rules: each brain's "
+              "APPROVED.md is the only place a rule lives.", ""]
+        for t in d["targets"]:
+            L.append(f"**{t['brain'].title()}'s playlist** ({t['tracks']} measured tracks, `{t['source']}`):")
+            L += [f"- {x['text']}" for x in t["lines"]]
+            L.append("")
+        L.pop()
+    if d.get("twins"):
+        L += ["", "## Pro twins (Epidemic Sound)", ""]
+        for t in d["twins"]:
+            ref = t.get("reference") or {}
+            near = f", near {ref.get('artists')} - {ref.get('title')}" if ref else ""
+            L.append(f"**{t.get('artists')} - {t.get('title')}** ({t['bpm']} BPM, {t.get('key')}{near}; {t['provenance']}):")
+            L += [f"- {x}" for x in t["against"]]
+            L.append("")
+        L.pop()
+    if d.get("moves"):
+        L += ["", "## Studio moves", "",
+              "What a session can do next (engine/STUDIO.md). Free moves run first; anything that spends a credit is "
+              "asked for, call by call.", ""]
+        for m in d["moves"]:
+            gap = f" for {m['gap']['layer']}, bars {m['gap']['bars']}" if m.get("gap") else ""
+            c = m["cost"].get("credits")
+            cost = "free" if c == 0 else (f"{c} credit(s)" if c else "credits: " + m["cost"].get("note", "unknown"))
+            gate = cost if m["gate"] == "free" else f"{m['gate'].replace('_', ' ')}, {cost}"
+            L.append(f"- `{m['id']}` {m['kind']}{gap} ({gate}): {m['why']}")
+    return L
+
+
 # ---------------------------------------------------------------- STATUS.md
 
-def status_md(registry: dict, listing_counts: dict, extra: list[str] | None = None) -> str:
+def status_md(registry: dict, listing_counts: dict, extra: list[str] | None = None, north_star: dict | None = None) -> str:
     L = ["# Production engine: status", "",
          "Generated by `trackcard engine run`. State only: what is in, what waits for a person. What is new in a run is",
-         "in the engine's pull request, not here.", "",
-         "## Projects", "", "| project | versions | latest | measured | queued | gave up |", "|---|---|---|---|---|---|"]
+         "in the engine's pull request, not here.", ""]
+    if north_star is not None:
+        ns = north_star
+        L += ["## North Star: gaps closed per bounce", ""]
+        if not ns["bounces"]:
+            L.append("Not measured yet: it needs two versions of a project, both measured with stems.")
+        else:
+            L.append(f"{ns['per_bounce']} ({ns['gaps_closed']} gap(s) closed over {ns['bounces']} bounce(s); "
+                     f"{ns['studio_closed']} after a Studio pick).")
+        L += ["", "Set by Krish on 2026-11-24 (docs/NORTH_STAR.md). Counted from the version diffs: only bounces whose "
+              "version and the one before it were measured with stems.", ""]
+    L += ["## Projects", "", "| project | versions | latest | measured | queued | gave up |", "|---|---|---|---|---|---|"]
     for slug, p in sorted(registry["projects"].items()):
         vs = p["versions"]
         vid, archived = latest(vs)

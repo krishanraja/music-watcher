@@ -161,8 +161,9 @@ def test_splice_args_match_the_live_tool(env):
     for g in b["gaps"]:
         assert g["splice"]["tool"] == "describe_a_sound" and set(g["splice"]["args"]) <= describe_a_sound
         assert isinstance(g["splice"]["args"]["bpm_min"], int) and g["splice"]["args"]["type"] == "loop"
-    assert {"schema_version", "project", "as_of", "latest_version", "source_card", "trackcard_version", "context",
-            "gaps", "gaps_partial", "changes", "rules", "references", "versions"} == set(b)
+    v1 = {"schema_version", "project", "as_of", "latest_version", "source_card", "trackcard_version", "context",
+          "gaps", "gaps_partial", "changes", "rules", "references", "versions"}
+    assert v1 | {"moves", "targets", "second_ear", "twins"} == set(b) and b["schema_version"] == 2  # v2 only adds keys
     assert b["context"]["bar1_s"] is not None and b["context"]["tempo"]["bpm"]
 
 

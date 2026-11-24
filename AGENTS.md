@@ -9,7 +9,7 @@ playlist, is `taste/calvin/` (see "Calvin's Music Brain" below).
 <!-- north-star:start -->
 ## North Star: read it first, every session
 
-[`docs/NORTH_STAR.md`](docs/NORTH_STAR.md). It is not set yet: only Krish sets it. Say which part of it a task moves before starting, and close by noting what moved. The state line, the first line under "Where it is right now" in `NOW.md`, says U4 until he sets a number ([the harness contract](https://github.com/krishanraja/ai-harness/blob/main/contract/north-star-metric.md)).
+[`docs/NORTH_STAR.md`](docs/NORTH_STAR.md). Set by Krish on 2026-11-24: **gaps closed per bounce** (no target yet; only Krish sets one). Say which part of it a task moves before starting, and close by noting what moved. The state line, the first line under "Where it is right now" in `NOW.md`, says U4 until the number is measured ([the harness contract](https://github.com/krishanraja/ai-harness/blob/main/contract/north-star-metric.md)).
 <!-- north-star:end -->
 
 ## Close out
@@ -43,8 +43,9 @@ a metadata source (Spotify, Discogs, label page), or inferred by Claude. Inferre
 - When Krish or Calvin says something about a track in a session, append it to `taste/brain/evidence.jsonl`: their words whole,
   where and when said, and signals from `taste/brain/vocab.json` whose quotes appear character for character in the words.
   Never write measured evidence there; it is derived from `taste/graph/tracks.csv` and, through `measured_extra` in
-  `brain/policy.json`, from the tracks this person dropped into Drive (`engine/references/krish/tracks.csv`, written by the
-  production engine; a track already in the playlist counts once). A word that is not in the vocabulary goes
+  `brain/policy.json`, from the tracks this person dropped into Drive and the tracks on their own Spotify most-played
+  list (`engine/references/krish/tracks.csv`, written by the production engine; a track already in the playlist counts
+  once). A word that is not in the vocabulary goes
   in as `other/<word>`; the vocabulary grows only by a change Krish merges.
 - Taken back? Set `"withdrawn": true` on the row; never delete it. Run `trackcard brain check` after any edit.
 - Weekly: `trackcard brain propose` (at most 3, frozen once proposed). Krish runs `trackcard brain accept|reject <id>`.
@@ -89,6 +90,24 @@ helps produce it. Start with [`engine/README.md`](engine/README.md); code in `sr
   applies one brain's rules as the other's, and never downloads a Splice sound (it spends a credit) or makes a public link
   without that session's explicit yes.
 - `taste/references.json` is the frozen 2026-11-06 hand read of the sheet; new references live in `engine/references/`.
+
+## The Studio (engine/STUDIO.md)
+
+After the engine: it turns a brief's `moves` into calls on Splice, Suno, Epidemic Sound and Spotify, and keeps a ledger of
+what a person picked (`engine/productions/<slug>/moves.jsonl`). Code in `src/trackcard/studio/`; commands
+`trackcard studio moves|ear|twin|cut|record|score|revealed`.
+
+- Run `free` moves without asking and show every result; ask for each `yes_each` call by name and cost, every time.
+- **Suno uploads:** every new bounce, Krish's and Calvin's, may be uploaded privately to Suno for its free analysis
+  (Ruling, Krish, 2026-11-24; Krish confirms Calvin agrees). Only that: generations, MIDI and stems are asked for each time.
+- Never commit a Suno id or link, or a presigned URL: the ledger keeps a hash of a Suno id, and the privacy gate refuses
+  `suno_link` and `signed_url`.
+- Character words come only from the accepted rules of the person who owns the next move; never the other brain's.
+- Suno sketches are references: only MIDI goes to Ableton, played with their own sounds.
+- **Spotify:** a person's most-played tracks go to `engine/references/<who>/revealed.csv` with link, title, artists and
+  rank band only (Krish, 2026-11-24), and count in that person's brain only.
+- Epidemic is Krish's own channels only, never paid ads; record the recording id with every asset.
+- **North Star** (Krish, 2026-11-24): gaps closed per bounce, `trackcard studio score`.
 
 ## The worker: use it by default
 

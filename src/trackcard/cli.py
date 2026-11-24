@@ -1,4 +1,4 @@
-"""Command line: `trackcard analyze` and `trackcard mcp`."""
+"""Command line: `trackcard analyze`, `mcp`, `brain`, `engine` and `studio`."""
 
 from __future__ import annotations
 
@@ -219,6 +219,239 @@ def engine_resume(config_path) -> None:
     from .engine import config as ec
     from .engine.run import resume
     click.echo(resume(ec.load(config_path, require_drive=False)))
+
+
+# ---------------------------------------------------------------- the Studio (engine/STUDIO.md)
+
+@main.group()
+def studio() -> None:
+    """The Studio: tool moves for a brief, and what people picked (Splice, Suno, Epidemic Sound, Spotify)."""
+
+
+_REPO = click.option("--clone", type=click.Path(path_type=Path, file_okay=False), default=Path("."), show_default=True,
+                     help="The repository checkout.")
+_ON = click.option("--on", "on", default=None, help="Date, YYYY-MM-DD (default: today).")
+
+
+def _today(on: str | None) -> str:
+    import datetime as dt
+    return on or dt.date.today().isoformat()
+
+
+def _brief(clone: Path, slug: str) -> dict:
+    import json
+    f = clone / "engine" / "productions" / slug / "brief.json"
+    if not f.exists():
+        click.echo(f"studio: no brief for {slug!r} ({f}); the engine writes it", err=True)
+        sys.exit(2)
+    return json.loads(f.read_text(encoding="utf-8"))
+
+
+def _card(clone: Path, vid: str) -> dict:
+    import json
+    f = clone / "engine" / "productions" / "cards" / f"{vid}.trackcard.json"
+    if not f.exists():
+        click.echo(f"studio: no card for version {vid}", err=True)
+        sys.exit(2)
+    return json.loads(f.read_text(encoding="utf-8"))
+
+
+def _write_checked(path: Path, obj) -> None:
+    """Write a committed Studio file only if the privacy gate passes it."""
+    import json
+    from .engine import privacy
+    text = json.dumps(obj, indent=1, sort_keys=True, ensure_ascii=False) + "\n"
+    hits = privacy.scan(text)
+    if hits:
+        click.echo("studio: refused by the privacy gate: " + ", ".join(sorted(set(hits))), err=True)
+        sys.exit(3)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+    click.echo(f"wrote {path}", err=True)
+
+
+@studio.command("moves")
+@click.argument("slug")
+@_REPO
+@click.option("--owner", type=click.Choice(["krish", "calvin"]), default=None,
+              help="Whose next move it is (default: the latest bounce's uploader). Only their brain's rules are used.")
+@click.option("--json", "as_json", is_flag=True, help="Print the moves as JSON.")
+def studio_moves(slug, clone, owner, as_json) -> None:
+    """List a project's moves: free ones first, then the standing yes, then the ones that spend credits."""
+    import json
+    from .studio import moves as mv
+    ms = mv.plan_moves(_brief(clone, slug), owner=owner)
+    if as_json:
+        click.echo(json.dumps(ms, indent=1, ensure_ascii=False))
+        return
+    for m in ms:
+        gap = f" {m['gap']['layer']} bars {m['gap']['bars']}" if m.get("gap") else ""
+        click.echo(f"{m['id']}  {m['kind']:<17} {m['gate']:<12}{gap}  {m['why']}")
+
+
+@studio.command("ear")
+@click.argument("slug")
+@click.option("--analysis", type=click.Path(path_type=Path, dir_okay=False, exists=True), required=True,
+              help="Suno's audio-analysis JSON for the bounce (kept outside the repository).")
+@click.option("--version", "vid", default=None, help="The version analysed (default: the brief's latest).")
+@_REPO
+@_ON
+def studio_ear(slug, analysis, vid, clone, on) -> None:
+    """Set Suno's analysis of a bounce against its card; write engine/productions/<slug>/ear/<version>.json."""
+    import json
+    from .studio import second_ear as se
+    vid = vid or _brief(clone, slug)["latest_version"]
+    rec = se.record(_card(clone, vid), json.loads(analysis.read_text(encoding="utf-8")), vid, _today(on))
+    _write_checked(clone / "engine" / "productions" / slug / "ear" / f"{vid}.json", rec)
+    for q in rec["questions"]:
+        click.echo(f"ear-check: {q['text']}")
+    if not rec["questions"]:
+        click.echo("Suno and trackcard agree on everything they both read.")
+    if rec["unread"]:
+        click.echo("not read from Suno's answer: " + ", ".join(rec["unread"]))
+
+
+@studio.command("twin")
+@click.argument("slug")
+@click.option("--recording", type=click.Path(path_type=Path, dir_okay=False, exists=True), required=True,
+              help="The Epidemic recording as SearchRecordings returned it (JSON with id, title, credits).")
+@click.option("--full", "full_card", type=click.Path(path_type=Path, dir_okay=False, exists=True), required=True,
+              help="trackcard JSON card of the full-mix preview.")
+@click.option("--stem", "stems", multiple=True, required=True,
+              help="NAME=CARD for each stem preview, e.g. bass=bass.trackcard.json (drums, bass, melody, instruments, vocals).")
+@click.option("--reference", default=None, help="The Spotify track id of the reference this twin stands next to.")
+@_REPO
+def studio_twin(slug, recording, full_card, stems, reference, clone) -> None:
+    """Measure-based twin: write engine/productions/<slug>/twins/<recording id>.json."""
+    import json
+    from .studio import twin as tw
+    rec = json.loads(recording.read_text(encoding="utf-8"))
+    rec = rec.get("recording", rec)
+    artists = ", ".join(c["artist"]["name"] for c in rec.get("credits") or [] if c.get("role") == "MAIN_ARTIST")
+    stem_cards = {}
+    for s in stems:
+        name, _, f = s.partition("=")
+        if name.lower() not in ("drums", "bass", "melody", "instruments", "vocals") or not f:
+            click.echo(f"studio: --stem takes NAME=CARD with a stem name Epidemic uses: {s!r}", err=True)
+            sys.exit(2)
+        stem_cards[name.lower()] = json.loads(Path(f).read_text(encoding="utf-8"))
+    ref = None
+    if reference:
+        b = _brief(clone, slug)
+        r = next((r for r in b.get("references") or [] if r.get("id") == reference), None)
+        ref = {"id": reference, "title": (r or {}).get("title"), "artists": (r or {}).get("artists")}
+    out = tw.twin_record({"id": rec["id"], "title": rec.get("title"), "artists": artists or None},
+                         json.loads(full_card.read_text(encoding="utf-8")), stem_cards, ref)
+    _write_checked(clone / "engine" / "productions" / slug / "twins" / f"{rec['id']}.json", out)
+
+
+@studio.command("cut")
+@click.option("--card", "card_path", type=click.Path(path_type=Path, dir_okay=False, exists=True), required=True,
+              help="trackcard JSON card of the licensed track (measured with stems for real drops).")
+@click.option("--length", "length_s", type=float, required=True, help="Length of the video edit, seconds.")
+@click.option("--hit", "hit_s", type=float, required=True, help="Where in the edit the drop must land (the reveal), seconds.")
+@click.option("--recording-id", default=None, help="The Epidemic recording id (UUID).")
+@click.option("--drop", "which", default="main", show_default=True, help="main, or bar:N for another drop or section.")
+@click.option("--lead-bars", default=4, show_default=True, help="Bars of build kept before the drop.")
+@click.option("--after-bars", default=4, show_default=True, help="Bars kept after the drop.")
+@click.option("--format", "audio_format", type=click.Choice(["WAV", "MP3"]), default="WAV", show_default=True)
+def studio_cut(card_path, length_s, hit_s, recording_id, which, lead_bars, after_bars, audio_format) -> None:
+    """Drop on the cut: print Epidemic EditRecording arguments that land the measured drop on the reveal."""
+    import json
+    from .studio import cut
+    try:
+        out = cut.edit_input(json.loads(card_path.read_text(encoding="utf-8")), length_s, hit_s, recording_id, which,
+                             lead_bars, after_bars, audio_format)
+    except cut.CutError as e:
+        click.echo(f"studio: {e}", err=True)
+        sys.exit(2)
+    click.echo(out["explain"], err=True)
+    click.echo(json.dumps(out["args"], indent=1))
+
+
+@studio.command("record")
+@click.argument("slug")
+@click.option("--move", "move_id", required=True, help="The move id from the brief (or `trackcard studio moves`).")
+@click.option("--who", type=click.Choice(["krish", "calvin"]), required=True, help="Who chose.")
+@click.option("--pick", default=None, help="provider:catalog-id, e.g. splice:<asset uuid> or epidemic:<recording id>; "
+              "none: when nothing fit.")
+@click.option("--suno-clip", default=None, help="A Suno clip id: only its hash is written, never the id.")
+@click.option("--title", default=None, help="The picked sound's name, as the catalog shows it.")
+@click.option("--credits", type=float, default=None, help="Credits this pick spent.")
+@click.option("--note", default="", help="Why, in a few words.")
+@_REPO
+@_ON
+def studio_record(slug, move_id, who, pick, suno_clip, title, credits, note, clone, on) -> None:
+    """Record what a person picked from a move, in engine/productions/<slug>/moves.jsonl."""
+    from .studio import ledger as lg
+    from .studio import moves as mv
+    b = _brief(clone, slug)
+    m = next((m for m in mv.plan_moves(b, owner="krish") + mv.plan_moves(b, owner="calvin") if m["id"] == move_id), None)
+    if m is None:
+        click.echo(f"studio: no move {move_id} in {slug}'s brief", err=True)
+        sys.exit(2)
+    if bool(pick) == bool(suno_clip):
+        click.echo("studio: give one of --pick or --suno-clip", err=True)
+        sys.exit(2)
+    if suno_clip:
+        p = {"provider": "suno", "hash": lg.private_hash(suno_clip)}
+    elif pick == "none":
+        p = {"provider": "none"}
+    else:
+        prov, _, cid = pick.partition(":")
+        p = {"provider": prov, "id": cid}
+    if title:
+        p["title"] = title
+    row = {"move": move_id, "kind": m["kind"], "version": b["latest_version"], "pick": p, "who": who, "on": _today(on),
+           "gap": m.get("gap")}
+    if credits is not None:
+        row["credits"] = credits
+    if note:
+        row["note"] = note
+    try:
+        added = lg.append(lg.path_for(clone, slug), row)
+    except lg.LedgerError as e:
+        click.echo(f"studio: {e}", err=True)
+        sys.exit(2)
+    click.echo("recorded" if added else "already recorded")
+
+
+@studio.command("score")
+@_REPO
+@click.option("--json", "as_json", is_flag=True)
+def studio_score(clone, as_json) -> None:
+    """The North Star (Krish, 2026-11-24): gaps closed per bounce, and how many after a Studio pick."""
+    import json
+    from .studio import ledger as lg
+    reg_f = clone / "engine" / "productions" / "registry.json"
+    reg = json.loads(reg_f.read_text(encoding="utf-8")) if reg_f.exists() else {"projects": {}}
+    sc = lg.score(reg, clone / "engine" / "productions" / "cards", clone)
+    if as_json:
+        click.echo(json.dumps(sc, indent=1))
+        return
+    if not sc["bounces"]:
+        click.echo("gaps closed per bounce: not measured yet (needs two versions of a project, both measured with stems)")
+        return
+    click.echo(f"gaps closed per bounce: {sc['per_bounce']} ({sc['gaps_closed']} over {sc['bounces']} bounce(s); "
+               f"{sc['studio_closed']} after a Studio pick)")
+
+
+@studio.command("revealed")
+@click.option("--who", type=click.Choice(["krish", "calvin"]), required=True,
+              help="Whose Spotify was read. Their list feeds their own brain only.")
+@click.option("--rows", "rows_path", type=click.Path(path_type=Path, dir_okay=False, exists=True), required=True,
+              help="JSON list of {link, title, artists, rank_band}; rank_band is top50 or top200.")
+@_REPO
+def studio_revealed(who, rows_path, clone) -> None:
+    """Write engine/references/<who>/revealed.csv: links, titles, artists and a rank band, nothing else."""
+    import json
+    from .studio import revealed as rv
+    try:
+        p = rv.write(clone, who, json.loads(rows_path.read_text(encoding="utf-8")))
+    except rv.RevealedError as e:
+        click.echo(f"studio: {e}", err=True)
+        sys.exit(2)
+    click.echo(f"wrote {p} ({len(rv.read(clone, who))} tracks)")
 
 
 if __name__ == "__main__":

@@ -20,7 +20,7 @@ steward: https://github.com/krishanraja/ai-harness/blob/main/docs/steward/RUNBOO
 
 ## Where it is right now (as of 2026-11-16)
 
-<!-- north-star-state {"week_of":"2026-11-09","week_target":null,"current":null,"current_as_of":null,"current_source":null,"urgency":4,"urgency_reason":"North Star not set; Krish sets it"} --> **North Star number: U4, not measured.** The North Star is not set (`docs/NORTH_STAR.md`), so there is no number yet.
+<!-- north-star-state {"week_of":"2026-11-23","week_target":null,"current":null,"current_as_of":null,"current_source":"trackcard studio score","urgency":4,"urgency_reason":"metric set 2026-11-24 (gaps closed per bounce); not measured until the engine runs"} --> **North Star number: U4, not measured.** Krish set the North Star on 2026-11-24: gaps closed per bounce (`docs/NORTH_STAR.md`). No target yet, and no number until the engine runs on the worker and a project has two stem-measured versions.
 
 - A production engine, separate from the brains, is built and tested but not yet running: `trackcard engine plan|run|resume` (`engine/README.md`) reads Drive's Music Production folder, its Inspiration folder and the reasons sheet, decides from each bounce's name and upload date whether it is a new track or a new version (the real folder reads as Closure, 3 versions, plus two archived beats), measures it with trackcard, writes one brief per project for people, Claude and the coming Splice, Ableton and Suno MCPs, puts new sheet and drop words under the right voice in the shared evidence log, feeds each person's drops into their own brain's measured layer, and publishes one rolling PR behind a privacy gate that keeps Drive ids and emails out of this public repository; the README now lays out the whole project's parts, use cases and limits, and `docs/ROADMAP.md` proposes the next phases (my read, not yet set by Krish). (2026-11-16)
 - The shared vocabulary has brass (sound_design) and build_into_drop (arrangement), and Krish's words on "Bird" and "Hey Sunshine" now count under them; "Hey Sunshine (Antonio Giacca Remix)" is measured with stems in `taste/cards/`, which shows its main build as a 28-bar breakdown carried by the vocal, with no low end for the last 16 bars and kick, bass and hats landing together on bar 141. (2026-11-15)
@@ -39,5 +39,5 @@ steward: https://github.com/krishanraja/ai-harness/blob/main/docs/steward/RUNBOO
 
 - Next (2026-11-16): on the worker, write `~/.music-watcher/engine.json`, run `trackcard engine plan` to confirm the worker's rclone sees the Music Production folder with owner metadata, then enable `music-engine.timer` and disable `music-inspo.timer` in the same step (`engine/README.md`, Worker setup).
 - **Next:** decide how the content engine calls `trackcard` for audio treatment (an OS session proposes it; nothing calls it yet).
-- **Waiting on Krish:** his North Star for this repository.
+- **Waiting on Krish:** a target for the North Star (gaps closed per bounce), when he wants one.
 - North Star check (2026-11-16): holds.

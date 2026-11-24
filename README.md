@@ -1,13 +1,14 @@
 # music-watcher
 
 Krish and Calvin make electronic music together. This repository gives Claude what it needs to help them do that well:
-**ears** (trackcard measures a bounce), **taste** (two Music Brains, one each, built only from evidence they approve) and a
-**production engine** (it collects what they make and what inspires them, and keeps one working brief per track). Claude
-can't hear; this is how it listens, remembers what they like, and keeps track of where each production stands.
+**ears** (trackcard measures a bounce), **taste** (two Music Brains, one each, built only from evidence they approve), a
+**production engine** (it collects what they make and what inspires them, and keeps one working brief per track) and a
+**Studio** (it turns a brief into moves on Splice, Suno, Epidemic Sound and Spotify, and remembers what they picked).
+Claude can't hear; this is how it listens, remembers what they like, and keeps track of where each production stands.
 
 Where it stands right now is in [`NOW.md`](NOW.md); where it is going is in [`docs/ROADMAP.md`](docs/ROADMAP.md). How to
-work in it (rules for sessions, provenance, privacy) is in [`AGENTS.md`](AGENTS.md). Its North Star is not set yet
-([`docs/NORTH_STAR.md`](docs/NORTH_STAR.md)); only Krish sets it.
+work in it (rules for sessions, provenance, privacy) is in [`AGENTS.md`](AGENTS.md). Its North Star, set by Krish on
+2026-11-24, is **gaps closed per bounce** ([`docs/NORTH_STAR.md`](docs/NORTH_STAR.md)).
 
 ## What's here
 
@@ -17,6 +18,7 @@ work in it (rules for sessions, provenance, privacy) is in [`AGENTS.md`](AGENTS.
 | **Krish's Music Brain** (`taste/`) | Turns what Krish and Calvin say about tracks, plus measurements of Krish's 346-track playlist, into taste rules Krish approves one at a time. Only `taste/APPROVED.md` holds rules. | [`taste/graph/GENERATION.md`](taste/graph/GENERATION.md), [`taste/APPROVED.md`](taste/APPROVED.md) |
 | **Calvin's Music Brain** (`taste/calvin/`) | The same machinery for Calvin: his 30-track playlist "Fall Bangers", his words only, his decisions only. | [`taste/calvin/README.md`](taste/calvin/README.md) |
 | **The production engine** (`engine/`, `src/trackcard/engine/`) | Reads Drive's Music Production folder: decides whether each bounce is a new track or a new version, measures it, says what changed, and writes one brief per project; turns Inspiration drops and the reasons sheet into references and evidence for the right brain. Publishes through one rolling PR. | [`engine/README.md`](engine/README.md) |
+| **The Studio** (`src/trackcard/studio/`, `trackcard studio`) | Turns a brief into tool moves (Splice searches, Suno second ear, sketches to MIDI and loops, Epidemic pro twins, drop on the cut for videos, Spotify most-played as revealed taste), gated by cost, and keeps a ledger of picks so the next bounce's diff says which pick closed which gap. | [`engine/STUDIO.md`](engine/STUDIO.md) |
 | **Shared taste notes** (`taste/PREFERENCES.md`) | A written synthesis of what both of them reach for, for an AI to read next to a card. Evidence, not rules. | [`taste/PREFERENCES.md`](taste/PREFERENCES.md) |
 | **Music Inspo** (`taste/inspo/`) | The first drop watcher. Replaced by the engine (Krish's ruling, 2026-11-16); its cards stay. | [`taste/inspo/README.md`](taste/inspo/README.md) |
 
@@ -38,7 +40,8 @@ work in it (rules for sessions, provenance, privacy) is in [`AGENTS.md`](AGENTS.
           |                                                  v                                 v
           +------ reads approved rules only ------  taste/APPROVED.md            taste/calvin/APPROVED.md
           v
- engine/productions/<project>/BRIEF.md + brief.json   -->  people, Claude, and later Splice / Ableton / Suno and a UI
+ engine/productions/<project>/BRIEF.md + brief.json   -->  people, Claude, the Studio (Splice, Suno, Epidemic; picks in
+                                                              moves.jsonl, credited on the next bounce), later Ableton, a UI
 ```
 
 The brains decide what counts as their taste (only through an accepted claim); the engine never decides one. The engine
@@ -55,6 +58,10 @@ reads the brains; the brains read the engine's measurements of each person's own
 | Say why you like a track | Add a row to the sheet: `Krish (20 Nov 2026): the build before the drop` | The words in the shared evidence log under the right voice, tagged and listed in the engine's PR to confirm |
 | See what your taste is turning into | `trackcard brain propose` weekly, then `accept` or `reject` | At most 3 proposals a week, frozen once proposed; accepted ones become rules in `APPROVED.md` |
 | Check a single bounce by hand | `trackcard analyze bounce.wav --print` (or the MCP tool in Claude Desktop) | The card, locally, in a few minutes |
+| Check the measurement with a second ear | Ask a session to run the brief's `suno_second_ear` move (a private upload; standing yes) | Ear-check questions in STATUS only where Suno and trackcard disagree |
+| See how a finished track builds the same thing | Run a brief's `epidemic_twin` move | When a catalog track close to your reference brings in each layer, next to yours |
+| Put a drop on a video's reveal | `trackcard studio cut --card track.trackcard.json --length 30 --hit 12.4` | Epidemic EditRecording arguments that land the measured drop on the frame |
+| Know if the work is moving | `trackcard studio score` (also at the top of `engine/STATUS.md`) | Gaps closed per bounce, and how many after a Studio pick |
 | Tell the engine it got a file wrong | Add a line to `engine/productions/aliases.json` (STATUS gives you the line) | The version moves, gets a date, a note, or is ignored; cards never move |
 
 ## Capabilities and limits, in short
@@ -69,7 +76,9 @@ reads the brains; the brains read the engine's measurements of each person's own
   Auto-tagged words are my read (Claude's) until confirmed.
 - **Keeps private things private** in a public repository: no audio, no Drive ids or links, no emails, ever; a gate blocks
   them before every engine commit.
-- **Does not yet** act in Splice, Ableton or Suno, or have a UI: the briefs are shaped for them ([`docs/ROADMAP.md`](docs/ROADMAP.md)).
+- **Acts through sessions:** a Claude session runs a brief's Studio moves on Splice, Suno, Epidemic and Spotify, free ones
+  first and every credit asked for ([`engine/STUDIO.md`](engine/STUDIO.md)). It **does not yet** drive Ableton or have a
+  UI ([`docs/ROADMAP.md`](docs/ROADMAP.md)).
 
 ---
 

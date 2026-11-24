@@ -25,6 +25,10 @@ RULES = [
     ("google_link", re.compile(r"(?:drive|docs)\.google\.com|googleusercontent\.com|/file/d/|[?&]id=[A-Za-z0-9_-]{10,}")),
     ("soundcloud_private", re.compile(r"soundcloud\.com/[^\s\"'<>]*/s-[A-Za-z0-9]+|on\.soundcloud\.com/[^\s\"'<>]+")),
     ("phone", re.compile(r"(?<![\w.])\+\d[\d ()-]{7,}\d")),
+    # a Suno song page or audio file (private songs: unreleased bounces uploaded for analysis, sketches)
+    ("suno_link", re.compile(r"suno\.(?:com|ai)/(?:song|s|embed)/|cdn\d*\.suno\.ai/|audiopipe\.suno\.ai")),
+    # a presigned download or upload link (Splice download_asset, Suno upload_url, Epidemic DownloadRecording)
+    ("signed_url", re.compile(r"[?&](?:X-Amz-Signature|X-Goog-Signature|Signature|_jwt|token|sig)=", re.I)),
 ]
 # Addresses that may appear in a commit (bot identities), never a person's.
 ALLOWED_EMAILS = {"noreply@anthropic.com", "41898282+github-actions[bot]@users.noreply.github.com"}

@@ -373,7 +373,8 @@ class Words:
                     graphs[who] = {r["id"]: r for r in csv.DictReader(fh)}
         rows = []
         tries = self.e.state.data.setdefault("tries", {})
-        for tid in sorted(self.refs):
+        # drops and sheet references are measured before tracks that come only from a Spotify most-played list
+        for tid in sorted(self.refs, key=lambda t: (self.refs[t]["sources"] <= {"spotify_top"}, t)):
             ref = self.refs[tid]
             m = self.meta(tid) or {}
             o = old.get(tid, {})
@@ -405,7 +406,7 @@ class Words:
                            else "queued", why=privacy.why(why) if why else "")
             row["_card"] = card
             rows.append(row)
-        return rows
+        return sorted(rows, key=lambda r: r["key"])
 
     def find_card(self, tid: str) -> tuple[dict | None, str]:
         for rel in (REFS / "cards", Path("taste/cards"), Path("taste/inspo/cards")):
@@ -476,7 +477,9 @@ class Words:
         return touched
 
     def write_feed(self, rows: list[dict]) -> list[str]:
-        """Only drops feed a brain's measured layer; never a track already in that person's playlist graph."""
+        """Only a person's drops, and the tracks on their own Spotify most-played list (engine/references/<who>/
+        revealed.csv, Krish's decision of 2026-11-24), feed their brain's measured layer; never a track already in that
+        person's playlist graph, and never another person's."""
         touched = []
         graph_ids = {}
         for who, rel in (("krish", "taste/graph/tracks.csv"), ("calvin", "taste/calvin/graph/tracks.csv")):
@@ -492,8 +495,11 @@ class Words:
                     continue
                 if not r.get("spotify_duration_s"):
                     continue
+                how = "full (SoundCloud, length within 6 s of Spotify's)"
+                if "drop" not in self.refs[r["key"]]["sources"] and "spotify_top" in self.refs[r["key"]]["sources"]:
+                    how += "; revealed: on the person's Spotify most-played list"
                 feed.append(ms.feed_row(self.root, r["_card"], r["key"], r["title"], r["artists"],
-                                        int(r["spotify_duration_s"]), "full (SoundCloud, length within 6 s of Spotify's)"))
+                                        int(r["spotify_duration_s"]), how))
             p = self.root / REFS / who / "tracks.csv"
             if not feed and not p.exists():
                 continue
@@ -540,6 +546,11 @@ def words_stage(engine, listing):
             w.sheet(it)
         elif it.kind == "text":
             w.drop(it)
+    from ..studio import revealed as rv
+    for who in VOICES:  # a person's Spotify most-played list feeds their own brain only
+        for r in rv.read(engine.root, who):
+            if rv.TRACK.match(r.get("link") or ""):
+                w.add_ref(rv.TRACK.match(r["link"]).group(1), who, "spotify_top", drop=True)
     budget = max(0, engine.cfg.max_per_run - len(getattr(engine, "measured_now", [])))
     touched, ok = w.append_evidence()
     rows = w.measure_refs(budget)

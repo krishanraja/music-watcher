@@ -25,7 +25,7 @@ rules; it never decides one. Code: `src/trackcard/engine/`. Asked for by Krish o
 | Turn sheet rows and text drops into evidence under the right voice, with auto tags to confirm | Decide whether words are someone's own when they read as reported speech: it asks |
 | Measure references from SoundCloud within 6 s of Spotify's length, reusing any existing card | Fetch from YouTube on the worker: those are left for a home computer |
 | Publish one PR, rebuilt from main each run, with a privacy gate | Run without the worker, or see Drive files its login cannot see |
-| Shape `brief.json` for Splice, Ableton and Suno | Call those tools: that is Phase 3 of [`docs/ROADMAP.md`](../docs/ROADMAP.md) |
+| Shape `brief.json` for Splice, Ableton and Suno, with the Studio's next moves in it ([`STUDIO.md`](STUDIO.md)) | Call those tools itself: a Claude session runs the moves ([`STUDIO.md`](STUDIO.md)); Ableton is still Phase 3 of [`docs/ROADMAP.md`](../docs/ROADMAP.md) |
 
 ## What goes in, what comes out
 
@@ -66,9 +66,12 @@ references that fit (within 3 BPM or half/double time and a Camelot neighbour, f
 Stem-based changes are compared only when both versions were measured with stems; otherwise the brief says
 "not comparable".
 
-## Adapter contract (`brief.json`, schema_version 1)
+## Adapter contract (`brief.json`, schema_version 2)
 
-Nothing calls the MCPs yet. When an adapter does:
+Schema 2 (2026-11-24) only adds keys to schema 1: `moves` (the Studio's next tool moves, each with its tool, arguments,
+cost and gate), `targets` (where the latest bounce sits against each brain's measured playlist), `second_ear` (Suno's
+analysis against the card, once a session has run it), `twins` (finished catalog tracks measured stem by stem) and
+`closed_by` on each closed gap. A Claude session runs the moves by [`STUDIO.md`](STUDIO.md). For each tool:
 
 - **Where to read:** `engine/productions/<slug>/brief.json` on the `engine/updates` branch while its PR is open, else on
   `main`. `latest_version` and `source_card` name the card behind it.
@@ -104,8 +107,10 @@ Nothing calls the MCPs yet. When an adapter does:
 - **References:** every Spotify track from a drop or the sheet, measured once from SoundCloud within 6 s of Spotify's
   length (else left for a home computer; YouTube refuses the worker). A card already in `taste/cards/`, `taste/inspo/cards/`
   or a playlist graph is reused. References carry evidence ids, never words.
-- **Brain feed:** only drops count in a brain's measured layer (`references/<who>/tracks.csv`, read through
-  `measured_extra` in each `brain/policy.json`), never a track already in that person's playlist graph.
+- **Brain feed:** only a person's drops, and the tracks on their own Spotify most-played list
+  (`references/<who>/revealed.csv`, written by `trackcard studio revealed`; Krish's decision, 2026-11-24), count in that
+  person's measured layer (`references/<who>/tracks.csv`, read through `measured_extra` in each `brain/policy.json`),
+  never a track already in that person's playlist graph. Drops are measured before most-played tracks.
 
 ## Privacy (the repository is public)
 
