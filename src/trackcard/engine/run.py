@@ -544,8 +544,11 @@ def studio_inputs(root: Path, slug: str, targets: dict) -> dict:
     d = root / PROD / slug
     ears = {f.stem: _read_json(f, None) for f in sorted((d / "ear").glob("*.json"))} if (d / "ear").is_dir() else {}
     twins = [_read_json(f, None) for f in sorted((d / "twins").glob("*.json"))] if (d / "twins").is_dir() else []
+    # a file a session wrote wrong is skipped, never fatal to the run (ledger.read skips broken lines the same way)
+    ok_twin = lambda t: isinstance(t, dict) and isinstance(t.get("entries"), dict) and t.get("recording_id")
+    ok_ear = lambda e: isinstance(e, dict) and isinstance(e.get("questions", []), list)
     return {"clone": root, "targets": targets, "ledger": lg.read(d / "moves.jsonl"),
-            "ears": {k: v for k, v in ears.items() if v}, "twins": [t for t in twins if t]}
+            "ears": {k: v for k, v in ears.items() if ok_ear(v)}, "twins": [t for t in twins if ok_twin(t)]}
 
 
 # ---------------------------------------------------------------- brains (read only)

@@ -339,7 +339,10 @@ def studio_twin(slug, recording, full_card, stems, reference, clone) -> None:
     if reference:
         b = _brief(clone, slug)
         r = next((r for r in b.get("references") or [] if r.get("id") == reference), None)
-        ref = {"id": reference, "title": (r or {}).get("title"), "artists": (r or {}).get("artists")}
+        if r is None:
+            click.echo(f"studio: {reference} is not among {slug}'s references that fit (brief.json references)", err=True)
+            sys.exit(2)
+        ref = {"id": reference, "title": r.get("title"), "artists": r.get("artists")}
     out = tw.twin_record({"id": rec["id"], "title": rec.get("title"), "artists": artists or None},
                          json.loads(full_card.read_text(encoding="utf-8")), stem_cards, ref)
     _write_checked(clone / "engine" / "productions" / slug / "twins" / f"{rec['id']}.json", out)

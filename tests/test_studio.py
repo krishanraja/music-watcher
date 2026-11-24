@@ -208,7 +208,9 @@ def test_move_args_fit_the_live_tool_schemas(env):
     """Field sets of the connectors as read on 2026-11-24 (Splice describe_a_sound, Suno sounds-create, audio-create,
     audio-upload-create, audio-analysis, audio-midi; Epidemic SearchRecordings)."""
     b = brief_of(env)
-    b["context"]["key"]["alternative"] = None  # let pitched layers carry the key
+    b["context"]["key"]["alternative"] = None  # a confirmed key: pitched layers carry it
+    for g in b["gaps"]:
+        g["splice"].pop("key_confirm_needed", None)
     ms = moves.plan_moves(b, RULES, owner="krish")
     suno_keys = {f"{p}{m}" for p in ("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B") for m in ("", "m")}
     for m in ms:
@@ -424,3 +426,63 @@ def test_privacy_gate_refuses_suno_links_and_signed_urls():
     assert "suno_link" in privacy.scan("https://cdn1.suno.ai/abc.mp3")
     assert "signed_url" in privacy.scan("https://x.s3.amazonaws.com/a.wav?X-Amz-Signature=abc")
     assert privacy.scan(f"https://splice.com/sounds/sample/abc/x-wav and {EPI_UUID}") == []
+
+
+# ---------------------------------------------------------------- regressions from the review of 2026-11-24
+
+def test_two_rules_on_the_same_layer_and_bars_get_distinct_moves_and_credit(env):
+    b = brief_of(env)
+    g = {**b["gaps"][0], "layer": "pads", "bars": "1-16", "rule": "R6",
+         "splice": {"tool": "describe_a_sound", "args": {"query": "pads pads", "type": "loop", "bpm_min": 124, "bpm_max": 128}}}
+    b["gaps"] = [g, {**g, "rule": "R8"}]
+    ms = moves.plan_moves(b, RULES, owner="krish")
+    assert len({m["id"] for m in ms}) == len(ms)
+    r8 = next(m for m in ms if m["kind"] == "splice_search" and m["gap"]["rule"] == "R8")
+    closed = [{"rule": "R8", "layer": "pads", "bars": "1-16", "gap": "bare"}]
+    assert ledger.credit(closed, [row(move=r8["id"], version="v1", gap=r8["gap"])], {"v1"})[0]["closed_by"]
+
+
+def test_an_unsure_key_never_reaches_a_paid_call_and_widens_the_filter(env):
+    b = brief_of(env)  # the template card: G minor, maybe D# major
+    ms = moves.plan_moves(b, RULES, owner="krish")
+    sound = next(m for m in ms if m["kind"] == "suno_sound")
+    assert "key" not in sound["args"] and sound["key_confirm_needed"]
+    sketch = next(m for m in ms if m["kind"] == "suno_sketch_midi")
+    assert "G minor" not in sketch["steps"][0]["args"]["style"] and sketch["key_confirm_needed"]
+    char = next(m for m in ms if m.get("rules"))
+    assert "d# major" in char["post_filter"]["keys"] and "g minor" in char["post_filter"]["keys"]
+
+
+def test_second_ear_lead_in_string_tempo_and_cut_drop_parsing():
+    c = tc()
+    shift = 1.0
+    c["level_by_8_bars"] = [{**x, "start": x["start"] + shift} for x in c["level_by_8_bars"]]
+    for s in c["sections"]:
+        s["start"] += shift
+    a = suno_like(c)
+    a["sections"][0]["start_s"] = grid.bar1(c)  # Suno's intro starts on the first downbeat
+    r = second_ear.compare(c, a)
+    assert 1 not in r["sections"]["only_suno"]
+    r = second_ear.compare(tc(), {**suno_like(tc()), "beats": {**suno_like(tc())["beats"], "bpm": "124.0"}})
+    assert r["tempo"]["suno"] == 124.0 and not r["tempo"]["agree"]
+    assert "tempo" in second_ear.read_analysis({"beats": {"bpm": "fast"}})["unread"]
+    for bad in ("bar:x", "bar58", "first"):
+        with pytest.raises(cut.CutError):
+            cut.pick_drop(tc(), bad)
+
+
+def test_broken_studio_files_never_stop_the_engine(env):
+    cfg, data, _ = env
+    d = cfg.clone / "engine/productions/sunrise"
+    d.mkdir(parents=True)
+    (d / "moves.jsonl").write_text('{"move": "m-1"\n' + json.dumps(row()) + "\n")
+    (d / "twins").mkdir()
+    (d / "twins" / "x.json").write_text('{"title": "no entries"}')
+    engine(cfg, data).run()
+    assert (d / "brief.json").exists() and ledger.bad_lines(d / "moves.jsonl") == 1 and len(ledger.read(d / "moves.jsonl")) == 1
+
+
+def test_twin_lines_read_plainly_when_the_twin_lacks_a_layer():
+    full = tc()
+    lines = twin.against(tc(), twin.twin_record({"id": EPI_UUID}, full, {"bass": stem_card(full, 2)}))
+    assert "Drums: the twin has none; ours at bar 1." in lines

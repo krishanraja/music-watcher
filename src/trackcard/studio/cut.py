@@ -10,6 +10,8 @@ and downloading it is the session's step, with the recording id recorded next to
 """
 from __future__ import annotations
 
+import re
+
 from . import grid
 
 MAX_EDIT_MS = 300_000  # EditRecording's targetDurationMs maximum (read 2026-11-24)
@@ -22,6 +24,8 @@ class CutError(ValueError):
 def pick_drop(card: dict, which: str = "main") -> dict:
     """The drop to land: the main drop (or the bar given as which="bar:N"); without stems, the first peak section."""
     drops = card.get("drops") or []
+    if which != "main" and not re.fullmatch(r"bar:\d+", which or ""):
+        raise CutError(f"--drop is main or bar:N (a bar number), not {which!r}")
     if which.startswith("bar:"):
         bar = int(which.split(":", 1)[1])
         d = next((d for d in drops if d.get("bar") == bar), None)

@@ -74,9 +74,27 @@ def path_for(clone: Path, slug: str) -> Path:
 
 
 def read(path: Path) -> list[dict]:
+    """Valid rows only: a broken or merge-conflicted line is skipped (and reported by `bad_lines`), never fatal."""
+    return [r for r in _rows(path) if r is not None]
+
+
+def bad_lines(path: Path) -> int:
+    return sum(1 for r in _rows(path) if r is None)
+
+
+def _rows(path: Path) -> list[dict | None]:
     if not path.exists():
         return []
-    return [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines() if l.strip()]
+    out = []
+    for l in path.read_text(encoding="utf-8").splitlines():
+        if not l.strip():
+            continue
+        try:
+            r = json.loads(l)
+            out.append(validate(r) if isinstance(r, dict) else None)
+        except (json.JSONDecodeError, LedgerError, TypeError, KeyError):
+            out.append(None)
+    return out
 
 
 def append(path: Path, row: dict) -> bool:

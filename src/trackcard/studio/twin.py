@@ -74,9 +74,10 @@ def against(ours: dict, twin: dict) -> list[str]:
         if t is None and mine.get(st) is None:
             continue
         label = {"other": "melody and instruments"}.get(st, st)
-        a = f"bar {t} (to the nearest 8)" if t is not None else "not in the twin"
-        b = f"bar {mine[st]}" if mine.get(st) is not None else ("not measured (no stems)" if not mine else "never")
-        L.append(f"{label.capitalize()}: the twin brings it in at {a}; ours at {b}.")
+        a = f"the twin brings it in at bar {t} (to the nearest 8)" if t is not None else "the twin has none"
+        b = f"ours at bar {mine[st]}" if mine.get(st) is not None else (
+            "ours not measured (no stems)" if not mine else "ours never")
+        L.append(f"{label.capitalize()}: {a}; {b}.")
     fp_t, fp_o = twin.get("first_peak_bar"), first_peak_bar(ours)
     if fp_t is not None or fp_o is not None:
         L.append(f"First full-energy section: the twin at bar {fp_t}; ours at bar {fp_o}.")

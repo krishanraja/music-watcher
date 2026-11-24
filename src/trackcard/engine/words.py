@@ -496,7 +496,7 @@ class Words:
                 if not r.get("spotify_duration_s"):
                     continue
                 how = "full (SoundCloud, length within 6 s of Spotify's)"
-                if "drop" not in self.refs[r["key"]]["sources"] and "spotify_top" in self.refs[r["key"]]["sources"]:
+                if who in self.refs[r["key"]].get("revealed_only", set()):  # this person never dropped it
                     how += "; revealed: on the person's Spotify most-played list"
                 feed.append(ms.feed_row(self.root, r["_card"], r["key"], r["title"], r["artists"],
                                         int(r["spotify_duration_s"]), how))
@@ -550,7 +550,11 @@ def words_stage(engine, listing):
     for who in VOICES:  # a person's Spotify most-played list feeds their own brain only
         for r in rv.read(engine.root, who):
             if rv.TRACK.match(r.get("link") or ""):
-                w.add_ref(rv.TRACK.match(r["link"]).group(1), who, "spotify_top", drop=True)
+                tid = rv.TRACK.match(r["link"]).group(1)
+                dropped = who in w.refs.get(tid, {}).get("drop_who", set())
+                w.add_ref(tid, who, "spotify_top", drop=True)
+                if not dropped:
+                    w.refs[tid].setdefault("revealed_only", set()).add(who)
     budget = max(0, engine.cfg.max_per_run - len(getattr(engine, "measured_now", [])))
     touched, ok = w.append_evidence()
     rows = w.measure_refs(budget)

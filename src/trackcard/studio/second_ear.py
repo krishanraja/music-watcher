@@ -84,6 +84,12 @@ def read_analysis(a: dict) -> dict:
         if dur is not None:
             at = start + dur
     bpm = _find(a, "bpm", "tempo")
+    try:
+        bpm = float(bpm) if bpm is not None else None
+    except (TypeError, ValueError):
+        bpm = None
+    if bpm is not None and bpm <= 0:
+        bpm = None
     key = _find(a, "key")
     if bpm is None:
         unread.append("tempo")
@@ -93,7 +99,7 @@ def read_analysis(a: dict) -> dict:
         unread.append("downbeats (beats with bar_position 1)")
     if not secs:
         unread.append("sections")
-    return {"bpm": float(bpm) if isinstance(bpm, (int, float)) else None, "key": key, "camelot": camelot_of(key),
+    return {"bpm": bpm, "key": key, "camelot": camelot_of(key),
             "downbeats": downbeats, "sections": secs, "unread": unread}
 
 
@@ -143,7 +149,7 @@ def compare(card: dict, analysis: dict) -> dict:
             q.append({"what": "grid", "text": f"Bar 1: Suno's downbeats sit {off:.1f} beat(s) away from trackcard's bar "
                       "lines. If Suno is right, the bar numbers in the brief are shifted: check where bar 1 is."})
     if bpm and b1 is not None and s["sections"]:
-        theirs = sorted({grid.bar_at(x["start_s"], b1, bpm) for x in s["sections"] if x["start_s"] > 0.5})
+        theirs = sorted({b for x in s["sections"] if (b := grid.bar_at(x["start_s"], b1, bpm)) > 1})  # as trackcard's
         mine = sorted({x["start_bar"] for x in card.get("sections") or [] if (x.get("start_bar") or 0) > 1})
         only_suno = [b for b in theirs if not any(abs(b - m) <= BOUNDARY_TOL_BARS for m in mine)]
         only_tc = [m for m in mine if not any(abs(b - m) <= BOUNDARY_TOL_BARS for b in theirs)]

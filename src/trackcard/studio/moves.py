@@ -98,6 +98,15 @@ def key_ok(result_key: str | None, camelot: str | None) -> bool:
     return f"{PITCHES[p].lower()} {'major' if major else 'minor'}" in ok
 
 
+def _filter_keys(camelot: str | None, alt_name: str | None) -> list[str]:
+    """Keys a character search keeps: the project's key and its neighbours, and, when trackcard is unsure, also its
+    alternative key and that key's neighbours."""
+    from .second_ear import camelot_of
+    names = compatible_names(camelot)
+    alt = camelot_of(alt_name) if alt_name else None
+    return names + [n for n in compatible_names(alt) if n not in names]
+
+
 def owner_words(rules: list[dict], owner: str | None, layer: str) -> tuple[list[str], list[str]]:
     """(words, claim ids) from the owner's brain's accepted rules that speak to this layer."""
     words, ids = [], []
@@ -121,12 +130,16 @@ def _gap_moves(slug: str, title: str, g: dict, ctx: dict, rules: list[dict], own
     key_name = (ctx.get("key") or {}).get("name")
     bpm = (ctx.get("tempo") or {}).get("bpm")
     pitched = layer not in ("drums", "percussion", "fx")
+    alt = (ctx.get("key") or {}).get("alternative")
+    unsure = bool(pitched and (sp.get("key_confirm_needed") or alt))  # trackcard is unsure between two keys
+    confirm = {"key_confirm_needed": True} if unsure else {}
+    rid = g.get("rule")  # two rules can name the same layer and bars (R6 and R8 on a bare section): ids keep them apart
     out = []
     if args.get("query"):
-        out.append({"id": _id(slug, "splice", layer, bars, "plain"), "kind": "splice_search", "provider": "splice",
+        out.append({"id": _id(slug, "splice", layer, bars, rid, "plain"), "kind": "splice_search", "provider": "splice",
                     "gate": "free", "cost": {"credits": 0}, "gap": gap, "owner_brain": owner,
                     "tool": "describe_a_sound", "args": args,
-                    **({"key_confirm_needed": True} if sp.get("key_confirm_needed") else {}),
+                    **confirm,
                     "then": "Show every result as numbered. A download spends 1 Splice credit: ask for that exact sound. "
                             "Build a stack only around a loop, with generate_public_url false.",
                     "why": f"{g.get('gap')} (bars {bars})"})
@@ -134,30 +147,33 @@ def _gap_moves(slug: str, title: str, g: dict, ctx: dict, rules: list[dict], own
     if words and args.get("query"):
         base = re.sub(rf"\s*{re.escape(str(key_name))}$", "", args["query"]) if key_name else args["query"]
         cargs = {**args, "query": f"{' '.join(words)} {base}".strip()}
-        out.append({"id": _id(slug, "splice", layer, bars, "character", *ids), "kind": "splice_search", "provider": "splice",
+        out.append({"id": _id(slug, "splice", layer, bars, rid, "character", *ids), "kind": "splice_search", "provider": "splice",
                     "gate": "free", "cost": {"credits": 0}, "gap": gap, "owner_brain": owner, "tool": "describe_a_sound",
-                    "args": cargs, "rules": ids,
-                    **({"post_filter": {"keys": compatible_names(camelot),
+                    "args": cargs, "rules": ids, **confirm,
+                    **({"post_filter": {"keys": _filter_keys(camelot, alt if unsure else None),
                                         "how": "keep results whose Key is one of these; a bare note matches either mode; "
                                                "a result with no key passes"}} if pitched and camelot else {}),
                     "then": "Run after the plain search. Character words move results off key (measured 2026-11-24), "
                             "so filter by key before showing them.",
                     "why": f"{owner.title() if owner else 'The owner'}'s approved rule(s) {', '.join(ids)} speak to {layer}."})
-    sk = suno_key(key_name)
+    sk = None if unsure else suno_key(key_name)  # a paid call never guesses between two keys
+    ask_key = " trackcard is unsure of the key: confirm it first and add it to the arguments." if unsure else ""
     if pitched and bpm:
         sargs = {"description": " ".join([*words, NOUN.get(layer, layer)]), "loop": True, "tempo": int(round(bpm))}
         if sk:
             sargs["key"] = sk
-        out.append({"id": _id(slug, "suno_sound", layer, bars), "kind": "suno_sound", "provider": "suno",
+        out.append({"id": _id(slug, "suno_sound", layer, bars, rid), "kind": "suno_sound", "provider": "suno",
                     "gate": "yes_each", "cost": {"credits": SUNO_SOUND_CREDITS}, "gap": gap, "owner_brain": owner,
-                    "tool": "sounds-create", "args": sargs,
-                    "then": "Only when Splice has nothing that fits. Two loops come back; the person picks one or none.",
+                    "tool": "sounds-create", "args": sargs, **confirm,
+                    "then": "Only when Splice has nothing that fits. Two loops come back; the person picks one or none."
+                            + ask_key,
                     "why": f"A loop made at the project's own tempo and key for {layer}, bars {bars}."})
-    if layer in PITCHED_SKETCH and bpm and sk:
+    if layer in PITCHED_SKETCH and bpm and (sk or unsure):
         secs = SKETCH_BARS * grid.bar_len(bpm)
-        style = ", ".join([*words, NOUN.get(layer, layer), "instrumental", f"{int(round(bpm))} BPM", f"{key_name}",
-                           f"{SKETCH_BARS} bars", "sparse"])
-        out.append({"id": _id(slug, "suno_sketch_midi", layer, bars), "kind": "suno_sketch_midi", "provider": "suno",
+        style = ", ".join([*words, NOUN.get(layer, layer), "instrumental", f"{int(round(bpm))} BPM",
+                           *([key_name] if sk else []), f"{SKETCH_BARS} bars", "sparse"])
+        out.append({"id": _id(slug, "suno_sketch_midi", layer, bars, rid), "kind": "suno_sketch_midi", "provider": "suno",
+                    **confirm,
                     "gate": "yes_each", "cost": {"credits": None, "note": "audio-create at suno.com's song price (read "
                                                  "account-usage before and after and record it), then 10 for the MIDI"},
                     "gap": gap, "owner_brain": owner,
@@ -167,8 +183,9 @@ def _gap_moves(slug: str, title: str, g: dict, ctx: dict, rules: list[dict], own
                               {"tool": "audio-midi", "args": {"id": "<the sketch the person picked>"},
                                "cost": {"credits": SUNO_MIDI_CREDITS}}],
                     "then": "Notes, not sounds: only the MIDI goes into Ableton, played with their own sounds. The "
-                            "sketch audio never goes into the track. Record the pick with its Suno id hashed.",
-                    "why": f"Melodic ideas for {layer}, bars {bars}, at {int(round(bpm))} BPM in {key_name}."})
+                            "sketch audio never goes into the track. Record the pick with its Suno id hashed." + ask_key,
+                    "why": f"Melodic ideas for {layer}, bars {bars}, at {int(round(bpm))} BPM"
+                           + (f" in {key_name}." if sk else " (key to confirm).")})
     return out
 
 
